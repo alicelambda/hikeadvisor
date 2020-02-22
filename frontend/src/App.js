@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <MuiThemeProvider>
-
+        <About/>
       </MuiThemeProvider>
     </div>
   );
