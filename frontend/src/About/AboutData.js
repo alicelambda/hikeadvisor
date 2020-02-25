@@ -2,13 +2,21 @@ const blurbData = [
     { 
         "name": "Alice Reuter",
         "role": "Frontend",
-        "description":"I am a second year Computer Science major interested in system's programming and cybersecurity. When not programming I'm a cat meme enthusiast.",
+        "description":"I am a second year Computer Science major interested in systems programming and cybersecurity. When not programming I enjoy bouldering and cat memes.",
         "noissues":4,
         "nocommits":9,
         "notestcases":0,
         "photo":"alice.png"
-
     }, 
+    {
+        "name": "Austin Aurelio",
+        "role": "Backend",
+        "description":"I am a second year Computer Science major interested in systems programming and cybersecurity. When not programming, I enjoy bouldering and cat memes.",
+        "noissues":4,
+        "nocommits":9,
+        "notestcases":0,
+        "photo":"austin.jpg"
+    },
     {
         "name": "Nabil Zubair",
         "role": "Backend",

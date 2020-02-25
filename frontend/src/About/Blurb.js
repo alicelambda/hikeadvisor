@@ -5,6 +5,7 @@ import { Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
+import Divider from '@material-ui/core/Divider';
 const useStyles = makeStyles(theme => ({
     root: {
       display: 'flex',
@@ -55,10 +56,12 @@ export default function Blurb(props) {
                 {props.info["description"]}
               </Typography>
               </Box>
-              <br></br>
-              <Typography varient="body1">
-                5 issues, 18 commits, 0 unit tests
-              </Typography>
+              <Divider/>
+              <Box pt={1}>
+                <Typography varient="body1">
+                  {props.info["noissues"]} issues, {props.info["nocommits"]} commits, {props.info["notestcases"]} unit tests
+                </Typography>
+              </Box>
             </Box>
           </Paper>
           </Grid>
