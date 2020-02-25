@@ -19,34 +19,50 @@ const useStyles = makeStyles(theme => ({
     control: {
       padding: theme.spacing(2),
     },
+    large: {
+      width: theme.spacing(7),
+      height: theme.spacing(7),
+    },
   }));
   
 
-export default function Blurb() {
+export default function Blurb(props) {
     const classes = useStyles();
    
     return (
       
         <div className={classes.root}  >
-           <Grid item xs={12} spacing={2}>
+          <Box p={1}>
+           <Grid item xs={12} spacing={5}>
           <Paper >
-            <Box p={2}>
+            <Box p={2} 
+                maxWidth={350}
+                minWidth={350}
+                textAlign="left"
+                >
                 <Grid container spacing={2}>
                   <Grid item>
-                    <Avatar alt="Remy Sharp" src="/face.jpg" className={classes.large} />
+                    <Avatar alt={props.info["name"]} src={'/blurb/' +props.info["photo"]} className={classes.large} />
                   </Grid>
                   <Grid item>
                     <Typography variant="h5" component="h2" id="blurbtitle">
-                      Alice Reuter (Frontend)
+                      {props.info["name"] + " (" + props.info["role"] + ")"}
                     </Typography>
                     </Grid>
                 </Grid>
+                <Box minHeight={100}>
               <Typography variant="body1" component="h2" id="blurbtitle">
-              React Developer and cat memes enthusiast.
+                {props.info["description"]}
+              </Typography>
+              </Box>
+              <br></br>
+              <Typography varient="body1">
+                5 issues, 18 commits, 0 unit tests
               </Typography>
             </Box>
           </Paper>
           </Grid>
+          </Box>
         </div>
     )
 
