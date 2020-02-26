@@ -43,7 +43,7 @@ export default function Blurb(props) {
                 >
                 <Grid container spacing={2}>
                   <Grid item>
-                    <Avatar alt={props.info["name"]} src={'/blurb/' +props.info["photo"]} className={classes.large} />
+                    <Avatar  className={classes.large} src={props.info["photo"]}/>
                   </Grid>
                   <Grid item>
                     <Typography variant="h5" component="h2" id="blurbtitle">

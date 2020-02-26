@@ -1,14 +1,13 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
-import Blurb from './Blurb';
+import Blurb from './About/Blurb';
 import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import { blurbData, blurb } from './AboutData';
-import Paper from '@material-ui/core/Paper';
+import { blurbData, blurb } from './About/AboutData';
 import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
-
+import Navigation from '../components/Navigation';
 const useStyles = makeStyles(theme => ({
     root: {
       display: 'flex',
@@ -35,11 +34,13 @@ export default function About() {
         <Blurb
             info={blurb}
         />)
+    const classes = useStyles();
 
     return (
-
-
+        <div>
+        <Navigation/>
         <Container >
+            
             <Container maxWidth="md">
 
                 <Grid
@@ -107,6 +108,6 @@ export default function About() {
             </Container>
 
         </Container>
-
+        </div>
     )
 }

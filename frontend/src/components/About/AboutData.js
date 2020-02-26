@@ -1,3 +1,10 @@
+import alice from '../../images/blurb/alice.png';
+import austin from '../../images/blurb/austin.jpg';
+import nabil from '../../images/blurb/nabil.png';
+import josh from '../../images/blurb/josh.jpg';
+import long from '../../images/blurb/long.png';
+
+
 const blurbData = [
     { 
         "name": "Alice Reuter",
@@ -6,7 +13,7 @@ const blurbData = [
         "noissues":4,
         "nocommits":9,
         "notestcases":0,
-        "photo":"alice.png"
+        "photo":alice
     }, 
     {
         "name": "Austin Aurelio",
@@ -15,7 +22,7 @@ const blurbData = [
         "noissues":4,
         "nocommits":9,
         "notestcases":0,
-        "photo":"austin.jpg"
+        "photo":austin
     },
     {
         "name": "Nabil Zubair",
@@ -24,7 +31,7 @@ const blurbData = [
         "noissues":4,
         "nocommits":9,
         "notestcases":0,
-        "photo":"nabil.png"
+        "photo":nabil
     },
     {
         "name": "Josh Trunick",
@@ -33,7 +40,16 @@ const blurbData = [
         "noissues":4,
         "nocommits":9,
         "notestcases":0,
-        "photo":"josh.png"
+        "photo":josh
+    },
+    {
+        "name": "Long Do",
+        "role": "Backend",
+        "description":"I'm a junior CS student. Hobbies include: animes, video games and cooking",
+        "noissues":4,
+        "nocommits":9,
+        "notestcases":0,
+        "photo":long
     }
 ]
 

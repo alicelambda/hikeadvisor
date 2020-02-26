@@ -7,6 +7,9 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import SearchIcon from '@material-ui/icons/Search';
 import logo from "../images/HikeAdvisorIcon.svg";
+import {
+  Link
+} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -82,10 +85,11 @@ export default function Navigation() {
           </Typography>
           <Typography className={classes.title} variant="h6" noWrap>
           </Typography>
-            <Button color="inherit">Cities</Button>
-            <Button color="inherit">Animals</Button>
-            <Button color="inherit">Weather</Button>
-            <Button color="inherit">About</Button>
+            <Link to="/"><Button>Home</Button> </Link>
+            <Link to="/cities"><Button >Cities</Button> </Link>
+            <Link to="/animals"><Button>Animals</Button> </Link>
+            <Link to="/weather"><Button>Weather</Button> </Link>
+            <Link to="/about"><Button>About</Button> </Link>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
