@@ -31,7 +31,7 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <body id='mybody' background={img} className="Home">
+                <body id='mybody' background={img} className="home">
                 <Navigation/>
                 <header className="Home-header">
                     <div className="Title-summary">

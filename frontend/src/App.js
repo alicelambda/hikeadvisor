@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from './components/Home'
 import About from './components/About'
+import Animals from './components/Animals'
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import {
@@ -17,6 +18,9 @@ function App() {
           <Switch>
           <Route path="/about">
               <About/>
+            </Route>
+            <Route path="/animals">
+              <Animals/>
             </Route>
             <Route path="/">
               <Home/>

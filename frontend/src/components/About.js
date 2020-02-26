@@ -8,6 +8,17 @@ import { blurbData, blurb } from './About/AboutData';
 import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import Navigation from '../components/Navigation';
+import img from '../images/forest.jpg';
+import { ContentTextFormat } from 'material-ui/svg-icons';
+
+
+var sectionStyle = {
+    width: "100%",
+    height: "400px",
+    backgroundImage: "url(" + { img } + ")"
+  };
+
+
 const useStyles = makeStyles(theme => ({
     root: {
       display: 'flex',
@@ -38,11 +49,9 @@ export default function About() {
 
     return (
         <div>
-        <Navigation/>
-        <Container >
-            
+        <Navigation/> 
             <Container maxWidth="md">
-
+                <Box>
                 <Grid
                     container
                     spacing={0}
@@ -52,7 +61,7 @@ export default function About() {
                 >
                     <Grid item>
                         
-                        <Box p={4}>
+                        <Box p={4} >
                             <Typography variant="h2" component="h2" maxWidth="xs">
                                 Hike Advisor
                             </Typography>
@@ -86,10 +95,12 @@ export default function About() {
                                 justify="center"
                                 >
                                     {blurbs}
+
                                 </Grid>
                             </Grid>
                         </Grid>
                     </Grid>
+                    
                     <Divider/>
                     <Grid item>
                       <Box p={4}>
@@ -105,9 +116,9 @@ export default function About() {
                             </Box>
                     </Grid>
                   </Grid>
+                  </Box>
             </Container>
 
-        </Container>
         </div>
     )
 }
