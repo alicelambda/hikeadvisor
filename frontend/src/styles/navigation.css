@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+.Navme{
+	background-color: #Eff1eD;
+	font-family: Montserrat;
+}
+
+.active-pink-4 input[type="text"]:focus:not([readonly]) {
+	border: 1px solid #Eff1eD;
+	box-shadow: 0 0 0 1px #Eff1eD;
+  }
+  .active-pink-3 input[type="text"] {
+	border: 1px solid #Eff1eD;
+	box-shadow: 0 0 0 1px #Eff1eD;
+  }
+
+  .form-control {
+	  color: #000000;
+  }

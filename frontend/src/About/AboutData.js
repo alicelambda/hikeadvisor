@@ -25,6 +25,15 @@ const blurbData = [
         "nocommits":9,
         "notestcases":0,
         "photo":"nabil.png"
+    },
+    {
+        "name": "Josh Trunick",
+        "role": "Frontend",
+        "description":"I'm a senior majoring in Computer Science interested in web and mobile dev. You can catch me either cooking a new recipe, slinging a frisbee or pitching a startup idea to my friends.",
+        "noissues":4,
+        "nocommits":9,
+        "notestcases":0,
+        "photo":"josh.png"
     }
 ]
 
