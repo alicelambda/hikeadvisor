@@ -13,7 +13,7 @@ const trailData = {
             "imgSqSmall": "https:\/\/cdn-files.apstatic.com\/hike\/7005382_sqsmall_1554312030.jpg",
             "imgSmall": "https:\/\/cdn-files.apstatic.com\/hike\/7005382_small_1554312030.jpg",
             "imgSmallMed": "https:\/\/cdn-files.apstatic.com\/hike\/7005382_smallMed_1554312030.jpg",
-            "imgMedium": "https:\/\/cdn-files.apstatic.com\/hike\/7005382_medium_1554312030.jpg",
+            "imgMedium": "https:\/\/cdn-files.apstatic.com/hike/7005382_medium_1554312030.jpg",
             "length": 5.7,
             "ascent": 2541,
             "descent": -2540,
