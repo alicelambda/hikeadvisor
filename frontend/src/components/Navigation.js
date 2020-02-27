@@ -88,7 +88,7 @@ export default function Navigation() {
             <Link to="/"><Button>Home</Button> </Link>
             <Link to="/cities"><Button >Cities</Button> </Link>
             <Link to="/animals"><Button>Animals</Button> </Link>
-            <Link to="/weather"><Button>Weather</Button> </Link>
+            <Link to="/trails"><Button>Trails</Button> </Link>
             <Link to="/about"><Button>About</Button> </Link>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
