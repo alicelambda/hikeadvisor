@@ -7,6 +7,7 @@ import California from './components/States/California'
 import Colorado from './components/States/Colorado'
 import Texas from './components/States/Texas'
 import StateInstance from './components/States/StateInstance.js'
+import Trails from './components/Trails'
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import {
@@ -38,6 +39,9 @@ function App() {
             </Route>
             <Route path="/animals">
               <Animals/>
+            </Route>
+            <Route path="/trails">
+              <Trails/>
             </Route>
             <Route path="/">
               <Home/>

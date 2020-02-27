@@ -111,7 +111,33 @@ export default function About() {
                         </Typography>
                         
                         <Typography variant="body1" component="h2" maxWidth="xs">
-                            Our team made use of <a href="https://www.inaturalist.org">iNaturalist data</a> for animal sightings. We used <a href="https://www.hikingproject.com">Hiking Project</a>
+                            Our team made use of <a href="https://www.inaturalist.org">iNaturalist data</a> for animal sightings, <a href="https://docs.ropensci.org/rebird/">Rebird</a> for bird sightings, <a href="https://www.hikingproject.com">Hiking Project</a> for hiking trails, and <a href="https://meta.wikimedia.org/w/api.php">Wikimedia</a> for state/city info.
+                        </Typography>
+                            </Box>
+                    </Grid>
+                      <Grid item>
+                      <Box p={4}>
+
+                        
+                        <Typography variant="h3" component="h2" maxWidth="xs">
+                            Tools
+                        </Typography>
+                            
+                        <Typography variant="body1" component="h2" maxWidth="xs">
+                            <a href="https://aws.amazon.com/">AWS</a>, <a href= "https://www.postman.com/">Postman</a>, <a href= "https://gitlab.com/">Gitlab</a>, <a href="https://reactjs.org/">React</a>, <a href="https://slack.com/">Slack</a>, <a href="https://www.namecheap.com/">Namecheap</a>
+                        </Typography>
+                            </Box>
+                    </Grid>
+                      <Grid item>
+                      <Box p={4}>
+
+                        
+                        <Typography variant="h3" component="h2" maxWidth="xs">
+                            Links
+                        </Typography>
+                            
+                        <Typography variant="body1" component="h2" maxWidth="xs">
+                         <a href="https://gitlab.com/alicelambda/hikeadvisor">Gitlab Repo</a>, <a href="https://documenter.getpostman.com/view/10487499/SzKWuxeb?version=latest"> Postman Docs </a>   
                         </Typography>
                             </Box>
                     </Grid>

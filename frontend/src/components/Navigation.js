@@ -88,7 +88,7 @@ export default function Navigation() {
             <Link to="/" style={{ textDecoration: 'none' }}><Button>Home</Button> </Link>
             <Link to="/states" style={{ textDecoration: 'none' }}><Button >States</Button> </Link>
             <Link to="/animals" style={{ textDecoration: 'none' }}><Button>Animals</Button> </Link>
-            <Link to="/weather" style={{ textDecoration: 'none' }}><Button>Weather</Button> </Link>
+            <Link to="/trails" style={{ textDecoration: 'none' }}><Button>Trails</Button> </Link>
             <Link to="/about" style={{ textDecoration: 'none' }}><Button>About</Button> </Link>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
