@@ -1,5 +1,4 @@
-const trailData = {
-    "trails": [
+const trailData = [
         {
             "id": 7000130,
             "name": "Bear Peak Out and Back",
@@ -9,11 +8,11 @@ const trailData = {
             "stars": 4.6,
             "starVotes": 112,
             "location": "Boulder, Colorado",
-            "url": "https:\/\/www.hikingproject.com\/trail\/7000130\/bear-peak-out-and-back",
-            "imgSqSmall": "https:\/\/cdn-files.apstatic.com\/hike\/7005382_sqsmall_1554312030.jpg",
-            "imgSmall": "https:\/\/cdn-files.apstatic.com\/hike\/7005382_small_1554312030.jpg",
-            "imgSmallMed": "https:\/\/cdn-files.apstatic.com\/hike\/7005382_smallMed_1554312030.jpg",
-            "imgMedium": "https:\/\/cdn-files.apstatic.com/hike/7005382_medium_1554312030.jpg",
+            "url": "https://www.hikingproject.com/trail/7000130/bear-peak-out-and-back",
+            "imgSqSmall": "https://cdn-files.apstatic.com/hike/7005382_sqsmall_1554312030.jpg",
+            "imgSmall": "https://cdn-files.apstatic.com/hike/7005382_small_1554312030.jpg",
+            "imgSmallMed": "https://cdn-files.apstatic.com/hike/7005382_smallMed_1554312030.jpg",
+            "imgMedium": "https://cdn-files.apstatic.com/hike/7005382_medium_1554312030.jpg",
             "length": 5.7,
             "ascent": 2541,
             "descent": -2540,
@@ -34,11 +33,11 @@ const trailData = {
             "stars": 4.7,
             "starVotes": 75,
             "location": "Superior, Colorado",
-            "url": "https:\/\/www.hikingproject.com\/trail\/7011192\/boulder-skyline-traverse",
-            "imgSqSmall": "https:\/\/cdn-files.apstatic.com\/hike\/7048859_sqsmall_1555540136.jpg",
-            "imgSmall": "https:\/\/cdn-files.apstatic.com\/hike\/7048859_small_1555540136.jpg",
-            "imgSmallMed": "https:\/\/cdn-files.apstatic.com\/hike\/7048859_smallMed_1555540136.jpg",
-            "imgMedium": "https:\/\/cdn-files.apstatic.com\/hike\/7048859_medium_1555540136.jpg",
+            "url": "https://www.hikingproject.com/trail/7011192/boulder-skyline-traverse",
+            "imgSqSmall": "https://cdn-files.apstatic.com/hike/7048859_sqsmall_1555540136.jpg",
+            "imgSmall": "https://cdn-files.apstatic.com/hike/7048859_small_1555540136.jpg",
+            "imgSmallMed": "https://cdn-files.apstatic.com/hike/7048859_smallMed_1555540136.jpg",
+            "imgMedium": "https://cdn-files.apstatic.com/hike/7048859_medium_1555540136.jpg",
             "length": 16.3,
             "ascent": 5409,
             "descent": -5492,
@@ -59,11 +58,11 @@ const trailData = {
             "stars": 4.5,
             "starVotes": 107,
             "location": "Boulder, Colorado",
-            "url": "https:\/\/www.hikingproject.com\/trail\/7004226\/sunshine-lions-lair-loop",
-            "imgSqSmall": "https:\/\/cdn-files.apstatic.com\/hike\/7039883_sqsmall_1555092747.jpg",
-            "imgSmall": "https:\/\/cdn-files.apstatic.com\/hike\/7039883_small_1555092747.jpg",
-            "imgSmallMed": "https:\/\/cdn-files.apstatic.com\/hike\/7039883_smallMed_1555092747.jpg",
-            "imgMedium": "https:\/\/cdn-files.apstatic.com\/hike\/7039883_medium_1555092747.jpg",
+            "url": "https://www.hikingproject.com/trail/7004226/sunshine-lions-lair-loop",
+            "imgSqSmall": "https://cdn-files.apstatic.com/hike/7039883_sqsmall_1555092747.jpg",
+            "imgSmall": "https://cdn-files.apstatic.com/hike/7039883_small_1555092747.jpg",
+            "imgSmallMed": "https://cdn-files.apstatic.com/hike/7039883_smallMed_1555092747.jpg",
+            "imgMedium": "https://cdn-files.apstatic.com/hike/7039883_medium_1555092747.jpg",
             "length": 5.3,
             "ascent": 1261,
             "descent": -1282,
@@ -76,4 +75,5 @@ const trailData = {
             "conditionDate": "2020-01-05 20:47:44"
         }
     ]
-}
+
+export {trailData}
