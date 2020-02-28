@@ -18,7 +18,7 @@ const blurbData = [
     {
         "name": "Austin Aurelio",
         "role": "Backend",
-        "description":"I am a second year Computer Science major interested in systems programming and cybersecurity. When not programming, I enjoy bouldering and cat memes.",
+        "description":"I am a second year Computer Science major and I always use the light theme.",
         "noissues":4,
         "nocommits":9,
         "notestcases":0,

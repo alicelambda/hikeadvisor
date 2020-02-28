@@ -50,6 +50,13 @@ export default function TrailCard(props) {
     const handleExpandClick = () => {
       setExpanded(!expanded);
     };
+
+    const difMap = {
+        "blueBlack":"intermediate/difficult",
+        "black":"difficult",
+        "blue":"intermediate",
+    }
+
     return (
         <Grid item xs={12} spacing={5}>
 
@@ -71,33 +78,28 @@ export default function TrailCard(props) {
                 <Grid item>
                     <Grid
                         container
-                        xs={12}
+                        spacing={3}
                     >
-                        <Grid item xs={8}>
+                        <Grid item xs={2}>
                             <Rating name="read-only" value={info.stars}Only />
-                        </Grid>
-                        <Grid item>
-                               {info.difficulty} 
                         </Grid>
                     </Grid>
                 </Grid>
                 <Grid item>
-                {info.summary}
+                {info.summary} It is a {difMap[info.difficulty]} route.
                 <Grid
                     container
                     spacing={2}
                 >
                     <Grid item>
                         <ul>
+                            <li>State: <a href="states/Colorado">Colorado</a></li>
                             <li>Length: {info.length} miles </li>
-                            <li> </li>
+                            <li>Peak elvation: {info.high} ft. </li>
                         </ul>
                     </Grid>
-                    <Grid item>
-                        <ul>
 
-                        </ul>
-                    </Grid>
+                    
                     </Grid>
                 </Grid>
             </Grid>

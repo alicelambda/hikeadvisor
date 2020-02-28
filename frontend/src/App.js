@@ -1,8 +1,9 @@
 import React from 'react';
 import Home from './components/Home'
 import About from './components/About'
-import Animals from './components/Animals'
-import Trails from './components/Trails'
+import Animals from './components/Animals';
+import Trails from './components/Trails';
+import TrailStand from './components/Trails/TrailStand';
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import {
@@ -22,6 +23,9 @@ function App() {
             </Route>
             <Route path="/animals">
               <Animals/>
+            </Route>
+            <Route path="/trail/:trailId">
+              <TrailStand/>
             </Route>
             <Route path="/trails">
               <Trails/>
