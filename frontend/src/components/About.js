@@ -41,11 +41,55 @@ const useStyles = makeStyles(theme => ({
   
 export default function About() {
 
+    
+    const classes = useStyles();
+
+    const [commits, setCommits] = React.useState({});
+    
+    const [austinCommits,setAustin] = React.useState(0);
+    const [longCommits,setLong] = React.useState(0);
+    const [joshuaCommits,setJoshua] = React.useState(0);
+    const [aliceCommits,setAlice] = React.useState(0);
+    const [nabilCommits,setNabil] = React.useState(0);
+
+    const getCommitData = () => {
+        fetch("https://gitlab.com/api/v4/projects/17074163/repository/commits", {
+            headers: {
+                "PRIVATE-TOKEN":"7xCyZoCLMCwAX7VxuNuR"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            //console.log(data)
+            const commits = {}
+            data.forEach((element) => {
+                if (!(element.author_name in commits)) {
+                    commits[element.author_name] = 1
+                } else {
+                    commits[element.author_name] = commits[element.author_name] + 1;
+                }
+            })
+            console.log(commits);
+            const finalCommits = {
+                "Alice Reuter":commits["alice reuter"] + commits["Alice Reuter"],
+                "Long Do":commits["Long Do"],
+                "Josh Trunick":commits["jtrunick"],
+                "Nabil Zubair":commits["Nabil Zubair"],
+                "Austin Aurelio":0,
+            }
+            setCommits(finalCommits)
+        })
+    }
+
+    React.useEffect(() => {
+        getCommitData()
+    }, []);
+
     const blurbs = blurbData.map(blurb =>
         <Blurb
             info={blurb}
+            comms={commits}
         />)
-    const classes = useStyles();
 
     return (
         <div>
@@ -141,6 +185,7 @@ export default function About() {
                         </Typography>
                             </Box>
                     </Grid>
+                    
                   </Grid>
                   </Box>
             </Container>
