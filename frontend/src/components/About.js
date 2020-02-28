@@ -45,12 +45,13 @@ export default function About() {
     const classes = useStyles();
 
     const [commits, setCommits] = React.useState({});
-    
-    const [austinCommits,setAustin] = React.useState(0);
-    const [longCommits,setLong] = React.useState(0);
-    const [joshuaCommits,setJoshua] = React.useState(0);
-    const [aliceCommits,setAlice] = React.useState(0);
-    const [nabilCommits,setNabil] = React.useState(0);
+
+    const [lissues,setlissues] = React.useState(0);
+    const [alissues,setalissues] = React.useState(0);
+    const [asissues,setasissues] = React.useState(0);
+    const [jissues,setjissues] = React.useState(0);
+    const [nissues,setnissues] = React.useState(0);
+
 
     const getCommitData = () => {
         fetch("https://gitlab.com/api/v4/projects/17074163/repository/commits", {
@@ -69,7 +70,6 @@ export default function About() {
                     commits[element.author_name] = commits[element.author_name] + 1;
                 }
             })
-            console.log(commits);
             const finalCommits = {
                 "Alice Reuter":commits["alice reuter"] + commits["Alice Reuter"],
                 "Long Do":commits["Long Do"],
@@ -81,14 +81,74 @@ export default function About() {
         })
     }
 
+    const getIssueData = () => {
+        const username = ["nzubair76","LongDo16","jtrunick","austinrandy0209","alicelambda"]
+
+        fetch("https://gitlab.com/api/v4/projects/17074163/issues?author_username=alicelambda", {
+            headers: {
+                "PRIVATE-TOKEN":"7xCyZoCLMCwAX7VxuNuR"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            setalissues(data.length)
+        })
+
+        fetch("https://gitlab.com/api/v4/projects/17074163/issues?author_username=LongDo16", {
+            headers: {
+                "PRIVATE-TOKEN":"7xCyZoCLMCwAX7VxuNuR"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            setlissues(data.length)
+        })
+
+        fetch("https://gitlab.com/api/v4/projects/17074163/issues?author_username=austinrandy0209", {
+            headers: {
+                "PRIVATE-TOKEN":"7xCyZoCLMCwAX7VxuNuR"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            setasissues(data.length)
+        })
+        
+        fetch("https://gitlab.com/api/v4/projects/17074163/issues?author_username=jtrunick", {
+            headers: {
+                "PRIVATE-TOKEN":"7xCyZoCLMCwAX7VxuNuR"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            setjissues(data.length)
+        })
+
+        fetch("https://gitlab.com/api/v4/projects/17074163/issues?author_username=nzubair76", {
+            headers: {
+                "PRIVATE-TOKEN":"7xCyZoCLMCwAX7VxuNuR"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            setnissues(data.length)
+        })
+    }
+
     React.useEffect(() => {
         getCommitData()
+        getIssueData()
     }, []);
 
     const blurbs = blurbData.map(blurb =>
         <Blurb
             info={blurb}
             comms={commits}
+            asissues={asissues}
+            alissues={alissues}
+            nissues={nissues}
+            lissues={lissues}
+            jissues={jissues}
         />)
 
     return (
