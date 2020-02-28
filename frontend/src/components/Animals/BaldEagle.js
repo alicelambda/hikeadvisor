@@ -116,8 +116,8 @@ export default function StateInstance(props) {
               <Divider/>
         <Typography variant="h6" component="h2" id="blurbtitle">
                 Trails:<br/>
-                <Link to="/trails/7000130" style={{ textDecoration: 'none' }}>Bear Peak Out and Back</Link><br/>
-                <Link to="/trails/7004226" style={{ textDecoration: 'none' }}>Sunshine Lion's Lair Loop</Link><br/>
+                <Link to="/trail/7000130" style={{ textDecoration: 'none' }}>Bear Peak Out and Back</Link><br/>
+                <Link to="/trail/7004226" style={{ textDecoration: 'none' }}>Sunshine Lion's Lair Loop</Link><br/>
               </Typography>
         <Typography variant="body1" component="h2" id="blurbtitle"></Typography>
         <a href="https://en.wikipedia.org/wiki/Bald_eagle">Read More</a>

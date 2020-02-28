@@ -111,6 +111,7 @@ export default function StateInstance(props) {
         <Typography variant="h6" component="h2" id="blurbtitle">
                 States:<br/>
                 <Link to="/states/Texas" style={{ textDecoration: 'none' }}>Texas</Link><br/>
+                <Link to="/states/Colorado" style={{ textDecoration: 'none' }}>Colorado</Link><br/>
               </Typography>
         <Typography variant="body1" component="h2" id="blurbtitle"></Typography>
         <a href="https://en.wikipedia.org/wiki/Northern_cardinal">Read More</a>

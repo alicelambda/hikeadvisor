@@ -123,7 +123,7 @@ export default function StateInstance(props) {
                 Trails:<br/>
                 <Link to="/trail/7000130" style={{ textDecoration: 'none' }}>Bear Peak Out and Back</Link><br/>
                 <Link to="/trail/7011192" style={{ textDecoration: 'none' }}>Boulder Skyline Traverse</Link><br/>
-                <Link to="/trail/7004226" style={{ textDecoration: 'none' }}>Sunshine Lion's Lair Loop"</Link><br/>
+                <Link to="/trail/7004226" style={{ textDecoration: 'none' }}>Sunshine Lion's Lair Loop</Link><br/>
               </Typography>
         <Typography variant="body1" component="h2" id="blurbtitle">
             
