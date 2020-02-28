@@ -6,7 +6,7 @@ import { Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
-import { stateData } from './stateData';
+import { animalData } from './animalData';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import {
@@ -57,14 +57,13 @@ export default function StateInstance(props) {
                 
                 <Box p={2} >
                     <Typography variant="h3" component="h2" maxWidth="xs">
-                        Colorado
+                        Bald Eagle
                     </Typography>
                 </Box>
 
                 <Box textAlign="left" p={3} alignContent="center">
-
-                  <img className={classes.photo} src={"https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Colorado_in_United_States.svg/2880px-Colorado_in_United_States.svg.png"}/>
-                  <img className={classes.photo} src={"https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Colorado_designed_by_Andrew_Carlisle_Carson.svg/2560px-Flag_of_Colorado_designed_by_Andrew_Carlisle_Carson.svg.png"}/>
+                  <img className={classes.photo} src={"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/About_to_Launch_%2826075320352%29.jpg/1920px-About_to_Launch_%2826075320352%29.jpg"}/>
+                  <img className={classes.photo} src={"https://upload.wikimedia.org/wikipedia/commons/5/57/Distribution_H._leucocephalus.png"}/>
                 </Box>
             </Grid>
             <Divider/>
@@ -96,39 +95,32 @@ export default function StateInstance(props) {
           >
           <Grid container spacing={2}>
             <Grid item>
-              <Avatar  className={classes.large} src={"https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Seal_of_Colorado.svg/1920px-Seal_of_Colorado.svg.png"}/>
+              <Avatar  className={classes.large} src={"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/About_to_Launch_%2826075320352%29.jpg/1920px-About_to_Launch_%2826075320352%29.jpg"}/>
             </Grid>
             <Grid item>
               <Typography variant="h4" component="h2" id="blurbtitle">
-                Colorado
+                Bald Eagle
               </Typography>
               </Grid>
           </Grid>
           <Box minHeight={100}>
         <Typography variant="body1" component="h2" id="blurbtitle">
-            State in western United States <br/>
-            Nickname: The Centennial State<br/>
-            Motto: Nil sine numine<br/>
-            Capital: Denver <br/>
-            Largest City: Denver<br/>
-            Population: 5,770,545 <br/>
-            Pop. Density: 19.9 people per sq mile<br/>
-            Mountain Time Zone<br/>
-            Area: 104,094 sq miles<br/>
-            Land: 103,718 sq miles<br/>
-            Water: 376 sq miles<br/>
+        The bald eagle (Haliaeetus leucocephalus) is a bird of prey found in North America. A sea eagle, it has two known subspecies and forms a species pair with the white-tailed eagle (Haliaeetus albicilla). Its range includes most of Canada and Alaska, all of the contiguous United States, and northern Mexico. It is found near large bodies of open water with an abundant food supply and old-growth trees for nesting. The bald eagle is an opportunistic feeder which subsists mainly on fish, which it swoops down and snatches from the water with its talons. It builds the largest nest of any North American bird and the largest tree nests ever recorded for any animal species, up to 4 m (13 ft) deep, 2.5 m (8.2 ft) wide, and 1 metric ton (1.1 short tons) in weight. Sexual maturity is attained at the age of four to five years.
         </Typography>
         <Divider/>
         <Typography variant="h6" component="h2" id="blurbtitle">
-                Trails:<br/>
-                <Link to="/trail/7000130" style={{ textDecoration: 'none' }}>Bear Peak Out and Back</Link><br/>
-                <Link to="/trail/7011192" style={{ textDecoration: 'none' }}>Boulder Skyline Traverse</Link><br/>
-                <Link to="/trail/7004226" style={{ textDecoration: 'none' }}>Sunshine Lion's Lair Loop"</Link><br/>
+                States:<br/>
+                <Link to="/states/Colorado" style={{ textDecoration: 'none' }}>Colorado</Link><br/>
+                <Link to="/states/California" style={{ textDecoration: 'none' }}>California</Link><br/>
               </Typography>
-        <Typography variant="body1" component="h2" id="blurbtitle">
-            
-            <a href="https://en.wikipedia.org/wiki/Colorado">Read More</a>
-        </Typography>
+              <Divider/>
+        <Typography variant="h6" component="h2" id="blurbtitle">
+                Trails:<br/>
+                <Link to="/trails/7000130" style={{ textDecoration: 'none' }}>Bear Peak Out and Back</Link><br/>
+                <Link to="/trails/7004226" style={{ textDecoration: 'none' }}>Sunshine Lion's Lair Loop</Link><br/>
+              </Typography>
+        <Typography variant="body1" component="h2" id="blurbtitle"></Typography>
+        <a href="https://en.wikipedia.org/wiki/Bald_eagle">Read More</a>
         </Box>
       </Box>
     </Paper>
