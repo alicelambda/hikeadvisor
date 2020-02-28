@@ -107,6 +107,16 @@ export default function StateInstance(props) {
         <Typography variant="body1" component="h2" id="blurbtitle">
         The American toad (Anaxyrus americanus) is a common species of toad found throughout the eastern United States and Canada. It is divided into three subspecies—the eastern American toad (A. a. americanus), the dwarf American toad (A. a. charlesmithi), and the rare Hudson Bay toad (A. a. copei). Recent taxonomic treatments place this species in the genus Anaxyrus instead of Bufo.
         </Typography>
+        <Divider/>
+        <Typography variant="h6" component="h2" id="blurbtitle">
+                States:<br/>
+                <Link to="/states/Texas" style={{ textDecoration: 'none' }}>Texas</Link><br/>
+              </Typography>
+              <Divider/>
+              <Typography variant="h6" component="h2" id="blurbtitle">
+                Trails:<br/>
+                <Link to="/trail/7011192" style={{ textDecoration: 'none' }}>Boulder Skyline Traverse</Link><br/>
+              </Typography>
         <Typography variant="body1" component="h2" id="blurbtitle"></Typography>
         <a href="https://en.wikipedia.org/wiki/American_toad">Read More</a>
         </Box>

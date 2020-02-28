@@ -9,6 +9,9 @@ import Box from '@material-ui/core/Box';
 import { stateData } from './stateData';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
+import {
+  Link
+} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -114,8 +117,14 @@ export default function StateInstance(props) {
             Area: 163,696 sq miles<br/>
             Land: 155,959 sq miles<br/>
             Water: 7,737 sq miles<br/>
-            <a href="https://en.wikipedia.org/wiki/California">Read More</a>
         </Typography>
+        <Divider/>
+        <Typography variant="h6" component="h2" id="blurbtitle">
+            Animals:<br/>
+            <Link to="/animals/9083" style={{ textDecoration: 'none' }}>Northern Cardinal</Link><br/>
+            <Link to="/animals/5305" style={{ textDecoration: 'none' }}>Bald Eagle</Link><br/>
+        </Typography>
+        <a href="https://en.wikipedia.org/wiki/California">Read More</a>
         </Box>
       </Box>
     </Paper>

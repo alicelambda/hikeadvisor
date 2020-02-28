@@ -7,6 +7,10 @@ import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import {  useParams} from "react-router-dom";
+import {
+    Link
+  } from "react-router-dom";
+
 const useStyles = makeStyles();
 
 export default function TrailStand() {
@@ -55,6 +59,7 @@ export default function TrailStand() {
                         <Grid item>
 
                             <ul>
+                            <li>State:                   <Link to={("/states/Colorado")} style={{ textDecoration: 'none' }}> Colorado</Link> </li>
                                 <li> Length: {trail.length}</li>
                                 <li> Stars: {trail.stars}</li>
                                 <li> Latitude: {trail.latitude}</li>
@@ -65,6 +70,7 @@ export default function TrailStand() {
 
                         <Grid item>
                             <ul>
+                            <li>Animals:                   <Link to={("/animals/5305")} style={{ textDecoration: 'none' }}> Bald Eagle</Link> </li>
                                 <li> Highest Elevation {trail.high} ft</li>
                                 <li> Lowest Elvation {trail.low} ft</li>
                                 <li> Ascent: {trail.ascent} ft</li>
