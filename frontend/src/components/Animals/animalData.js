@@ -1,6 +1,6 @@
-const animalData = {
-  "animals": [
+const animalData = [
     {
+      "image": "https://upload.wikimedia.org/wikipedia/commons/d/da/Cardinal.jpg",
       "inaturalist-id": 9083,
       "scientific-name": "Cardinal cardinalis",
       "common-name": "Northern Cardinal",
@@ -32,6 +32,7 @@ const animalData = {
       "place-of-origin": "North America"
     },
     {
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/About_to_Launch_%2826075320352%29.jpg/1920px-About_to_Launch_%2826075320352%29.jpg",
       "inaturalist-id": 5305,
       "scientific-name": "Haliaeetus leucocephalus",
       "common-name": "Bald Eagle",
@@ -63,6 +64,7 @@ const animalData = {
       "place-of-origin": "North America"
     },
     {
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Bufo_americanus_PJC1.jpg/2560px-Bufo_americanus_PJC1.jpg",
       "inaturalist-id": 64968,
       "scientific-name": "Anaxyrus americanus",
       "common-name": "American Toad",
@@ -93,5 +95,6 @@ const animalData = {
       "description": "The American toad (Anaxyrus americanus) is a common species of toad found throughout the eastern United States and Canada. It is divided into three subspecies—the eastern American toad (A. a. americanus), the dwarf American toad (A. a. charlesmithi), and the rare Hudson Bay toad (A. a. copei). Recent taxonomic treatments place this species in the genus Anaxyrus instead of Bufo.",
       "place-of-origin": "North America"
     }
-  ]
-}
+]
+
+export {animalData};

@@ -4,6 +4,14 @@ import About from './components/About'
 import Animals from './components/Animals';
 import Trails from './components/Trails';
 import TrailStand from './components/Trails/TrailStand';
+import States from './components/States'
+import California from './components/States/California'
+import Colorado from './components/States/Colorado'
+import Cardinal from './components/Animals/Cardinal'
+import BaldEagle from './components/Animals/BaldEagle'
+import Toad from './components/Animals/AmericanToad'
+import Texas from './components/States/Texas'
+
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import {
@@ -18,9 +26,30 @@ function App() {
       <MuiThemeProvider>
         <Router>
           <Switch>
-          <Route path="/about">
+          <Route path="/states/Colorado">
+            <Colorado/>
+          </Route>
+          <Route path="/states/California">
+            <California/>
+          </Route>
+          <Route path="/states/Texas">
+            <Texas/>
+          </Route>
+          <Route path="/states">
+              <States/>
+            </Route>
+            <Route path="/about">
               <About/>
             </Route>
+            <Route path="/animals/9083">
+            <Cardinal/>
+          </Route>
+          <Route path="/animals/5305">
+            <BaldEagle/>
+          </Route>
+          <Route path="/animals/64968">
+            <Toad/>
+          </Route>
             <Route path="/animals">
               <Animals/>
             </Route>
