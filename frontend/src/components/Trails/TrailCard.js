@@ -16,6 +16,7 @@ import Grid from '@material-ui/core/Grid'
 import Rating from '@material-ui/lab/Rating';
 import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 import {
   Link
 } from "react-router-dom";
@@ -64,8 +65,9 @@ export default function TrailCard(props) {
         <Grid item xs={12} spacing={5}>
 
                 <Card className={classes.root}>
-                <Link to={("/trail/" + info.id)} style={{ textDecoration: 'none' }}>
-                  <Box textDecoration={'none'} color="black">
+                  <Box textDecoration={'none'} color={'black'}>
+                  <Link to={("/trail/" + info.id)} style={{ textDecoration: 'none' }}>
+
       <CardHeader
         title={info.name}
       />
@@ -98,7 +100,7 @@ export default function TrailCard(props) {
                 >
                     <Grid item>
                         <ul>
-                            <li>State: <a href="states/Colorado">Colorado</a></li>
+                            <li>State:                   <Link to={("states/Colorado")} style={{ textDecoration: 'none' }}> Colorado</Link> </li>
                             <li>Length: {info.length} miles </li>
                             <li>Peak elvation: {info.high} ft. </li>
                         </ul>
@@ -110,8 +112,9 @@ export default function TrailCard(props) {
             </Grid>
         </Typography>
       </CardContent>
-      </Box>
       </Link>
+      </Box>
+
     </Card>
         </Grid>
     )
