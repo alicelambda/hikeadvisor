@@ -54,7 +54,7 @@ const blurbData = [
 ]
 
 const blurb= `
-Hike Advisor helps you to discover the joy of hiking. overlaying realtime  tells you realtime what animals you will be able to see on your favourite hiking trails! Hike Advisor  Have you been on a hike and wondered to yourself what types of animals will I be able to see today? Hike Advisor can help with that. Do you want to see a Red Shouldered Hawk or a Freetail Bat? Then hike on trail where they have been recently spotted. 
+Hike Advisor helps you to discover the joy of hiking. It tells you realtime what animals you will be able to see on your favourite hiking trails! Have you been on a hike and wondered to yourself what types of animals will I be able to see today? Hike Advisor can help with that. Do you want to see a Red Shouldered Hawk or a Freetail Bat? Then hike on trail where they have been recently spotted. Hike Advisor is for anyone who enjoys the outdoors and spotting animals.
 
 
 `
