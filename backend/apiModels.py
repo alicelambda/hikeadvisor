@@ -74,4 +74,26 @@ class Animal (db.Model) :
         return f"Animal('{self.animal_id}', '{self.animal_location}', '{self.animal_scientificName}', '{self.animal_picURL}', '{self.animal_commonName}', '{self.animal_numObser}', '{animal_description}', '{self.animal_ancestry}', '{self.animal_isExtinct}', '{self.animal_rank}', '{self.animal_lastSighting}', '{self.animal_taxonName}')"
 
 
+class State (db.Model) :
+    __tablename__ = "state"
+    __table_args__ = {"schema": "public"}
+    state_name = db.Column (db.Unicode, primary_key = True)
+    state_elevation = db.Column (db.Float)
+    state_capital = db.Column (db.Unicode)
+    state_totalArea = db.Column (db.Integer)
+    state_population = db.Column (db.Unicode)
+    state_populationDensity = db.Column (db.Unicode)
+    state_timezone = db.Column (db.Unicode)
+    state_flagPicURL = db.Column (db.Unicode)
+    state_motto = db.Column (db.Unicode)
+    state_lat = db.Column (db.Float)
+    state_long = db.Column (db.Float)
+    state_landArea = db.Column (db.Integer)
+    state_highest = db.Column (db.Unicode)
+    state_lowest = db.Column (db.Unicode)
+
+    def __repr__ (self) :
+        return f"State('{self.state_name}', '{self.state_elevation}', '{self.state_capital}', '{self.state_totalArea}', '{self.state_population}', '{self.state_populationDensity}', '{self.state_timezone}', '{self.state_flagPicURL}', '{self.state_motto}', '{self.state_landArea}', '{self.state_lat}', '{self.state_long}', '{self.state_higest}', '{self.state_lowest}')"
+
+
 engine = create_engine(app.config["SQLALCHEMY_DATABASE_URI"])
