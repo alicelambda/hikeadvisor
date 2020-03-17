@@ -49,10 +49,10 @@ class Trail (db.Model) :
     trail_ascent = db.Column (db.Integer)
     trail_descent = db.Column (db.Integer)
     trail_picURL = db.Column (db.Unicode)
-    trail_condition = db.Column (db.Unicode)
+    trail_states = db.Column (db.Unicode)
 
     def __repr__ (self) :
-        return f"Trail('{self.trail_id}', '{self.trail_name}', '{self.trail_location}', '{self.trail_length}', '{self.trail_stars}', '{self.trail_latitude}', '{self.trail_latitude}', '{self.trail_longtitude}', '{self.trail_numstarts}', '{self.trail_high}', '{self.trail_low}', '{self.trail_ascent}', '{self.trail_descent}', '{self.trail_picURL}', '{self.trail_condition}')"
+        return f"Trail('{self.trail_id}', '{self.trail_name}', '{self.trail_location}', '{self.trail_length}', '{self.trail_stars}', '{self.trail_latitude}', '{self.trail_latitude}', '{self.trail_longtitude}', '{self.trail_numstarts}', '{self.trail_high}', '{self.trail_low}', '{self.trail_ascent}', '{self.trail_descent}', '{self.trail_picURL}', '{self.trail_states}')"
 
 class Animal (db.Model) :
     __tablename__ = "animal"

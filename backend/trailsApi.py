@@ -54,12 +54,11 @@ def getTrail () :
                 info_ascent = jsonRes["trails"][j]["ascent"]
                 info_descent = jsonRes["trails"][j]["descent"]
                 info_picURL = jsonRes["trails"][j]["imgMedium"]
-                total = total + max_trail
-                info_condition = jsonRes["trails"][j]["conditionDetails"]
+                info_states = states[i]
 
                 exists = (Trail.query.filter_by(trail_id = info_id).scalar() is not None)
 
-                if not exists in (
+                if not exists and None not in (
                     info_id,
                     info_name,
                     info_location,
@@ -73,7 +72,7 @@ def getTrail () :
                     info_ascent,
                     info_descent,
                     info_picURL,
-                    info_condition,
+                    info_states,
                 ) :
                     db.session.add (
                         Trail (
@@ -90,7 +89,7 @@ def getTrail () :
                             trail_ascent = info_ascent,
                             trail_descent = info_descent,
                             trail_picURL = info_picURL,
-                            trail_condition = info_condition,
+                            trail_states = info_states
                             )
                         )
                     db.session.commit ()
