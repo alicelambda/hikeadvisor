@@ -12,7 +12,7 @@ import flask_restless
 application = Flask (__name__)
 application.config.from_object (Config)
 db = SQLAlchemy (application)
-migrate = Migrate (application.db)
+migrate = Migrate (application, db)
 
 default_results_per_page = 5
 
