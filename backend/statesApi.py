@@ -73,14 +73,14 @@ def getState () :
 
             population_data = text_to_list(wf_jsonRes["queryresult"]["pods"][3]["subpods"][0]["img"]["alt"])
 
-            print
-
-            print(population_data)
+            #print(population_data)
 
             info_population = population_data[1]
             info_populationDensity = population_data[5]
 
             geographic_data = text_to_list(wf_jsonRes["queryresult"]["pods"][7]["subpods"][0]["img"]["alt"])
+
+            #print(geographic_data)
 
             info_totalArea = int(geographic_data[1].replace(" mi^2", ""))
             info_landArea = int(geographic_data[3].replace(" mi^2", ""))

@@ -1,0 +1,150 @@
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Alabama_%281861%2C_obverse%29.svg'
+	WHERE state_name = 'Alabama';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/e/e6/Flag_of_Alaska.svg'
+	WHERE state_name = 'Alaska';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/9/9d/Flag_of_Arizona.svg'
+	WHERE state_name = 'Arizona';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/9/9d/Flag_of_Arkansas.svg'
+	WHERE state_name = 'Arkansas';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/0/01/Flag_of_California.svg'
+	WHERE state_name = 'California';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Colorado_designed_by_Andrew_Carlisle_Carson.svg'
+	WHERE state_name = 'Colorado';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/9/96/Flag_of_Connecticut.svg'
+	WHERE state_name = 'Connecticut';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/c/c6/Flag_of_Delaware.svg'
+	WHERE state_name = 'Delaware';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Florida.svg'
+	WHERE state_name = 'Florida';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/5/54/Flag_of_Georgia_%28U.S._state%29.svg'
+	WHERE state_name = 'Georgia';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/e/ef/Flag_of_Hawaii.svg'
+	WHERE state_name = 'Hawaii';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_Idaho.svg'
+	WHERE state_name = 'Idaho';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/0/01/Flag_of_Illinois.svg'
+	WHERE state_name = 'Illinois';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/a/ac/Flag_of_Indiana.svg'
+	WHERE state_name = 'Indiana';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/a/aa/Flag_of_Iowa.svg'
+	WHERE state_name = 'Iowa';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/d/da/Flag_of_Kansas.svg'
+	WHERE state_name = 'Kansas';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/8/8d/Flag_of_Kentucky.svg'
+	WHERE state_name = 'Kentucky';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/e/e0/Flag_of_Louisiana.svg'
+	WHERE state_name = 'Louisiana';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/3/35/Flag_of_Maine.svg'
+	WHERE state_name = 'Maine';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/a/a0/Flag_of_Maryland.svg'
+	WHERE state_name = 'Maryland';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/f/f2/Flag_of_Massachusetts.svg'
+	WHERE state_name = 'Massachusetts';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/b/b5/Flag_of_Michigan.svg'
+	WHERE state_name = 'Michigan';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/b/b9/Flag_of_Minnesota.svg'
+	WHERE state_name = 'Minnesota';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/4/42/Flag_of_Mississippi.svg'
+	WHERE state_name = 'Mississippi';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/5/5a/Flag_of_Missouri.svg'
+	WHERE state_name = 'Missouri State';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/c/cb/Flag_of_Montana.svg'
+	WHERE state_name = 'Montana';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/4/4d/Flag_of_Nebraska.svg'
+	WHERE state_name = 'Nebraska';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/f/f1/Flag_of_Nevada.svg'
+	WHERE state_name = 'Nevada';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/2/28/Flag_of_New_Hampshire.svg'
+	WHERE state_name = 'New Hampshire';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/9/92/Flag_of_New_Jersey.svg'
+	WHERE state_name = 'New Jersey';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_New_Mexico.svg'
+	WHERE state_name = 'New Mexico';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/1/1a/Flag_of_New_York.svg'
+	WHERE state_name = 'New York';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/b/bb/Flag_of_North_Carolina.svg'
+	WHERE state_name = 'North Carolina';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/e/ee/Flag_of_North_Dakota.svg'
+	WHERE state_name = 'North Dakota';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/4/4c/Flag_of_Ohio.svg'
+	WHERE state_name = 'Ohio';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/6/6e/Flag_of_Oklahoma.svg'
+	WHERE state_name = 'Oklahoma';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/b/b9/Flag_of_Oregon.svg'
+	WHERE state_name = 'Oregon';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Pennsylvania.svg'
+	WHERE state_name = 'Pennsylvania';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/f/f3/Flag_of_Rhode_Island.svg'
+	WHERE state_name = 'Rhode Island';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/6/69/Flag_of_South_Carolina.svg'
+	WHERE state_name = 'South Carolina';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/1/1a/Flag_of_South_Dakota.svg'
+	WHERE state_name = 'South Dakota';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/9/9e/Flag_of_Tennessee.svg'
+	WHERE state_name = 'Tennessee';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg'
+	WHERE state_name = 'Texas';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/7/7d/Flag_of_Utah_%281903%E2%80%931913%29.svg'
+	WHERE state_name = 'Utah';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/4/49/Flag_of_Vermont.svg'
+	WHERE state_name = 'Vermont';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/4/47/Flag_of_Virginia.svg'
+	WHERE state_name = 'Virginia';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/5/54/Flag_of_Washington.svg'
+	WHERE state_name = 'Washington';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/c/c9/Flag_of_West_Virginia_%281905%E2%80%931907%29.svg'
+	WHERE state_name = 'West Virginia';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/2/22/Flag_of_Wisconsin.svg'
+	WHERE state_name = 'Wisconsin';
+UPDATE State
+	SET "state_flagPicURL" = ' https://upload.wikimedia.org/wikipedia/commons/b/bc/Flag_of_Wyoming.svg'
+	WHERE state_name = 'Wyoming';

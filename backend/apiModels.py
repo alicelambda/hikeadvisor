@@ -30,7 +30,7 @@ states = ["Wisconsin", "West Virginia", "Vermont", "Texas", "South Dakota", "Rho
  "Nebraska", "Kansas", "Mississippi", "Illinois", "Delaware", "Connecticut", "Arkansas", "Indiana", "Missouri State", "Florida",
  "Nevada", "Maine", "Michigan", "Georgia", "Hawaii", "Alaska", "Tennessee", "Virginia", "New Jersey", "Kentucky", "North Dakota",
  "Minnesota", "Oklahoma", "Montana", "Washington", "Utah", "Colorado", "Ohio", "Alabama", "Iowa", "New Mexico", "South Carolina",
- "Pennylvania", "Arizona", "Maryland", "Massachusetts", "California", "Idaho", "Wyoming", "North Carolina", "Louisiana"]
+ "Pennsylvania", "Arizona", "Maryland", "Massachusetts", "California", "Idaho", "Wyoming", "North Carolina", "Louisiana"]
 
 
 class Trail (db.Model) :
