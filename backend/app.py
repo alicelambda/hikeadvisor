@@ -7,6 +7,8 @@ import sys
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from config import Config
+from flask import render_template
+from apiModels import states, engine
 import flask_restless
 
 application = Flask (__name__)
@@ -95,6 +97,58 @@ def index () :
 	)
 	response.status_code = 200
 	return response
+
+# For frontend use only
+# example result: {"animal list":["47607","60551","51112"],"status":200}
+@application.route ("/animal/search_state")
+def get_animal_by_state () :
+    query = request.args.get("q")
+
+    if not query in states :
+        response_json = {"status" : 404}
+        response_json["message"] = "Not found"
+        response = jsonify(response_json)
+        response.status_code = 404
+        return response
+    else :
+        query_list = Animal.query.filter_by(animal_location = query).all()
+        temp = []
+        for row in query_list :
+            temp.append(str(row.animal_id))
+        response_json = {"status" : 200}
+        response_json["animal list"] = list(temp)
+        response = jsonify(response_json)
+        response.status_code = 200
+        return response
+
+
+# For frontend use only
+# example result: {"status":200, "trail list":[7017937,7016992,7013161,7021696,7029003,7016574,7027232,7036362,7019190,7029620,7063387]}
+@application.route ("/trail/search_state")
+def get_trail_by_state () :
+    query = request.args.get("q")
+
+    if not query in states :
+        response_json = {"status" : 404}
+        response_json["message"] = " Not found"
+        response = jsonify(response_json)
+        response.status_code = 404
+        return response
+    else :
+        query_list = Trail.query.filter_by(trail_states = query).all()
+        temp = []
+        for row in query_list :
+            temp.append(row.trail_id)
+        response_json = {"status" : 200}
+        response_json["trail list"] = list(temp)
+        response = jsonify(response_json)
+        response.status_code = 200
+        return response
+
+
+@application.errorhandler(404)
+def page_not_found (e) :
+    return render_template('404.html'), 404
 
 if __name__ == "__main__" :
 	application.run ()
