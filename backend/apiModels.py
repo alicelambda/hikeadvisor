@@ -52,7 +52,8 @@ class Trail (db.Model) :
     trail_states = db.Column (db.Unicode)
 
     def __repr__ (self) :
-        return f"Trail('{self.trail_id}', '{self.trail_name}', '{self.trail_location}', '{self.trail_length}', '{self.trail_stars}', '{self.trail_latitude}', '{self.trail_latitude}', '{self.trail_longtitude}', '{self.trail_numstarts}', '{self.trail_high}', '{self.trail_low}', '{self.trail_ascent}', '{self.trail_descent}', '{self.trail_picURL}', '{self.trail_states}')"
+        #return f"Trail('{self.trail_id}', '{self.trail_name}', '{self.trail_location}', '{self.trail_length}', '{self.trail_stars}', '{self.trail_latitude}', '{self.trail_latitude}', '{self.trail_longtitude}', '{self.trail_numstarts}', '{self.trail_high}', '{self.trail_low}', '{self.trail_ascent}', '{self.trail_descent}', '{self.trail_picURL}', '{self.trail_states}')"
+        return "Trail {}".format (self.trail_name)
 
 class Animal (db.Model) :
     __tablename__ = "animal"
@@ -71,7 +72,8 @@ class Animal (db.Model) :
     animal_taxonName = db.Column (db.Unicode)
 
     def __repr__ (self) :
-        return f"Animal('{self.animal_id}', '{self.animal_location}', '{self.animal_scientificName}', '{self.animal_picURL}', '{self.animal_commonName}', '{self.animal_numObser}', '{animal_description}', '{self.animal_ancestry}', '{self.animal_isExtinct}', '{self.animal_rank}', '{self.animal_lastSighting}', '{self.animal_taxonName}')"
+        #return f"Animal('{self.animal_id}', '{self.animal_location}', '{self.animal_scientificName}', '{self.animal_picURL}', '{self.animal_commonName}', '{self.animal_numObser}', '{animal_description}', '{self.animal_ancestry}', '{self.animal_isExtinct}', '{self.animal_rank}', '{self.animal_lastSighting}', '{self.animal_taxonName}')"
+        return "Animal {}".format (self.animal_commonName)
 
 
 class State (db.Model) :
@@ -93,7 +95,8 @@ class State (db.Model) :
     state_lowest = db.Column (db.Unicode)
 
     def __repr__ (self) :
-        return f"State('{self.state_name}', '{self.state_elevation}', '{self.state_capital}', '{self.state_totalArea}', '{self.state_population}', '{self.state_populationDensity}', '{self.state_timezone}', '{self.state_flagPicURL}', '{self.state_motto}', '{self.state_landArea}', '{self.state_lat}', '{self.state_long}', '{self.state_higest}', '{self.state_lowest}')"
+        #return f"State('{self.state_name}', '{self.state_elevation}', '{self.state_capital}', '{self.state_totalArea}', '{self.state_population}', '{self.state_populationDensity}', '{self.state_timezone}', '{self.state_flagPicURL}', '{self.state_motto}', '{self.state_landArea}', '{self.state_lat}', '{self.state_long}', '{self.state_higest}', '{self.state_lowest}')"
+        return "State {}".format (self.state_name)
 
 
 engine = create_engine(app.config["SQLALCHEMY_DATABASE_URI"])
