@@ -38,7 +38,7 @@ class Trail (db.Model) :
     trail_states = db.Column (db.Unicode)
 
     def __repr__ (self) :
-    	return "Trail {}".format (self.trail_name)
+        return "Trail {}".format (self.trail_name)
 
 class Animal (db.Model) :
     __tablename__ = "animal"
@@ -57,7 +57,7 @@ class Animal (db.Model) :
     animal_taxonName = db.Column (db.Unicode)
 
     def __repr__ (self) :
-    	return "Animal {}".format (self.animal_commonName)
+        return "Animal {}".format (self.animal_commonName)
 
 class State (db.Model) :
     __tablename__ = "state"
@@ -78,7 +78,7 @@ class State (db.Model) :
     state_lowest = db.Column (db.Unicode)
 
     def __repr__ (self) :
-    	return "State {}".format (self.state_name)
+        return "State {}".format (self.state_name)
 
 
 manager = flask_restless.APIManager (application, flask_sqlalchemy_db = db)
@@ -89,14 +89,14 @@ manager.create_api (State, results_per_page = default_results_per_page)
 
 @application.route ("/")
 def index () :
-	response = jsonify (
-		{
-		    "status" : 200,
-		    "message":"Welcome to the HikeAdvisor API! The documentation is at https://documenter.getpostman.com/view/1048799/SzKWuxeb?version=latest. Check our our website https://hikeadvisor.me as well."
-		}
-	)
-	response.status_code = 200
-	return response
+    response = jsonify (
+        {
+            "status" : 200,
+            "message":"Welcome to the HikeAdvisor API! The documentation is at https://documenter.getpostman.com/view/1048799/SzKWuxeb?version=latest. Check our our website https://hikeadvisor.me as well."
+        }
+    )
+    response.status_code = 200
+    return response
 
 # For frontend use only
 # example result: {"animal list":["47607","60551","51112"],"status":200}
@@ -151,4 +151,8 @@ def page_not_found (e) :
     return render_template('404.html'), 404
 
 if __name__ == "__main__" :
-	application.run (host = '0.0.0.0')
+    application.debug = False
+    port = int(os.environ.get("PORT", 5000))
+    application.run (host = '0.0.0.0', port = port)
+    #on local machine
+    #application.run()

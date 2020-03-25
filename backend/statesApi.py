@@ -139,5 +139,6 @@ def text_to_list (text) :
     result = temp.split(" | ")
     return result
 
+
 if __name__ == "__main__" :
 	getState ()
