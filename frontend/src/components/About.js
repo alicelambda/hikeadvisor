@@ -43,6 +43,8 @@ export default function About() {
 
     
     const classes = useStyles();
+    
+    const private_token = "yizfdQxzAde2eFKmjbgz";
 
     const [commits, setCommits] = React.useState({});
 
@@ -56,12 +58,12 @@ export default function About() {
     const getCommitData = () => {
         fetch("https://gitlab.com/api/v4/projects/17074163/repository/commits", {
             headers: {
-                "PRIVATE-TOKEN":"7xCyZoCLMCwAX7VxuNuR"
+                "PRIVATE-TOKEN":`${private_token}`
             }
         })
         .then(response => response.json())
         .then(data => {
-            //console.log(data)
+            console.log(data)
             const commits = {}
             data.forEach((element) => {
                 if (!(element.author_name in commits)) {
@@ -71,11 +73,11 @@ export default function About() {
                 }
             })
             const finalCommits = {
-                "Alice Reuter":commits["alice reuter"] + commits["Alice Reuter"],
+                "Alice Reuter":commits["alice reuter"],
                 "Long Do":commits["Long Do"],
                 "Josh Trunick":commits["jtrunick"],
                 "Nabil Zubair":commits["Nabil Zubair"],
-                "Austin Aurelio":0,
+                "Austin Aurelio":commits["Austin Aurelio"],
             }
             setCommits(finalCommits)
         })
@@ -86,7 +88,7 @@ export default function About() {
 
         fetch("https://gitlab.com/api/v4/projects/17074163/issues?author_username=alicelambda", {
             headers: {
-                "PRIVATE-TOKEN":"7xCyZoCLMCwAX7VxuNuR"
+                "PRIVATE-TOKEN":`${private_token}`
             }
         })
         .then(response => response.json())
@@ -96,7 +98,7 @@ export default function About() {
 
         fetch("https://gitlab.com/api/v4/projects/17074163/issues?author_username=LongDo16", {
             headers: {
-                "PRIVATE-TOKEN":"7xCyZoCLMCwAX7VxuNuR"
+                "PRIVATE-TOKEN":`${private_token}`
             }
         })
         .then(response => response.json())
@@ -106,7 +108,7 @@ export default function About() {
 
         fetch("https://gitlab.com/api/v4/projects/17074163/issues?author_username=austinrandy0209", {
             headers: {
-                "PRIVATE-TOKEN":"7xCyZoCLMCwAX7VxuNuR"
+                "PRIVATE-TOKEN":`${private_token}`
             }
         })
         .then(response => response.json())
@@ -116,7 +118,7 @@ export default function About() {
         
         fetch("https://gitlab.com/api/v4/projects/17074163/issues?author_username=jtrunick", {
             headers: {
-                "PRIVATE-TOKEN":"7xCyZoCLMCwAX7VxuNuR"
+                "PRIVATE-TOKEN":`${private_token}`
             }
         })
         .then(response => response.json())
@@ -126,7 +128,7 @@ export default function About() {
 
         fetch("https://gitlab.com/api/v4/projects/17074163/issues?author_username=nzubair76", {
             headers: {
-                "PRIVATE-TOKEN":"7xCyZoCLMCwAX7VxuNuR"
+                "PRIVATE-TOKEN":`${private_token}`
             }
         })
         .then(response => response.json())
