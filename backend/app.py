@@ -98,6 +98,8 @@ def index () :
     response.status_code = 200
     return response
 
+# Because I forgot to add relationship to the database, I had to implement search to connect the model
+# This is use to connect animal with state
 # For frontend use only
 # example result: {"animal list":["47607","60551","51112"],"status":200}
 @application.route ("/animal/search_state")
@@ -121,7 +123,8 @@ def get_animal_by_state () :
         response.status_code = 200
         return response
 
-
+# Because I forgot to add relationship to the database, I had to implement search to connect the model
+# This is use to connect trail with state
 # For frontend use only
 # example result: {"status":200, "trail list":[7017937,7016992,7013161,7021696,7029003,7016574,7027232,7036362,7019190,7029620,7063387]}
 @application.route ("/trail/search_state")
