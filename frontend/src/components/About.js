@@ -63,7 +63,7 @@ export default function About() {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+            //console.log(data)
             const commits = {}
             data.forEach((element) => {
                 if (!(element.author_name in commits)) {
@@ -77,7 +77,7 @@ export default function About() {
                 "Long Do":commits["Long Do"],
                 "Josh Trunick":commits["jtrunick"],
                 "Nabil Zubair":commits["Nabil Zubair"],
-                "Austin Aurelio":commits["Austin Aurelio"],
+                "Austin Aurelio":commits["austin0209"],
             }
             setCommits(finalCommits)
         })
