@@ -8,4 +8,4 @@ api_tests:
         entrypoint: [""]
     script: 
         - newman --version
-        
+        - newman run backend/HikeAdvisor.postman_collection.json
