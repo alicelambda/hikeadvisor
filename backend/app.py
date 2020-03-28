@@ -9,14 +9,16 @@ from flask_migrate import Migrate
 from config import Config
 from flask import render_template
 from apiModels import states, engine
+from flask_cors import CORS
 import flask_restless
 
 application = Flask (__name__)
 application.config.from_object (Config)
+CORS(application)
 db = SQLAlchemy (application)
 migrate = Migrate (application, db)
 
-default_results_per_page = 5
+default_results_per_page = 10
 
 
 class Trail (db.Model) :
