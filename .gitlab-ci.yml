@@ -3,7 +3,9 @@ stages:
     
 api_tests:
     stage: test
+    image: 
+        name: postman/newman_alpine33
+        entrypoint: [""]
     script: 
-        - npm install -g newman
         - newman --version
         
