@@ -1,0 +1,9 @@
+stages:
+    - test
+    
+api_tests:
+    stage: test
+    script: 
+        - npm install -g newman
+        - newman --version
+        
