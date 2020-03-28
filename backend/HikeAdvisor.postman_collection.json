@@ -1,0 +1,637 @@
+{
+	"info": {
+		"_postman_id": "7c92c672-ccd1-428b-b2bb-8bcca7105d2e",
+		"name": "HikeAdvisor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test Animal Model",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fc475841-0449-4e47-aec6-f534e3949017",
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test('Has data - num_results', function () {",
+							"    pm.expect(jsonData).to.have.property('num_results');",
+							"});",
+							"",
+							"pm.test('Has data - page', function () {",
+							"    pm.expect(jsonData).to.have.property('page');",
+							"});",
+							"",
+							"pm.test('Has data - total_pages', function () {",
+							"    pm.expect(jsonData).to.have.property('total_pages');",
+							"});",
+							"",
+							"pm.test('Has data - animal_ancestry', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('animal_ancestry');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - animal_commonName', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('animal_commonName');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - animal_description', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('animal_description');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - animal_id', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('animal_id');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - animal_isExtinct', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('animal_isExtinct');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - animal_lastSighting', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('animal_lastSighting');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - animal_location', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('animal_location');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - animal_numObser', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('animal_numObser');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - animal_picURL', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('animal_picURL');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - animal_rank', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('animal_rank');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - animal_scientificName', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('animal_scientificName');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - animal_taxonName', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('animal_taxonName');",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.hikeadvisor.me/api/animal",
+					"protocol": "https",
+					"host": [
+						"api",
+						"hikeadvisor",
+						"me"
+					],
+					"path": [
+						"api",
+						"animal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Animal Instance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4bd77eb5-9c0a-40f6-8696-6a60bb18fd2d",
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test('Verify data - animal_ancestry', function () {",
+							"    pm.expect(jsonData.animal_ancestry).to.eql('48460, 1, 2, 355675, 3, 2708, 2715, 3438');",
+							"});",
+							"",
+							"pm.test('Verify data - animal_commonName', function () {",
+							"    pm.expect(jsonData.animal_commonName).to.eql('Mourning Dove');",
+							"});",
+							"",
+							"pm.test('Verify data - animal_id', function () {",
+							"    pm.expect(jsonData.animal_id).to.eql(3454);",
+							"});",
+							"",
+							"pm.test('Verify data - animal_location', function () {",
+							"    pm.expect(jsonData.animal_location).to.eql('Nevada');",
+							"});",
+							"",
+							"pm.test('Verify data - animal_rank', function () {",
+							"    pm.expect(jsonData.animal_rank).to.eql('species');",
+							"});",
+							"",
+							"pm.test('Verify data - animal_scientificName', function () {",
+							"    pm.expect(jsonData.animal_scientificName).to.eql('Zenaida macroura');",
+							"});",
+							"",
+							"pm.test('Verify data - animal_taxonName', function () {",
+							"    pm.expect(jsonData.animal_taxonName).to.eql('Aves');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.hikeadvisor.me/api/animal/3454",
+					"protocol": "https",
+					"host": [
+						"api",
+						"hikeadvisor",
+						"me"
+					],
+					"path": [
+						"api",
+						"animal",
+						"3454"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test State Model",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c388437a-35f0-4b0b-9a58-01584b22c6a4",
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test('Has data - num_results', function () {",
+							"    pm.expect(jsonData).to.have.property('num_results');",
+							"});",
+							"",
+							"pm.test('Has data - page', function () {",
+							"    pm.expect(jsonData).to.have.property('page');",
+							"});",
+							"",
+							"pm.test('Has data - total_pages', function () {",
+							"    pm.expect(jsonData).to.have.property('total_pages');",
+							"});",
+							"",
+							"pm.test('Has data - state_capital', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('state_capital');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - state_elevation', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('state_elevation');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - state_flagPicURL', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('state_flagPicURL');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - state_highest', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('state_highest');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - state_landArea', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('state_landArea');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - state_lat', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('state_lat');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - state_long', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('state_long');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - state_lowest', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('state_lowest');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - state_motto', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('state_motto');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - state_name', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('state_name');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - state_population', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('state_population');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - state_populationDensity', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('state_populationDensity');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - state_timezone', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('state_timezone');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - state_totalArea', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('state_totalArea');",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.hikeadvisor.me/api/state",
+					"protocol": "https",
+					"host": [
+						"api",
+						"hikeadvisor",
+						"me"
+					],
+					"path": [
+						"api",
+						"state"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test State Instance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d69f8887-166c-4828-8ee2-84695623d907",
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test('Verify data - state_capital', function () {",
+							"    pm.expect(jsonData.state_capital).to.eql('Austin');",
+							"});",
+							"",
+							"pm.test('Verify data - state_elevation', function () {",
+							"    pm.expect(jsonData.state_elevation).to.eql(1706.0);",
+							"});",
+							"",
+							"pm.test('Verify data - state_highest', function () {",
+							"    pm.expect(jsonData.state_highest).to.eql('Guadalupe Peak, 8753 ft');",
+							"});",
+							"",
+							"pm.test('Verify data - state_landArea', function () {",
+							"    pm.expect(jsonData.state_landArea).to.eql(261200);",
+							"});",
+							"",
+							"pm.test('Verify data - state_lat', function () {",
+							"    pm.expect(jsonData.state_lat).to.eql(31.0);",
+							"});",
+							"",
+							"pm.test('Verify data - state_long', function () {",
+							"    pm.expect(jsonData.state_long).to.eql(-100.0);",
+							"});",
+							"",
+							"pm.test('Verify data - state_lowest', function () {",
+							"    pm.expect(jsonData.state_lowest).to.eql('Gulf of Mexico, 0 ft');",
+							"});",
+							"",
+							"pm.test('Verify data - state_motto', function () {",
+							"    pm.expect(jsonData.state_motto).to.eql('Friendship');",
+							"});",
+							"",
+							"pm.test('Verify data - state_name', function () {",
+							"    pm.expect(jsonData.state_name).to.eql('Texas');",
+							"});",
+							"",
+							"pm.test('Verify data - state_population', function () {",
+							"    pm.expect(jsonData.state_population).to.eql('28.3 million people');",
+							"});",
+							"",
+							"pm.test('Verify data - state_populationDensity', function () {",
+							"    pm.expect(jsonData.state_populationDensity).to.eql('105.4 people/mi^2');",
+							"});",
+							"",
+							"pm.test('Verify data - state_timezone', function () {",
+							"    pm.expect(jsonData.state_timezone).to.eql('CDT');",
+							"});",
+							"",
+							"pm.test('Verify data - state_totalArea', function () {",
+							"    pm.expect(jsonData.state_totalArea).to.eql(268600);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.hikeadvisor.me/api/state/Texas",
+					"protocol": "https",
+					"host": [
+						"api",
+						"hikeadvisor",
+						"me"
+					],
+					"path": [
+						"api",
+						"state",
+						"Texas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Trail Model",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "26be6d3e-7643-4cfe-a2d0-66f77b0302af",
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test('Has data - num_results', function () {",
+							"    pm.expect(jsonData).to.have.property('num_results');",
+							"});",
+							"",
+							"pm.test('Has data - page', function () {",
+							"    pm.expect(jsonData).to.have.property('page');",
+							"});",
+							"",
+							"pm.test('Has data - total_pages', function () {",
+							"    pm.expect(jsonData).to.have.property('total_pages');",
+							"});",
+							"",
+							"pm.test('Has data - trail_ascent', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('trail_ascent');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - trail_descent', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('trail_descent');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - trail_high', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('trail_high');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - trail_id', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('trail_id');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - trail_latitude', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('trail_latitude');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - trail_length', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('trail_length');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - trail_location', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('trail_location');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - trail_longtitude', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('trail_longtitude');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - trail_low', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('trail_low');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - trail_name', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('trail_name');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - trail_numstars', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('trail_numstars');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - trail_picURL', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('trail_picURL');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - trail_stars', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('trail_stars');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - trail_states', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('trail_states');",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.hikeadvisor.me/api/trail",
+					"protocol": "https",
+					"host": [
+						"api",
+						"hikeadvisor",
+						"me"
+					],
+					"path": [
+						"api",
+						"trail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Trail Instance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ffe99801-315e-4d11-90ab-1492ada86054",
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test('Verify data - trail_ascent', function () {",
+							"    pm.expect(jsonData.trail_ascent).to.eql(344);",
+							"});",
+							"",
+							"pm.test('Verify data - trail_descent', function () {",
+							"    pm.expect(jsonData.trail_descent).to.eql(-346);",
+							"});",
+							"",
+							"pm.test('Verify data - trail_high', function () {",
+							"    pm.expect(jsonData.trail_high).to.eql(1208);",
+							"});",
+							"",
+							"pm.test('Verify data - trail_id', function () {",
+							"    pm.expect(jsonData.trail_id).to.eql(7000056);",
+							"});",
+							"",
+							"pm.test('Verify data - trail_latitude', function () {",
+							"    pm.expect(jsonData.trail_latitude).to.eql(43.7888);",
+							"});",
+							"",
+							"pm.test('Verify data - trail_length', function () {",
+							"    pm.expect(jsonData.trail_length).to.eql(1.8);",
+							"});",
+							"",
+							"pm.test('Verify data - trail_location', function () {",
+							"    pm.expect(jsonData.trail_location).to.eql('Holderness, New Hampshire');",
+							"});",
+							"",
+							"pm.test('Verify data - trail_longtitude', function () {",
+							"    pm.expect(jsonData.trail_longtitude).to.eql(-71.5484);",
+							"});",
+							"",
+							"pm.test('Verify data - trail_low', function () {",
+							"    pm.expect(jsonData.trail_low).to.eql(867);",
+							"});",
+							"",
+							"pm.test('Verify data - trail_name', function () {",
+							"    pm.expect(jsonData.trail_name).to.eql('Rattlesnake');",
+							"});",
+							"",
+							"pm.test('Verify data - trail_numstars', function () {",
+							"    pm.expect(jsonData.trail_numstars).to.eql(17);",
+							"});",
+							"",
+							"pm.test('Verify data - trail_states', function () {",
+							"    pm.expect(jsonData.trail_states).to.eql('Vermont');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.hikeadvisor.me/api/trail/7000056",
+					"protocol": "https",
+					"host": [
+						"api",
+						"hikeadvisor",
+						"me"
+					],
+					"path": [
+						"api",
+						"trail",
+						"7000056"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "c87af1e2-e6c4-4c5d-98e7-27f3200eeec0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "9c4b533c-1e82-4bfc-aa1e-c5e36eb24f39",
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
