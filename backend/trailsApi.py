@@ -47,7 +47,7 @@ def getTrail () :
                 info_length = jsonRes["trails"][j]["length"]
                 info_stars = jsonRes["trails"][j]["stars"]
                 info_latitude = jsonRes["trails"][j]["latitude"]
-                info_longtitude = jsonRes["trails"][j]["longitude"]
+                info_longitude = jsonRes["trails"][j]["longitude"]
                 info_numstars = jsonRes["trails"][j]["starVotes"]
                 info_high = jsonRes["trails"][j]["high"]
                 info_low = jsonRes["trails"][j]["low"]
@@ -65,7 +65,7 @@ def getTrail () :
                     info_length,
                     info_stars,
                     info_latitude,
-                    info_longtitude,
+                    info_longitude,
                     info_numstars,
                     info_high,
                     info_low,
@@ -82,7 +82,7 @@ def getTrail () :
                             trail_length = info_length,
                             trail_stars = info_stars,
                             trail_latitude = info_latitude,
-                            trail_longtitude = info_longtitude,
+                            trail_longitude = info_longitude,
                             trail_numstars = info_numstars,
                             trail_high = info_high,
                             trail_low = info_low,

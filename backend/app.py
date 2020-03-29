@@ -30,7 +30,7 @@ class Trail (db.Model) :
     trail_length = db.Column (db.Float)
     trail_stars = db.Column (db.Float)
     trail_latitude = db.Column (db.Float)
-    trail_longtitude = db.Column (db.Float)
+    trail_longitude = db.Column (db.Float)
     trail_numstars = db.Column (db.Integer)
     trail_high = db.Column (db.Integer)
     trail_low = db.Column (db.Integer)
