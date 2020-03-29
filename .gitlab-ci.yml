@@ -11,7 +11,7 @@ api_tests:
         - newman run backend/HikeAdvisor.postman_collection.json
 
 backend_tests:
-    stage: backend
+    stage: test
     image: python:3
     script:
         - which python
