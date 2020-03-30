@@ -2,6 +2,7 @@ import requests
 import json
 import unittest
 
+<<<<<<< HEAD
 api_link = "https://api.hikeadvisor.me/api"
 ANIMAL_PROPERTIES = [
     "animal_ancestry",
@@ -50,6 +51,12 @@ TRAIL_PROPERTIES = [
     "trail_states",
 ]
 
+=======
+api_link = 'https://api.hikeadvisor.me/api'
+ANIMAL_PROPERTIES = ['animal_ancestry', 'animal_commonName', 'animal_description', 'animal_id', 'animal_isExtinct', 'animal_lastSighting', 'animal_location', 'animal_numObser', 'animal_picURL', 'animal_rank', 'animal_scientificName', 'animal_taxonName']
+STATE_PROPERTIES = ['state_capital', 'state_elevation', 'state_flagPicURL', 'state_highest', 'state_landArea', 'state_lat', 'state_long', 'state_lowest', 'state_motto', 'state_name', 'state_population', 'state_populationDensity', 'state_timezone', 'state_totalArea']
+TRAIL_PROPERTIES = ['trail_ascent', 'trail_descent', 'trail_high', 'trail_id', 'trail_latitude', 'trail_length', 'trail_location', 'trail_longitude', 'trail_low', 'trail_name', 'trail_numstars', 'trail_picURL', 'trail_stars', 'trail_states']
+>>>>>>> 13c49a89fc405e5895ebe542be074e417f18619c
 
 class Unit_Tests(unittest.TestCase):
 

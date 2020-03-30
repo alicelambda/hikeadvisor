@@ -1,0 +1,69 @@
+@startuml
+hide circle
+skinparam linetype ortho
+
+entity State {
+  Table of the fifty states in the US
+  ==
+  *id : text
+  --
+  *state_capital : text
+  *state_elevation : number
+  *state_flagPicURL : text
+  *state_highest : text
+  *state_landArea : number
+  *state_lat : number
+  *state_long : number
+  *state_lowest : text
+  *state_motto : text
+  *state_name : text
+  *state_population : text
+  *state_populationDensity : text
+  *state_timezone : text
+  *state_totalArea : number
+}
+
+entity Animal {
+  Table of animals based on states and trails
+  ==
+  *id : number <<generated>>
+  --
+  *animal_ancestry : text
+  *animal_commonName : text
+  *animal_description : text
+  *animal_id : number
+  *animal_isExtinct : boolean
+  *animal_lastSighting : text
+  *animal_location : text <<FK>>
+  *animal_numObser : number
+  *animal_picURL : number
+  *animal_rank : text
+  *animal_scientificName : text
+  *animal_taxonName : text
+}
+
+entity Trail {
+  Table of hiking trails
+  ==
+  *id : number <<generated>>
+  --
+  *trail_ascent : number
+  *trail_descent : number
+  *trail_high : number
+  *trail_id : number
+  *trail_latitude : number
+  *trail_length : number
+  *trail_location : text
+  *trail_longitude : number
+  *trail_low : number
+  *trail_name : text
+  *trail_numstars : number
+  *trail_picURL : text
+  *trail_stars : num
+  *trail_state : text <<FK>>
+}
+
+State ||--|{ Animal
+State ||--|{ Trail
+Animal }|--|| Trail
+@enduml
