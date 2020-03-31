@@ -16,125 +16,104 @@ var sectionStyle = {
     width: "100%",
     height: "400px",
     backgroundImage: "url(" + { img } + ")"
-  };
+};
 
 
 const useStyles = makeStyles(theme => ({
     root: {
-      display: 'flex',
-      '& > *': {
-        margin: theme.spacing(1),
-      },
+        display: 'flex',
+        '& > *': {
+            margin: theme.spacing(1),
+        },
     },
     paper: {
-      height: 140,
-      width: 100,
+        height: 140,
+        width: 100,
     },
     control: {
-      padding: theme.spacing(2),
+        padding: theme.spacing(2),
     },
     large: {
-      width: theme.spacing(7),
-      height: theme.spacing(7),
+        width: theme.spacing(7),
+        height: theme.spacing(7),
     },
-  }));
-  
+}));
+
 export default function About() {
 
-    
+
     const classes = useStyles();
-    
+
     const private_token = "yizfdQxzAde2eFKmjbgz";
 
     const [commits, setCommits] = React.useState({});
-
-    const [lissues,setlissues] = React.useState(0);
-    const [alissues,setalissues] = React.useState(0);
-    const [asissues,setasissues] = React.useState(0);
-    const [jissues,setjissues] = React.useState(0);
-    const [nissues,setnissues] = React.useState(0);
+    const [issues, setIssues] = React.useState({
+        "alicelambda": 0,
+        "nzubair76": 0,
+        "LongDo16": 0,
+        "jtrunick": 0,
+        "austinrandy0209": 0,
+        "alicelambda": 0
+    });
+    const [lissues, setlissues] = React.useState(0);
+    const [alissues, setalissues] = React.useState(0);
+    const [asissues, setasissues] = React.useState(0);
+    const [jissues, setjissues] = React.useState(0);
+    const [nissues, setnissues] = React.useState(0);
 
 
     const getCommitData = () => {
         fetch("https://gitlab.com/api/v4/projects/17074163/repository/commits", {
             headers: {
-                "PRIVATE-TOKEN":`${private_token}`
+                "PRIVATE-TOKEN": `${private_token}`
             }
         })
-        .then(response => response.json())
-        .then(data => {
-            //console.log(data)
-            const commits = {}
-            data.forEach((element) => {
-                if (!(element.author_name in commits)) {
-                    commits[element.author_name] = 1
-                } else {
-                    commits[element.author_name] = commits[element.author_name] + 1;
+            .then(response => response.json())
+            .then(data => {
+                //console.log(data)
+                const commits = {}
+                data.forEach((element) => {
+                    if (!(element.author_name in commits)) {
+                        commits[element.author_name] = 1
+                    } else {
+                        commits[element.author_name] = commits[element.author_name] + 1;
+                    }
+                })
+                const finalCommits = {
+                    "Alice Reuter": commits["alice reuter"],
+                    "Long Do": commits["Long Do"],
+                    "Josh Trunick": commits["jtrunick"],
+                    "Nabil Zubair": commits["Nabil Zubair"],
+                    "Austin Aurelio": commits["austin0209"],
                 }
+                setCommits(finalCommits)
             })
-            const finalCommits = {
-                "Alice Reuter":commits["alice reuter"],
-                "Long Do":commits["Long Do"],
-                "Josh Trunick":commits["jtrunick"],
-                "Nabil Zubair":commits["Nabil Zubair"],
-                "Austin Aurelio":commits["austin0209"],
-            }
-            setCommits(finalCommits)
-        })
+    }
+
+    const getPersonData = (name, page) => {
+        fetch("https://gitlab.com/api/v4/projects/17074163/issues?author_username=" + name + "&page=" + page)
+            .then(response => {
+                var rpage = response.headers.get("x-total-pages");
+                console.log(name + " " + rpage + " " + page);
+
+                if (rpage > page) {
+                    getPersonData(name, page + 1)
+                }
+                return response.json()
+            })
+            .then(data => {
+                var newIssues = issues;
+                newIssues[name] = issues[name] + data.length;
+                console.log(name + " " + issues[name] + " " + data.length)
+                setIssues(newIssues)
+            })
+
+
     }
 
     const getIssueData = () => {
-        const username = ["nzubair76","LongDo16","jtrunick","austinrandy0209","alicelambda"]
-
-        fetch("https://gitlab.com/api/v4/projects/17074163/issues?author_username=alicelambda", {
-            headers: {
-                "PRIVATE-TOKEN":`${private_token}`
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            setalissues(data.length)
-        })
-
-        fetch("https://gitlab.com/api/v4/projects/17074163/issues?author_username=LongDo16", {
-            headers: {
-                "PRIVATE-TOKEN":`${private_token}`
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            setlissues(data.length)
-        })
-
-        fetch("https://gitlab.com/api/v4/projects/17074163/issues?author_username=austinrandy0209", {
-            headers: {
-                "PRIVATE-TOKEN":`${private_token}`
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            setasissues(data.length)
-        })
-        
-        fetch("https://gitlab.com/api/v4/projects/17074163/issues?author_username=jtrunick", {
-            headers: {
-                "PRIVATE-TOKEN":`${private_token}`
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            setjissues(data.length)
-        })
-
-        fetch("https://gitlab.com/api/v4/projects/17074163/issues?author_username=nzubair76", {
-            headers: {
-                "PRIVATE-TOKEN":`${private_token}`
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            setnissues(data.length)
-        })
+        const usernames = ["nzubair76", "LongDo16", "jtrunick", "austinrandy0209", "alicelambda"]
+        usernames.map(x => getPersonData(x,1))
     }
 
     React.useEffect(() => {
@@ -155,101 +134,101 @@ export default function About() {
 
     return (
         <div>
-        <Navigation/> 
+            <Navigation />
             <Container maxWidth="md">
                 <Box>
-                <Grid
-                    container
-                    spacing={0}
-                    direction="column"
-                    alignItems="center"
-                    justify="center"
-                >
-                    <Grid item>
-                        
-                        <Box p={4} >
-                            <Typography variant="h2" component="h2" maxWidth="xs">
-                                Hike Advisor
+                    <Grid
+                        container
+                        spacing={0}
+                        direction="column"
+                        alignItems="center"
+                        justify="center"
+                    >
+                        <Grid item>
+
+                            <Box p={4} >
+                                <Typography variant="h2" component="h2" maxWidth="xs">
+                                    Hike Advisor
                             </Typography>
-                        </Box>
+                            </Box>
 
-                        <Box textAlign="left" p={3} alignContent="center">
+                            <Box textAlign="left" p={3} alignContent="center">
 
-                            <Typography variant="body1" component="h2" maxWidth="xs">
-                                {blurb}
-                            </Typography>
+                                <Typography variant="body1" component="h2" maxWidth="xs">
+                                    {blurb}
+                                </Typography>
 
-                        </Box>
-                    </Grid>
-                    <Divider/>
-                    <Grid item>
-                        <Typography variant="h3" component="h2" maxWidth="xs">
-                            Team
+                            </Box>
+                        </Grid>
+                        <Divider />
+                        <Grid item>
+                            <Typography variant="h3" component="h2" maxWidth="xs">
+                                Team
                         </Typography>
-                        <Grid
-                            container
-                            spacing={0}
-                            direction="column"
-                            alignItems="center"
-                            justify="center"
-                        >
-                            <Grid item>
-                                <Grid container 
-                                alignContent="center" 
-                                alignItems="center"  
-                                justspacing={2}
+                            <Grid
+                                container
+                                spacing={0}
+                                direction="column"
+                                alignItems="center"
                                 justify="center"
-                                >
-                                    {blurbs}
+                            >
+                                <Grid item>
+                                    <Grid container
+                                        alignContent="center"
+                                        alignItems="center"
+                                        justspacing={2}
+                                        justify="center"
+                                    >
+                                        {blurbs}
 
+                                    </Grid>
                                 </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
-                    
-                    <Divider/>
-                    <Grid item>
-                      <Box p={4}>
 
-                        
-                        <Typography variant="h3" component="h2" maxWidth="xs">
-                            Data sources
+                        <Divider />
+                        <Grid item>
+                            <Box p={4}>
+
+
+                                <Typography variant="h3" component="h2" maxWidth="xs">
+                                    Data sources
                         </Typography>
-                        
-                        <Typography variant="body1" component="h2" maxWidth="xs">
-                            Our team made use of <a href="https://www.inaturalist.org">iNaturalist data</a> for animal sightings, <a href="https://docs.ropensci.org/rebird/">Rebird</a> for bird sightings, <a href="https://www.hikingproject.com">Hiking Project</a> for hiking trails, and <a href="https://meta.wikimedia.org/w/api.php">Wikimedia</a> for state/city info.
+
+                                <Typography variant="body1" component="h2" maxWidth="xs">
+                                    Our team made use of <a href="https://www.inaturalist.org">iNaturalist data</a> for animal sightings, <a href="https://docs.ropensci.org/rebird/">Rebird</a> for bird sightings, <a href="https://www.hikingproject.com">Hiking Project</a> for hiking trails, and <a href="https://meta.wikimedia.org/w/api.php">Wikimedia</a> for state/city info.
                         </Typography>
                             </Box>
-                    </Grid>
-                      <Grid item>
-                      <Box p={4}>
+                        </Grid>
+                        <Grid item>
+                            <Box p={4}>
 
-                        
-                        <Typography variant="h3" component="h2" maxWidth="xs">
-                            Tools
-                        </Typography>
-                            
-                        <Typography variant="body1" component="h2" maxWidth="xs">
-                            <a href="https://aws.amazon.com/">AWS</a>, <a href= "https://www.postman.com/">Postman</a>, <a href= "https://gitlab.com/">Gitlab</a>, <a href="https://reactjs.org/">React</a>, <a href="https://slack.com/">Slack</a>, <a href="https://www.namecheap.com/">Namecheap</a>
-                        </Typography>
-                            </Box>
-                    </Grid>
-                      <Grid item>
-                      <Box p={4}>
 
-                        
-                        <Typography variant="h3" component="h2" maxWidth="xs">
-                            Links
+                                <Typography variant="h3" component="h2" maxWidth="xs">
+                                    Tools
                         </Typography>
-                            
-                        <Typography variant="body1" component="h2" maxWidth="xs">
-                         <a href="https://gitlab.com/alicelambda/hikeadvisor">Gitlab Repo</a>, <a href="https://documenter.getpostman.com/view/10487499/SzKWuxeb?version=latest"> Postman Docs </a>   
-                        </Typography>
+
+                                <Typography variant="body1" component="h2" maxWidth="xs">
+                                    <a href="https://aws.amazon.com/">AWS</a>, <a href="https://www.postman.com/">Postman</a>, <a href="https://gitlab.com/">Gitlab</a>, <a href="https://reactjs.org/">React</a>, <a href="https://slack.com/">Slack</a>, <a href="https://www.namecheap.com/">Namecheap</a>
+                                </Typography>
                             </Box>
+                        </Grid>
+                        <Grid item>
+                            <Box p={4}>
+
+
+                                <Typography variant="h3" component="h2" maxWidth="xs">
+                                    Links
+                        </Typography>
+
+                                <Typography variant="body1" component="h2" maxWidth="xs">
+                                    <a href="https://gitlab.com/alicelambda/hikeadvisor">Gitlab Repo</a>, <a href="https://documenter.getpostman.com/view/10487499/SzKWuxeb?version=latest"> Postman Docs </a>
+                                </Typography>
+                            </Box>
+                        </Grid>
+
                     </Grid>
-                    
-                  </Grid>
-                  </Box>
+                </Box>
             </Container>
 
         </div>
