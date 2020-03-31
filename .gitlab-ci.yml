@@ -1,0 +1,20 @@
+stages:
+    - test
+    
+api_tests:
+    stage: test
+    image: 
+        name: postman/newman_alpine33
+        entrypoint: [""]
+    script: 
+        - newman --version
+        - newman run backend/HikeAdvisor.postman_collection.json
+
+backend_tests:
+    stage: test
+    image: python:3
+    script:
+        - which python
+        - pip install requests
+        - cd backend
+        - python unit_tests.py
