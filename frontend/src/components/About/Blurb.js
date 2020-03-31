@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
@@ -30,20 +30,8 @@ const useStyles = makeStyles(theme => ({
 
 export default function Blurb(props) {
     const classes = useStyles();
-  //  console.log(props.comms);
-   // console.log(props.info)
-   var issues = 0;
-    if(props.info.name == "Alice Reuter") {
-      issues=props.alissues
-    } else if (props.info.name == "Long Do") {
-      issues=props.lissues
-    } else if (props.info.name == "Josh Trunick") {
-      issues=props.jissues
-    } else if (props.info.name == "Nabil Zubair") {
-      issues= props.nissues
-    } else {
-      issues = props.asissues
-    }
+
+ 
     return (
       
         <div className={classes.root}  >
@@ -73,7 +61,7 @@ export default function Blurb(props) {
               <Divider/>
               <Box pt={1}>
                 <Typography varient="body1">
-                  {issues} issues, {props.comms[props.info.name]} commits, {props.info["notestcases"]} unit tests
+                  {props.info.noissues} issues, {props.comms[props.info.name]} commits, {props.info["notestcases"]} unit tests
                 </Typography>
               </Box>
             </Box>

@@ -10,6 +10,7 @@ import Divider from '@material-ui/core/Divider';
 import Navigation from '../components/Navigation';
 import img from '../images/forest.jpg';
 import { ContentTextFormat } from 'material-ui/svg-icons';
+import dataUsage from 'material-ui/svg-icons/device/data-usage';
 
 
 var sectionStyle = {
@@ -47,20 +48,7 @@ export default function About() {
     const private_token = "yizfdQxzAde2eFKmjbgz";
 
     const [commits, setCommits] = React.useState({});
-    const [issues, setIssues] = React.useState({
-        "alicelambda": 0,
-        "nzubair76": 0,
-        "LongDo16": 0,
-        "jtrunick": 0,
-        "austinrandy0209": 0,
-        "alicelambda": 0
-    });
-    const [lissues, setlissues] = React.useState(0);
-    const [alissues, setalissues] = React.useState(0);
-    const [asissues, setasissues] = React.useState(0);
-    const [jissues, setjissues] = React.useState(0);
-    const [nissues, setnissues] = React.useState(0);
-
+    const [blurbs, setBlurbs] = React.useState([]);
 
     const getCommitData = () => {
         fetch("https://gitlab.com/api/v4/projects/17074163/repository/commits", {
@@ -94,7 +82,6 @@ export default function About() {
         fetch("https://gitlab.com/api/v4/projects/17074163/issues?author_username=" + name + "&page=" + page)
             .then(response => {
                 var rpage = response.headers.get("x-total-pages");
-                console.log(name + " " + rpage + " " + page);
 
                 if (rpage > page) {
                     getPersonData(name, page + 1)
@@ -102,36 +89,41 @@ export default function About() {
                 return response.json()
             })
             .then(data => {
-                var newIssues = issues;
-                newIssues[name] = issues[name] + data.length;
-                console.log(name + " " + issues[name] + " " + data.length)
-                setIssues(newIssues)
+                var newBlurbData = blurbData;
+                var i;
+                for(i=0; i < newBlurbData.length;i++) {
+                    if(newBlurbData[i].username === name) {
+                        newBlurbData[i].noissues = newBlurbData[i].noissues + data.length;
+
+                    }
+                }
+                setBlurbs(newBlurbData);
             })
 
 
     }
 
     const getIssueData = () => {
-        const usernames = ["nzubair76", "LongDo16", "jtrunick", "austinrandy0209", "alicelambda"]
-        usernames.map(x => getPersonData(x,1))
+        blurbData.map(x => getPersonData(x.username,1))
     }
 
     React.useEffect(() => {
         getCommitData()
-        getIssueData()
+       
     }, []);
 
-    const blurbs = blurbData.map(blurb =>
-        <Blurb
-            info={blurb}
-            comms={commits}
-            asissues={asissues}
-            alissues={alissues}
-            nissues={nissues}
-            lissues={lissues}
-            jissues={jissues}
-        />)
+    React.useEffect(() => {
+        getIssueData()
+    },[ ]);
 
+
+    React.useEffect(() => {
+      setBlurbs(blurbData.map(blurb =>
+            <Blurb
+                info={blurb}
+                comms={commits}
+                issues={blurb.noissues}/>))
+      });
     return (
         <div>
             <Navigation />

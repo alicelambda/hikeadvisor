@@ -13,6 +13,7 @@ const blurbData = [
         "noissues":4,
         "nocommits":9,
         "notestcases":0,
+        "username": "alicelambda",
         "photo":alice
     }, 
     {
@@ -22,6 +23,7 @@ const blurbData = [
         "noissues":4,
         "nocommits":9,
         "notestcases":0,
+        "username":"austinrandy0209",
         "photo":austin
     },
     {
@@ -31,7 +33,8 @@ const blurbData = [
         "noissues":4,
         "nocommits":9,
         "notestcases":0,
-        "photo":nabil
+        "photo":nabil,
+        "username":"nzubair76"
     },
     {
         "name": "Josh Trunick",
@@ -40,6 +43,7 @@ const blurbData = [
         "noissues":4,
         "nocommits":9,
         "notestcases":0,
+        "username":"jtrunick",
         "photo":josh
     },
     {
@@ -49,6 +53,7 @@ const blurbData = [
         "noissues":4,
         "nocommits":9,
         "notestcases":0,
+        "username":"LongDo16",
         "photo":long
     }
 ]
