@@ -39,7 +39,7 @@ function App() {
             <Route path="/trail/:trailId">
               <TrailStand/>
             </Route>
-            <Route path="/trails">
+            <Route path="/trails/:offset">
               <Trails/>
             </Route>
             <Route path="/">

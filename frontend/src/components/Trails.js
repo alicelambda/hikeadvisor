@@ -4,7 +4,10 @@ import TrailCard from './Trails/TrailCard';
 import Grid from '@material-ui/core/Grid';
 import Pagination from "material-ui-flat-pagination";
 import { Redirect, useParams } from 'react-router-dom';
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5795908be86242ddc384d630ea2cb235f29cb7d2
 
 export default function Trails() {
 
@@ -50,6 +53,10 @@ export default function Trails() {
         setRedirect(offset)
     }
 
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 5795908be86242ddc384d630ea2cb235f29cb7d2
 
     return (
         <div>
@@ -59,9 +66,9 @@ export default function Trails() {
                 alignItems="center"
                 justify="center"
             >
-                
-                        {trails}
-               
+
+                {trails}
+
             </Grid>
             {redirect != -1 ? <Redirect to={"/trails/" + redirect} /> : null}
             <Pagination
