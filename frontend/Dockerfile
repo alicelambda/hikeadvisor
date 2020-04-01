@@ -1,11 +1,18 @@
-FROM nginx
+FROM node:11 as react-build
 
-MAINTAINER Long Do "longhoangdo16@gmail.com"
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-EXPOSE 80
+COPY package*.json ./
 
-RUN mkdir -p /var/www/hikeadvisor.me
-COPY ./build /var/www/hikeadvisor.me 
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY . ./
 
+RUN npm install
 
+RUN npm upgrade
+
+RUN npm run build
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
