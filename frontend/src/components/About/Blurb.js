@@ -61,7 +61,7 @@ export default function Blurb(props) {
               <Divider/>
               <Box pt={1}>
                 <Typography varient="body1">
-                  {props.info.noissues} issues, {props.comms[props.info.name]} commits, {props.info["notestcases"]} unit tests
+                  {props.info.noissues} issues, {props.commits} commits, {props.info["notestcases"]} unit tests
                 </Typography>
               </Box>
             </Box>

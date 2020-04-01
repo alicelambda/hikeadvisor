@@ -9,8 +9,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import Navigation from '../components/Navigation';
 import img from '../images/forest.jpg';
-import { ContentTextFormat } from 'material-ui/svg-icons';
-import dataUsage from 'material-ui/svg-icons/device/data-usage';
 
 
 var sectionStyle = {
@@ -45,37 +43,55 @@ export default function About() {
 
     const classes = useStyles();
 
-    const private_token = "yizfdQxzAde2eFKmjbgz";
+    const trans = {
+        "Alice Reuter":"Alice Reuter",
+        "alice reuter":"Alice Reuter",
+        "Alice":"Alice Reuter",
+        "Long Do":"Long Do",
+        "nzubair76":"Nabil Zubair",
+        "Nabil Zubair":"Nabil Zubair",
+        "Nabil Zubair":"Nabil Zubair",
+        "jtrunick":"Josh Trunick",
+        "Josh Trunick":"Josh Trunick",
+        "austin0209":"Austin Aurelio",
+        "Austin Aurelio":"Austin Aurelio"  
+    }
 
-    const [commits, setCommits] = React.useState({});
-    const [blurbs, setBlurbs] = React.useState([]);
+    const [commits, setCommits] = React.useState({
+        "Alice Reuter": 0,
+        "Long Do": 0,
+        "Josh Trunick": 0,
+        "Nabil Zubair": 0,
+        "Austin Aurelio": 0
+    });
+    
+    const [blurbs, setBlurbs] = React.useState();
+   
+    const getCommitPageData = (page) => {
+        fetch("https://gitlab.com/api/v4/projects/17074163/repository/commits?page=" + page)
+            .then(response => {
+                var rpage = response.headers.get("x-total-pages");
+
+                if (rpage > page) {
+                    getCommitPageData(page + 1);
+                }
+                return response.json()
+            })
+            .then(data => {
+                const lcommits = commits;
+                data.forEach((element) => {
+                    const tran = trans[element.author_name];
+                    lcommits[tran] = lcommits[tran] + 1;
+
+                })
+                setCommits(lcommits)
+            })
+
+    }
 
     const getCommitData = () => {
-        fetch("https://gitlab.com/api/v4/projects/17074163/repository/commits", {
-            headers: {
-                "PRIVATE-TOKEN": `${private_token}`
-            }
-        })
-            .then(response => response.json())
-            .then(data => {
-                //console.log(data)
-                const commits = {}
-                data.forEach((element) => {
-                    if (!(element.author_name in commits)) {
-                        commits[element.author_name] = 1
-                    } else {
-                        commits[element.author_name] = commits[element.author_name] + 1;
-                    }
-                })
-                const finalCommits = {
-                    "Alice Reuter": commits["alice reuter"],
-                    "Long Do": commits["Long Do"],
-                    "Josh Trunick": commits["jtrunick"],
-                    "Nabil Zubair": commits["Nabil Zubair"],
-                    "Austin Aurelio": commits["austin0209"],
-                }
-                setCommits(finalCommits)
-            })
+        getCommitPageData(1)
+
     }
 
     const getPersonData = (name, page) => {
@@ -91,39 +107,51 @@ export default function About() {
             .then(data => {
                 var newBlurbData = blurbData;
                 var i;
-                for(i=0; i < newBlurbData.length;i++) {
-                    if(newBlurbData[i].username === name) {
+                for (i = 0; i < newBlurbData.length; i++) {
+                    if (newBlurbData[i].username === name) {
                         newBlurbData[i].noissues = newBlurbData[i].noissues + data.length;
 
                     }
                 }
-                setBlurbs(newBlurbData);
+                setBlurbs(newBlurbData.map(blurb => {
+                    const tran = trans[blurb.name];
+                    console.log(tran + " " + blurb.name);
+
+
+                    return <Blurb
+                        info={blurb}
+                        commits={commits[tran]}
+                        issues={blurb.noissues} 
+                />}));
             })
 
 
     }
 
     const getIssueData = () => {
-        blurbData.map(x => getPersonData(x.username,1))
+        blurbData.map(x => getPersonData(x.username, 1))
     }
 
     React.useEffect(() => {
         getCommitData()
-       
+
     }, []);
 
     React.useEffect(() => {
         getIssueData()
-    },[ ]);
+    }, []);
 
 
     React.useEffect(() => {
-      setBlurbs(blurbData.map(blurb =>
-            <Blurb
+        setBlurbs(blurbData.map(blurb => {
+            const tran = trans[blurb.name];
+            console.log(tran + " mow" + blurb.name);
+            return <Blurb
                 info={blurb}
-                comms={commits}
-                issues={blurb.noissues}/>))
-      });
+                commits={commits[tran]}
+                issues={blurb.noissues} 
+        />}))
+    },[commits,blurbData,blurbs]);
     return (
         <div>
             <Navigation />
