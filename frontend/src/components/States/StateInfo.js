@@ -32,6 +32,7 @@ const useStyles = makeStyles(theme => ({
   
 
 export default function StateInfo(props) {
+    const info = props.info;
     const classes = useStyles();
    
     return (
@@ -39,7 +40,7 @@ export default function StateInfo(props) {
         <div className={classes.root}  >
           <Box p={1}>
            <Grid item xs={12} spacing={5}>
-          <Link to={("/states/" + props.info["name"])} style={{ textDecoration: 'none' }}>
+          <Link to={("/state/" + info.name)} style={{ textDecoration: 'none' }}>
           <Paper >
             <Box p={3} 
                 maxWidth={350}
@@ -48,22 +49,22 @@ export default function StateInfo(props) {
                 >
                 <Grid container spacing={2}>
                   <Grid item>
-                    <Avatar  className={classes.large} src={props.info["image_seal"]}/>
+                    <Avatar  className={classes.large} src={info.state_flagPicURL}/>
                   </Grid>
                   <Grid item>
                     <Typography variant="h4" component="h2" id="blurbtitle">
-                      {props.info["name"]} <br/>
+                      {info.state_name} <br/>
                     </Typography>
                     </Grid>
                 </Grid>
                 <Box minHeight={100}>
                 <Divider/>
               <Typography variant="body1" component="h2" id="blurbtitle">
-                {props.info["short_description"]} <br/>
-                  Capital: {props.info["capital"]} <br/>
-                  Largest City: {props.info["largest_city"]} <br/>
-                  Population: {props.info["pop"]} <br/>
-                  {props.info["timezone"]}
+                  Motto: {info.state_motto} <br/>
+                  Capital: {info.state_capital} <br/>
+                  Elevation: {info.state_elevation} ft.<br/>
+                  Population: {info.state_population} <br/>
+                  {info.state_timezone}
               </Typography>
               </Box>
             </Box>

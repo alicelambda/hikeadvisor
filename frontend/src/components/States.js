@@ -1,5 +1,6 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
+import Pagination from '@material-ui/lab/Pagination';
 import {stateData} from './States/stateData';
 import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
@@ -10,15 +11,35 @@ import Navigation from '../components/Navigation';
 import img from '../images/forest.jpg';
 import StateInfo from './States/StateInfo';
 
-
-
   
 export default function States() {
 
-    const states = stateData.map(state =>
-        <StateInfo
-            info={state}
-        />)
+    const [stateData,setStates] = React.useState([]);
+    const [states,setStatesCard] = React.useState([]);
+
+    const getStateData = () => {
+        
+        fetch("https://api.hikeadvisor.me/api/state?page=1")
+        .then(response => response.json())
+        .then(data => {
+            setStates(data.objects)
+        })
+    }
+
+    React.useEffect(() => {
+        setStatesCard(stateData.map(state => 
+            <StateInfo
+                key={state.id}
+                info={state}
+            />
+            ))
+
+    },[stateData])
+    
+
+    React.useEffect(() => {
+        getStateData();
+    }, []);
 
     return (
         <div>
@@ -40,7 +61,7 @@ export default function States() {
                             </Typography>
                         </Box>
 
-                        <Box textAlign="left" p={3} alignContent="center">
+                        <Box p={3} alignContent="center">
 
                             <Typography variant="body1" component="h2" maxWidth="xs">
                                 {"Search what state you're interested in visiting."}
@@ -73,7 +94,7 @@ export default function States() {
                             </Grid>
                         </Grid>
                     </Grid>
-                    
+                    <Pagination count={5} />
                     <Divider/>
                     <Grid item>
                         <Box p={4}>
@@ -82,7 +103,6 @@ export default function States() {
                   </Grid>
                   </Box>
             </Container>
-
         </div>
     )
 }
