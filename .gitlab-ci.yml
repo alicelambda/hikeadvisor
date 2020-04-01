@@ -18,3 +18,11 @@ backend_tests:
         - pip install requests
         - cd backend
         - python unit_tests.py
+
+frontend_tests:
+    stage: test
+    image: node:latest
+    script:
+        - cd frontend
+        - npm install
+        - npm test
