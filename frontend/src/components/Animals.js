@@ -8,18 +8,29 @@ import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import AnimalInfo from './Animals/AnimalInfo';
-import Pagination from '@material-ui/lab/Pagination';
+import Pagination from "material-ui-flat-pagination";
+import { Redirect, useParams } from 'react-router-dom';
 
 
   
 export default function Animals() {
 
+    let poffset = useParams();
+
     const [animalData,setAnimals] = React.useState([]);
     const [animals,setAnimalsCard] = React.useState([]);
+    const [offset, setOffset] = React.useState(0);
+    const [redirect, setRedirect] = React.useState(-1);
+    const [pagination, setPagination] = React.useState();
+
+    React.useEffect(() => {
+
+        setOffset(parseInt(poffset.offset));
+    })
 
     const getAnimalData = () => {
         
-        fetch("https://api.hikeadvisor.me/api/animal?page=1")
+        fetch("https://api.hikeadvisor.me/api/animal?page=" + offset/10+1)
         .then(response => response.json())
         .then(data => {
             setAnimals(data.objects)
@@ -40,6 +51,11 @@ export default function Animals() {
     React.useEffect(() => {
         getAnimalData();
     }, []);
+
+    const handleClick = (offset) => {
+        setOffset(offset)
+        setRedirect(offset)
+    }
 
     return (
         <div>
@@ -94,7 +110,13 @@ export default function Animals() {
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Pagination count={15} />
+                    {redirect != -1 ? <Redirect to={"/animals/" + redirect} /> : null}
+            <Pagination
+            limit={10}
+            offset={offset}
+            total={50}
+            onClick={(e, offset) => handleClick(offset)}
+        />
                     <Divider/>
                     <Grid item>
                         <Box p={4}>
