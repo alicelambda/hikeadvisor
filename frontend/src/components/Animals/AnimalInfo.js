@@ -31,7 +31,8 @@ const useStyles = makeStyles(theme => ({
   }));
   
 
-export default function StateInfo(props) {
+export default function AnimalInfo(props) {
+    const info = props.info;
     const classes = useStyles();
    
     return (
@@ -39,7 +40,7 @@ export default function StateInfo(props) {
         <div className={classes.root}  >
           <Box p={1}>
            <Grid item xs={12} spacing={5}>
-          <Link to={("/animals/" + props.info["inaturalist-id"])} style={{ textDecoration: 'none' }}>
+          <Link to={("/animal/" + info.animal_id)} style={{ textDecoration: 'none' }}>
           <Paper >
             <Box p={3} 
                 maxWidth={350}
@@ -48,22 +49,21 @@ export default function StateInfo(props) {
                 >
                 <Grid container spacing={2}>
                   <Grid item>
-                    <Avatar  className={classes.large} src={props.info["image"]}/>
+                    <Avatar  className={classes.large} src={info.animal_picURL}/>
                   </Grid>
                   <Grid item>
                     <Typography variant="h4" component="h2" id="blurbtitle">
-                      {props.info["common-name"]} <br/>
+                      {info.animal_commonName} <br/>
                     </Typography>
                     </Grid>
                 </Grid>
                 <Box minHeight={100}>
                 <Divider/>
               <Typography variant="body1" component="h2" id="blurbtitle">
-                Scientific name: {props.info["scientific-name"]} <br/>
-                  Place of Origin: {props.info["place-of-origin"]} <br/>
-                  Conservation Status: {props.info["conservation-status"]} <br/>
-                  Sightings: {props.info["number-sightings"]} <br/>
-                  Last seen: {props.info["last-sighting"]}
+                  Scientific name: {info.animal_scientificName} <br/>
+                  Place of Origin: {info.animal_location} <br/>
+                  Sightings: {info.animal_numObser} <br/>
+                  Last seen: {info.animal_lastSighting}
               </Typography>
               </Box>
             </Box>

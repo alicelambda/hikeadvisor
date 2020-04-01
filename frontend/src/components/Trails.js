@@ -49,8 +49,6 @@ export default function Trails() {
         setRedirect(offset)
     }
 
-  
-
     return (
         <div>
             <Navigation />

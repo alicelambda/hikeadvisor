@@ -5,13 +5,7 @@ import Animals from './components/Animals';
 import Trails from './components/Trails';
 import TrailStand from './components/Trails/TrailStand';
 import States from './components/States'
-import California from './components/States/California'
-import Colorado from './components/States/Colorado'
-import Cardinal from './components/Animals/Cardinal'
-import BaldEagle from './components/Animals/BaldEagle'
-import Toad from './components/Animals/AmericanToad'
-import Texas from './components/States/Texas'
-
+import AnimalInstance from './components/Animals/AnimalInstance';
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import {
@@ -19,6 +13,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import StateInstance from './components/States/StateInstance';
 
 function App() {
   return (
@@ -26,14 +21,8 @@ function App() {
       <MuiThemeProvider>
         <Router>
           <Switch>
-          <Route path="/states/Colorado">
-            <Colorado/>
-          </Route>
-          <Route path="/states/California">
-            <California/>
-          </Route>
-          <Route path="/states/Texas">
-            <Texas/>
+          <Route path="/state/:stateId">
+            <StateInstance/>
           </Route>
           <Route path="/states">
               <States/>
@@ -41,14 +30,8 @@ function App() {
             <Route path="/about">
               <About/>
             </Route>
-            <Route path="/animals/9083">
-            <Cardinal/>
-          </Route>
-          <Route path="/animals/5305">
-            <BaldEagle/>
-          </Route>
-          <Route path="/animals/64968">
-            <Toad/>
+          <Route path="/animal/:animalId">
+            <AnimalInstance/>
           </Route>
             <Route path="/animals">
               <Animals/>
