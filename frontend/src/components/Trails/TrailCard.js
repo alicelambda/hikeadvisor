@@ -62,19 +62,19 @@ export default function TrailCard(props) {
     }
 
     return (
-        <Grid item xs={12} spacing={5}>
+        <Grid item xs={4} >
 
                 <Card className={classes.root}>
                   <Box textDecoration={'none'} color={'black'}>
-                  <Link to={("/trail/" + info.id)} style={{ textDecoration: 'none' }}>
+                  <Link to={("/trail/" + info.trail_id)} style={{ textDecoration: 'none' }}>
 
       <CardHeader
-        title={info.name}
+        title={info.trail_name}
       />
       <CardMedia
         className={classes.media}
-        image={info.imgMedium}
-        title={info.name}
+        image={info.trail_picURL}
+        title={info.trail_name}
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
@@ -87,22 +87,23 @@ export default function TrailCard(props) {
                         container
                         spacing={3}
                     >
-                        <Grid item xs={2}>
-                            <Rating name="read-only" value={info.stars}Only />
+                        <Grid item xs={9}>
+                            <Rating name="read-only" value={info.trail_numstars}Only />
+                            {info.trail_location}
                         </Grid>
                     </Grid>
                 </Grid>
                 <Grid item>
-                {info.summary} It is a {difMap[info.difficulty]} route.
                 <Grid
                     container
                     spacing={2}
                 >
                     <Grid item>
                         <ul>
-                            <li>State:                   <Link to={("states/Colorado")} style={{ textDecoration: 'none' }}> Colorado</Link> </li>
-                            <li>Length: {info.length} miles </li>
-                            <li>Peak elvation: {info.high} ft. </li>
+                            <li>State:                   <Link to={("states/" + info.trail_states)} style={{ textDecoration: 'none' }}> {info.trail_states} </Link> </li>
+                            <li>Length: {info.trail_length} miles </li>
+                            <li>Peak elevation: {info.trail_high} ft. </li>
+                           
                         </ul>
                     </Grid>
 
