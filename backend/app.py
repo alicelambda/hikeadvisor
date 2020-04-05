@@ -20,6 +20,7 @@ migrate = Migrate(application, db)
 
 default_results_per_page = 10
 
+'''
 trail_attr = ["trail_id", "trail_name", "trail_location", "trail_length", "trail_stars", "trail_latitude", "trail_longitude",
 "trail_numstars", "trail_high", "trail_low", "trail_ascent", "trail_descent", "trail_picURL", "trail_states"]
 
@@ -28,6 +29,7 @@ animal_attr = ["animal_id", "animal_location", "animal_scientificName", "animal_
 
 state_attr = ["state_name", "state_elevation", "state_capital", "state_totalArea", "state_population", "state_populationDensity",
 "state_timezone", "state_flagPicURL", "state_motto", "state_lat", "state_long", "state_landArea", "state_highest", "state_lowest"]
+'''
 
 class Trail(db.Model):
     __tablename__ = "trail"
@@ -163,6 +165,7 @@ def get_trail_by_state():
         response.status_code = 200
         return response
 
+'''
 @application.route("/api/search")
 def search() :
     input_query = request.args.get("q")
@@ -221,7 +224,7 @@ def convert_to_dict(row, model_attr) :
     for attr in model_attr :
         response_json[attr] = getattr(row, attr)
     return response_json
-
+'''
 
 @application.errorhandler(404)
 def page_not_found(e):
