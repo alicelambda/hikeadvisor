@@ -165,7 +165,7 @@ def get_trail_by_state():
         response.status_code = 200
         return response
 
-'''
+#example call: http://127.0.0.1:5000/api/search?q=texas (local machine only)
 @application.route("/api/search")
 def search() :
     input_query = request.args.get("q")
@@ -224,7 +224,6 @@ def convert_to_dict(row, model_attr) :
     for attr in model_attr :
         response_json[attr] = getattr(row, attr)
     return response_json
-'''
 
 @application.errorhandler(404)
 def page_not_found(e):
@@ -236,4 +235,4 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     application.run(host="0.0.0.0", port=port)
     # on local machine
-    #application.run()
+    # application.run()
