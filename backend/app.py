@@ -20,6 +20,14 @@ migrate = Migrate(application, db)
 
 default_results_per_page = 10
 
+trail_attr = ["trail_id", "trail_name", "trail_location", "trail_length", "trail_stars", "trail_latitude", "trail_longitude",
+"trail_numstars", "trail_high", "trail_low", "trail_ascent", "trail_descent", "trail_picURL", "trail_states"]
+
+animal_attr = ["animal_id", "animal_location", "animal_scientificName", "animal_picURL", "animal_commonName", "animal_numObser",
+"animal_description", "animal_ancestry", "animal_isExtinct", "animal_rank", "animal_lastSighting", "animal_taxonName"]
+
+state_attr = ["state_name", "state_elevation", "state_capital", "state_totalArea", "state_population", "state_populationDensity",
+"state_timezone", "state_flagPicURL", "state_motto", "state_lat", "state_long", "state_landArea", "state_highest", "state_lowest"]
 
 class Trail(db.Model):
     __tablename__ = "trail"
@@ -155,6 +163,65 @@ def get_trail_by_state():
         response.status_code = 200
         return response
 
+@application.route("/api/search")
+def search() :
+    input_query = request.args.get("q")
+
+    if input_query == None or len(input_query) < 1 :
+        response_json = {"status": 400}
+        if input_query == None :
+            response_json["message"] = "Invalid. Search query not found."
+        else :
+            response_json["message"] = "Invalid. Search query cannot be empty."
+        response = jsonify(response_json)
+        response.status_code = 400
+        return response
+    else :
+        input_query = input_query.lower()
+        models = {"trails" : Trail.query, "animals" : Animal.query, "states" : State.query}
+        response_json = {"status": 200}
+        response_json["result"] = {}
+        for model in ["trails", "animals", "states"] :
+            if model == "trails" :
+                response_json["result"][model] = search_model(input_query, models[model], trail_attr)
+                response_json["num_trails"] = len(response_json["result"][model])
+            elif model == "animals" :
+                response_json["result"][model] = search_model(input_query, models[model], animal_attr)
+                response_json["num_animals"] = len(response_json["result"][model])
+            else :
+                response_json["result"][model] = search_model(input_query, models[model], state_attr)
+                response_json["num_states"] = len(response_json["result"][model])
+
+        total = 0
+        for result in ["num_trails", "num_animals", "num_states"] :
+            total = total + int(response_json[result])
+
+        response_json["total_results"] = total
+        response_json["page"] = 1
+        response_json["total_pages"] = 1
+        response = jsonify(response_json)
+        response.status_code = 200
+        return response
+
+def search_model(input_query, model_query, model_attr) :
+    return [convert_to_dict(row, model_attr) for row in model_query.all() if helper(input_query, row, model_attr)]
+
+def helper(input_query, row, model_attr) :
+    for attr in model_attr :
+        try : 
+            val = str(getattr(row, attr))
+        except UnicodeEncodeError :
+            val = getattr(row, attr).encode('ascii', 'ignore').decode('ascii')
+        if val != None and input_query in val.lower() :
+            return True
+    return False
+
+def convert_to_dict(row, model_attr) :
+    response_json = {}
+    for attr in model_attr :
+        response_json[attr] = getattr(row, attr)
+    return response_json
+
 
 @application.errorhandler(404)
 def page_not_found(e):
@@ -166,4 +233,4 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     application.run(host="0.0.0.0", port=port)
     # on local machine
-    # application.run()
+    #application.run()
