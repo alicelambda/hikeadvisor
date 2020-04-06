@@ -1,30 +1,30 @@
 UPDATE Animal
-	SET "animal_taxonNetwork" = 'https://www4f.wolframalpha.com/Calculate/MSP/MSP37651fi8di79b89eahg400001fah72i8ih9c57h7?MSPStoreType=image/gif&s=46'
+	SET "animal_taxonNetwork" = 'https://hikingadvisor-static.s3.amazonaws.com/Animalia.gif'
 	WHERE animal_taxonName = 'Animalia';
 UPDATE Animal
-	SET "animal_taxonNetwork" = 'https://www4f.wolframalpha.com/Calculate/MSP/MSP8801fef38b3fi4673f800004f1a7i575c9869g5?MSPStoreType=image/gif&s=47'
+	SET "animal_taxonNetwork" = 'https://hikingadvisor-static.s3.amazonaws.com/Mollusca.gif'
 	WHERE animal_taxonName = 'Mollusca';
 UPDATE Animal
-	SET "animal_taxonNetwork" = 'https://www4f.wolframalpha.com/Calculate/MSP/MSP3285163e95cgbf4d0gab00002c40aghh14ge3b29?MSPStoreType=image/gif&s=38'
+	SET "animal_taxonNetwork" = 'https://hikingadvisor-static.s3.amazonaws.com/Fungi.gif'
 	WHERE animal_taxonName = 'Fungi';
 UPDATE Animal
-	SET "animal_taxonNetwork" = 'https://www4f.wolframalpha.com/Calculate/MSP/MSP935810dd89069e15gg8300003gffadb6ca6d5256?MSPStoreType=image/gif&s=20'
+	SET "animal_taxonNetwork" = 'https://hikingadvisor-static.s3.amazonaws.com/Reptilia.gif'
 	WHERE animal_taxonName = 'Reptilia';
 UPDATE Animal
-	SET "animal_taxonNetwork" = 'https://www4f.wolframalpha.com/Calculate/MSP/MSP8436203a34gbgda7dfg100001egi1aa235h7b8f6?MSPStoreType=image/gif&s=30'
+	SET "animal_taxonNetwork" = 'https://hikingadvisor-static.s3.amazonaws.com/Mammalia.gif'
 	WHERE animal_taxonName = 'Mammalia';
 UPDATE Animal
-	SET "animal_taxonNetwork" = 'https://www4f.wolframalpha.com/Calculate/MSP/MSP4271c81685ia3d72dei00001id486037884f925?MSPStoreType=image/gif&s=40'
+	SET "animal_taxonNetwork" = 'https://hikingadvisor-static.s3.amazonaws.com/Aves.gif'
 	WHERE animal_taxonName = 'Aves';
 UPDATE Animal
-	SET "animal_taxonNetwork" = 'https://www4d.wolframalpha.com/Calculate/MSP/MSP2566127f2c550bh469030000355g4h85fd1i497e?MSPStoreType=image/gif&s=44'
+	SET "animal_taxonNetwork" = 'https://hikingadvisor-static.s3.amazonaws.com/Amphibia.gif'
 	WHERE animal_taxonName = 'Amphibia';
 UPDATE Animal
-	SET "animal_taxonNetwork" = 'https://www4d.wolframalpha.com/Calculate/MSP/MSP15651223c0ibdhd4aa8i000027fc7e60eec797a2?MSPStoreType=image/gif&s=36'
+	SET "animal_taxonNetwork" = 'https://hikingadvisor-static.s3.amazonaws.com/Insecta.gif'
 	WHERE animal_taxonName = 'Insecta';
 UPDATE Animal
-	SET "animal_taxonNetwork" = 'https://www4d.wolframalpha.com/Calculate/MSP/MSP17571223c0ib6aai2de5000030026b0fd4db7g9f?MSPStoreType=image/gif&s=36'
+	SET "animal_taxonNetwork" = 'https://hikingadvisor-static.s3.amazonaws.com/Arachnida.gif'
 	WHERE animal_taxonName = 'Arachnida';
 UPDATE Animal
-	SET "animal_taxonNetwork" = 'https://www4d.wolframalpha.com/Calculate/MSP/MSP116522414ab2b55a517e0000111e6a48g9810065?MSPStoreType=image/gif&s=31'
+	SET "animal_taxonNetwork" = 'https://hikingadvisor-static.s3.amazonaws.com/Plantae.gif'
 	WHERE animal_taxonName = 'Plantae';
