@@ -32,7 +32,7 @@ const blurbData = [
         "description":"I am a junior majoring in computer science and minoring in Japanese. Some of my hobbies include playing the piano, video games, and cooking.",
         "noissues":0,
         "nocommits":9,
-        "notestcases":0,
+        "notestcases":110,
         "photo":nabil,
         "username":"nzubair76"
     },
