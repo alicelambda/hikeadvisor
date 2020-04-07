@@ -192,6 +192,7 @@ class Trail(db.Model):
     trail_descent = db.Column(db.Integer)
     trail_picURL = db.Column(db.Unicode)
     trail_states = db.Column(db.Unicode)
+    trail_mapPicURL = db.Column(db.Unicode)
 
     def __repr__(self):
         # return f"Trail('{self.trail_id}', '{self.trail_name}', '{self.trail_location}', '{self.trail_length}', '{self.trail_stars}', '{self.trail_latitude}', '{self.trail_latitude}', '{self.trail_longtitude}', '{self.trail_numstarts}', '{self.trail_high}', '{self.trail_low}', '{self.trail_ascent}', '{self.trail_descent}', '{self.trail_picURL}', '{self.trail_states}')"
@@ -236,6 +237,8 @@ class State(db.Model):
     state_landArea = db.Column(db.Integer)
     state_highest = db.Column(db.Unicode)
     state_lowest = db.Column(db.Unicode)
+    state_flagPicURL = db.Column(db.Unicode)
+    state_mapPicURL = db.Column(db.Unicode)
 
     def __repr__(self):
         # return f"State('{self.state_name}', '{self.state_elevation}', '{self.state_capital}', '{self.state_totalArea}', '{self.state_population}', '{self.state_populationDensity}', '{self.state_timezone}', '{self.state_flagPicURL}', '{self.state_motto}', '{self.state_landArea}', '{self.state_lat}', '{self.state_long}', '{self.state_higest}', '{self.state_lowest}')"

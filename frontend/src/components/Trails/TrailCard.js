@@ -12,7 +12,6 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Grid from '@material-ui/core/Grid'
-import Rating from '@material-ui/lab/Rating';
 import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -87,7 +86,6 @@ export default function TrailCard(props) {
                         spacing={3}
                     >
                         <Grid item xs={9}>
-                            <Rating name="read-only" value={info.trail_numstars}Only />
                             {info.trail_location}
                         </Grid>
                     </Grid>

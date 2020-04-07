@@ -10,3 +10,6 @@ require.extensions['.png'] = function () {
 require.extensions['.jpg'] = function () {
     return null;
 };
+require.extensions['.svg'] = function () {
+    return null;
+};
