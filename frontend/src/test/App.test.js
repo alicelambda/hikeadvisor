@@ -9,8 +9,9 @@ import App from '../App';
 
 configure({ adapter: new Adapter() });
 
-it('renders without crashing', () => {
+it('renders app without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<App />, div);
     ReactDOM.unmountComponentAtNode(div);
 });
+
