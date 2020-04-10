@@ -34,6 +34,7 @@ export default function Trails() {
             <TrailCard
                 key={trail.id}
                 info={trail}
+                page={offset}
             />
         ))
 

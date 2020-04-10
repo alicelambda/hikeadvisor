@@ -39,7 +39,7 @@ function App() {
             <Route path="/animals">
               <Animals/>
             </Route>
-            <Route path="/trail/:trailId">
+            <Route path="/trail/:trailId/:trailPage">
               <TrailStand/>
             </Route>
             <Route path="/trails/:offset">

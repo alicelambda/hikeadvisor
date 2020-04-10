@@ -64,7 +64,7 @@ export default function TrailCard(props) {
 
                 <Card className={classes.root}>
                   <Box textDecoration={'none'} color={'black'}>
-                  <Link to={("/trail/" + info.trail_id)} style={{ textDecoration: 'none' }}>
+                  <Link to={("/trail/" + info.trail_id) +'/'+ props.page} style={{ textDecoration: 'none' }}>
 
       <CardHeader
         title={info.trail_name}
