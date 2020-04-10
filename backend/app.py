@@ -184,18 +184,20 @@ def search() :
         return response
     else :
         input_query = input_query.lower()
+        input_list = input_query.split(' ')
+        container = set()
         models = {"trails" : Trail.query, "animals" : Animal.query, "states" : State.query}
         response_json = {"status": 200}
         response_json["result"] = {}
         for model in ["trails", "animals", "states"] :
             if model == "trails" :
-                response_json["result"][model] = search_model(input_query, models[model], trail_attr)
+                response_json["result"][model] = search_model(input_list, models[model], trail_attr, container, model)
                 response_json["num_trails"] = len(response_json["result"][model])
             elif model == "animals" :
-                response_json["result"][model] = search_model(input_query, models[model], animal_attr)
+                response_json["result"][model] = search_model(input_list, models[model], animal_attr, container, model)
                 response_json["num_animals"] = len(response_json["result"][model])
             else :
-                response_json["result"][model] = search_model(input_query, models[model], state_attr)
+                response_json["result"][model] = search_model(input_list, models[model], state_attr, container, model)
                 response_json["num_states"] = len(response_json["result"][model])
 
         total = 0
@@ -209,16 +211,33 @@ def search() :
         response.status_code = 200
         return response
 
-def search_model(input_query, model_query, model_attr) :
-    return [convert_to_dict(row, model_attr) for row in model_query.all() if helper(input_query, row, model_attr)]
+def search_model(input_query, model_query, model_attr, container, model) :
+    return [convert_to_dict(row, model_attr) for row in model_query.all() if helper(input_query, row, model_attr, container, model)]
 
-def helper(input_query, row, model_attr) :
+def helper(input_query, row, model_attr, container, model) :
     for attr in model_attr :
+        if attr == "trail_mapPicURL" or attr == "animal_taxonNetwork" or attr == "state_mapPicURL" :
+            continue
         try : 
             val = str(getattr(row, attr))
         except UnicodeEncodeError :
             val = getattr(row, attr).encode('ascii', 'ignore').decode('ascii')
-        if val != None and input_query in val.lower() :
+        if val != None and isContains(input_query, str(val.lower())) :
+            if str(val.lower()) in container :
+                return False
+            else :
+                if model == "animals" :
+                    container |= {str(getattr(row, "animal_id"))}
+                elif model == "trails" :
+                    container |= {str(getattr(row, "trail_id"))}
+                else :
+                    container |= {str(getattr(row, "state_name"))}
+                return True
+    return False
+
+def isContains (input_query, val) :
+    for query in input_query :
+        if query in val :
             return True
     return False
 
