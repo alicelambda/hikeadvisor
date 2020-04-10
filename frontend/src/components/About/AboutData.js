@@ -12,7 +12,7 @@ const blurbData = [
         "description":"I am a second year Computer Science major interested in systems programming and cybersecurity. When not programming I enjoy bouldering and cat memes.",
         "noissues":0,
         "nocommits":9,
-        "notestcases":1,
+        "notestcases":22,
         "username": "alicelambda",
         "photo":alice
     }, 
