@@ -34,7 +34,8 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.1",
     "react-search-box": "^2.0.2",
-    "serve": "^11.3.0"
+    "serve": "^11.3.0",
+    "typescript": "^3.8.3"
   },
   "scripts": {
     "start-prod": "NODE_ENV=production react-scripts start",
