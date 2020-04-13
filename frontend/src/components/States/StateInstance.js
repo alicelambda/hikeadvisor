@@ -15,23 +15,6 @@ import {
 } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
-    root: {
-      display: 'flex',
-      '& > *': {
-        margin: theme.spacing(1),
-      },
-    },
-    paper: {
-      height: 140,
-      width: 100,
-    },
-    control: {
-      padding: theme.spacing(2),
-    },
-    large: {
-      width: theme.spacing(7),
-      height: theme.spacing(7),
-    },
     photo: {
         height: 250,
       },

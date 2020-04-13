@@ -37,41 +37,42 @@ export default function AnimalInfo(props) {
    
     return (
       
-        <div className={classes.root}  >
-          <Box p={1}>
-           <Grid item xs={12} spacing={5}>
-          <Link to={("/animal/" + info.animal_id)} style={{ textDecoration: 'none' }}>
-          <Paper >
-            <Box p={3} 
-                maxWidth={350}
-                minWidth={350}
-                textAlign="left"
-                >
-                <Grid container spacing={2}>
-                  <Grid item>
-                    <Avatar  className={classes.large} src={info.animal_picURL}/>
-                  </Grid>
-                  <Grid item>
-                    <Typography variant="h4" component="h2" id="blurbtitle">
-                      {info.animal_commonName} <br/>
-                    </Typography>
-                    </Grid>
+      <div className={classes.root}  >
+        <Box p={1}>
+         <Grid item xs={12} spacing={5}>
+        <Link to={("/animal/" + info.animal_id) +'/'+ props.page} style={{ textDecoration: 'none' }}>
+        <Paper >
+          <Box p={3} 
+              maxWidth={350}
+              minWidth={350}
+              textAlign="left"
+              >
+              <Grid container spacing={2}>
+                <Grid item>
+                  <Avatar  className={classes.large} src={info.animal_picURL}/>
                 </Grid>
-                <Box minHeight={100}>
-                <Divider/>
-              <Typography variant="body1" component="h2" id="blurbtitle">
-                  Scientific name: {info.animal_scientificName} <br/>
-                  Place of Origin: {info.animal_location} <br/>
-                  Sightings: {info.animal_numObser} <br/>
-                  Last seen: {info.animal_lastSighting}
-              </Typography>
-              </Box>
+                <Grid item>
+                  <Typography variant="h4" component="h2" id="blurbtitle">
+                    {info.animal_commonName} <br/>
+                  </Typography>
+                  </Grid>
+              </Grid>
+              <Box minHeight={100}>
+              <Divider/>
+            <Typography variant="body1" component="h2" id="blurbtitle">
+                Scientific name: {info.animal_scientificName} <br/>
+                Place of Origin: {info.animal_location} <br/>
+                Sightings: {info.animal_numObser} <br/>
+                Last seen: {info.animal_lastSighting}
+            </Typography>
             </Box>
-          </Paper>
-          </Link>
-          </Grid>
           </Box>
-        </div>
-    )
+        </Paper>
+        </Link>
+        </Grid>
+        </Box>
+      </div>
+  )
+
 
 }
