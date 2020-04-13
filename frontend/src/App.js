@@ -24,19 +24,19 @@ function App() {
       <MuiThemeProvider>
         <Router>
           <Switch>
-          <Route path="/state/:stateId">
+          <Route path="/state/:stateId/:statePage">
             <StateInstance/>
           </Route>
-          <Route path="/states">
+          <Route path="/states/:offset">
               <States/>
             </Route>
             <Route path="/about">
               <About/>
             </Route>
-          <Route path="/animal/:animalId">
+          <Route path="/animal/:animalId/:animalPage">
             <AnimalInstance/>
           </Route>
-            <Route path="/animals">
+            <Route path="/animals/:offset">
               <Animals/>
             </Route>
             <Route path="/trail/:trailId/:trailPage">

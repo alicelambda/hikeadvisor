@@ -86,8 +86,8 @@ export default function Navigation() {
           <Typography className={classes.title} variant="h6" noWrap>
           </Typography>
             <Link to="/" style={{ textDecoration: 'none' }}><Button>Home</Button> </Link>
-            <Link to="/states" style={{ textDecoration: 'none' }}><Button >States</Button> </Link>
-            <Link to="/animals" style={{ textDecoration: 'none' }}><Button>Animals</Button> </Link>
+            <Link to="/states/0" style={{ textDecoration: 'none' }}><Button >States</Button> </Link>
+            <Link to="/animals/0" style={{ textDecoration: 'none' }}><Button>Animals</Button> </Link>
             <Link to="/trails/0" style={{ textDecoration: 'none' }}><Button>Trails</Button> </Link>
             <Link to="/about" style={{ textDecoration: 'none' }}><Button>About</Button> </Link>
           <div className={classes.search}>

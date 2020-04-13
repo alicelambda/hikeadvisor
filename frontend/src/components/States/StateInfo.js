@@ -37,42 +37,43 @@ export default function StateInfo(props) {
    
     return (
       
-        <div className={classes.root}  >
-          <Box p={1}>
-           <Grid item xs={12} spacing={5}>
-          <Link to={("/state/" + info.state_name)} style={{ textDecoration: 'none' }}>
-          <Paper >
-            <Box p={3} 
-                maxWidth={350}
-                minWidth={350}
-                textAlign="left"
-                >
-                <Grid container spacing={2}>
-                  <Grid item>
-                    <Avatar  className={classes.large} src={info.state_flagPicURL}/>
-                  </Grid>
-                  <Grid item>
-                    <Typography variant="h4" component="h2" id="blurbtitle">
-                      {info.state_name} <br/>
-                    </Typography>
-                    </Grid>
+      <div className={classes.root}  >
+        <Box p={1}>
+         <Grid item xs={12} spacing={5}>
+        <Link to={("/state/" + info.state_name)+'/'+ props.page} style={{ textDecoration: 'none' }}>
+        <Paper >
+          <Box p={3} 
+              maxWidth={350}
+              minWidth={350}
+              textAlign="left"
+              >
+              <Grid container spacing={2}>
+                <Grid item>
+                  <Avatar  className={classes.large} src={info.state_flagPicURL}/>
                 </Grid>
-                <Box minHeight={100}>
-                <Divider/>
-              <Typography variant="body1" component="h2" id="blurbtitle">
-                  Motto: {info.state_motto} <br/>
-                  Capital: {info.state_capital} <br/>
-                  Elevation: {info.state_elevation} ft.<br/>
-                  Population: {info.state_population} <br/>
-                  {info.state_timezone}
-              </Typography>
-              </Box>
+                <Grid item>
+                  <Typography variant="h4" component="h2" id="blurbtitle">
+                    {info.state_name} <br/>
+                  </Typography>
+                  </Grid>
+              </Grid>
+              <Box minHeight={100}>
+              <Divider/>
+            <Typography variant="body1" component="h2" id="blurbtitle">
+                Motto: {info.state_motto} <br/>
+                Capital: {info.state_capital} <br/>
+                Elevation: {info.state_elevation} ft.<br/>
+                Population: {info.state_population} <br/>
+                {info.state_timezone}
+            </Typography>
             </Box>
-          </Paper>
-          </Link>
-          </Grid>
           </Box>
-        </div>
-    )
+        </Paper>
+        </Link>
+        </Grid>
+        </Box>
+      </div>
+  )
+
 
 }
