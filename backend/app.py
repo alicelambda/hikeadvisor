@@ -22,13 +22,13 @@ default_results_per_page = 10
 
 
 trail_attr = ["trail_id", "trail_name", "trail_location", "trail_length", "trail_stars", "trail_latitude", "trail_longitude",
-"trail_numstars", "trail_high", "trail_low", "trail_ascent", "trail_descent", "trail_picURL", "trail_states", "trail_mapPicURL"]
+"trail_numstars", "trail_high", "trail_low", "trail_ascent", "trail_descent", "trail_picURL", "trail_states", "trail_mapPicURL", "trail_animals"]
 
 animal_attr = ["animal_id", "animal_location", "animal_scientificName", "animal_picURL", "animal_commonName", "animal_numObser",
-"animal_description", "animal_ancestry", "animal_isExtinct", "animal_rank", "animal_lastSighting", "animal_taxonName", "animal_taxonNetwork"]
+"animal_description", "animal_ancestry", "animal_isExtinct", "animal_rank", "animal_lastSighting", "animal_taxonName", "animal_taxonNetwork", "animal_trails"]
 
 state_attr = ["state_name", "state_elevation", "state_capital", "state_totalArea", "state_population", "state_populationDensity",
-"state_timezone", "state_flagPicURL", "state_motto", "state_lat", "state_long", "state_landArea", "state_highest", "state_lowest", "state_mapPicURL"]
+"state_timezone", "state_flagPicURL", "state_motto", "state_lat", "state_long", "state_landArea", "state_highest", "state_lowest", "state_mapPicURL", "state_animals", "state_trails"]
 
 
 class Trail(db.Model):
@@ -49,6 +49,7 @@ class Trail(db.Model):
     trail_picURL = db.Column(db.Unicode)
     trail_states = db.Column(db.Unicode)
     trail_mapPicURL = db.Column(db.Unicode)
+    trail_animals = db.Column(db.Unicode)
 
     def __repr__(self):
         return "Trail {}".format(self.trail_name)
@@ -70,6 +71,7 @@ class Animal(db.Model):
     animal_lastSighting = db.Column(db.Unicode)
     animal_taxonName = db.Column(db.Unicode)
     animal_taxonNetwork = db.Column(db.Unicode)
+    animal_trails = db.Column(db.Unicode)
 
     def __repr__(self):
         return "Animal {}".format(self.animal_commonName)
@@ -93,6 +95,8 @@ class State(db.Model):
     state_highest = db.Column(db.Unicode)
     state_lowest = db.Column(db.Unicode)
     state_mapPicURL = db.Column(db.Unicode)
+    state_animals = db.Column(db.Unicode)
+    state_trails = db.Column(db.Unicode)
 
     def __repr__(self):
         return "State {}".format(self.state_name)

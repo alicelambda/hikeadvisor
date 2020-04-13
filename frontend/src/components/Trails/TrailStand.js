@@ -14,7 +14,7 @@ const useStyles = makeStyles();
 
 export default function TrailStand() {
     const [trails, setTrails] = React.useState([]);
-    const [trail, setTrail] = React.useState({});
+    const [trail, setTrail] = React.useState(null);
 
     React.useEffect(() => {
         getTrailData();
@@ -78,7 +78,7 @@ export default function TrailStand() {
                                 <Grid item>
 
                                     <ul>
-                                        <li>State:                   <Link to={("/states/Colorado")} style={{ textDecoration: 'none' }}> Colorado</Link> </li>
+                                        <li>State:                   <Link to={("/state/" + trail.trail_states)} style={{ textDecoration: 'none' }}> {trail.trail_states}</Link> </li>
                                         <li> Length: {trail.trail_length}</li>
                                         <li> Stars: {trail.trail_stars}</li>
                                         <li> Latitude: {trail.trail_latitude}</li>
@@ -88,7 +88,10 @@ export default function TrailStand() {
 
                                 <Grid item>
                                     <ul>
-                                        <li>Animals:                   <Link to={("/animals/5305")} style={{ textDecoration: 'none' }}> Bald Eagle</Link> </li>
+                                        <li>
+                                        Animals:                   <Link to={("/animal/" + trail.trail_animals[0])} style={{ textDecoration: 'none' }}> {trail.trail_animals[1]}</Link>,
+                                        <Link to={("/animal/" + trail.trail_animals[2])} style={{ textDecoration: 'none' }}> {trail.trail_animals[3]}</Link>
+                                         </li>
                                         <li> Highest Elevation {trail.trail_high} ft</li>
                                         <li> Lowest Elvation {trail.trail_low} ft</li>
                                         <li> Ascent: {trail.trail_ascent} ft</li>
