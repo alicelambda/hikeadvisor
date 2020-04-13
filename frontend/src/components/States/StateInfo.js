@@ -40,7 +40,7 @@ export default function StateInfo(props) {
         <div className={classes.root}  >
           <Box p={1}>
            <Grid item xs={12} spacing={5}>
-          <Link to={("/state/" + info.name)} style={{ textDecoration: 'none' }}>
+          <Link to={("/state/" + info.state_name)} style={{ textDecoration: 'none' }}>
           <Paper >
             <Box p={3} 
                 maxWidth={350}
