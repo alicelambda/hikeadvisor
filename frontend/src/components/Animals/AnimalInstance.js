@@ -14,70 +14,60 @@ import {
   Link
 } from "react-router-dom";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-    '& > *': {
-      margin: theme.spacing(1),
-    },
-  },
-  paper: {
-    height: 140,
-    width: 100,
-  },
-  control: {
-    padding: theme.spacing(2),
-  },
-  large: {
-    width: theme.spacing(7),
-    height: theme.spacing(7),
-  },
-  photo: {
-    height: 200,
-  },
-}));
+const useStyles = makeStyles();
 
 
 export default function AnimalInstance() {
   let { animalId } = useParams();
-    console.log(animalId)
-    const animal = animalData.filter(animal =>{
-       return animal["animal_id"] == animalId
-    })[0]
+  console.log(animalId)
+    // console.log(animalId)
+    // const animal = animalData.filter(animal =>{
+    //    return animal["animal_id"] == animalId
+    // })[0]
     
-    const classes = useStyles();
-    console.log(animal)
- 
+    // const classes = useStyles();
+    // console.log(animal)
+  // const [animals, setAnimals] = React.useState([]);
+  const [animal, setAnimal] = React.useState(null);
+  React.useEffect(async () => {
+    var url = "https://api.hikeadvisor.me/api/animal/" + animalId;
+    console.log(animalId)
+    console.log(url)
+    const response = await fetch(url);
+    console.log(response)
+    const data = await response.json();
+    const item = data;
+    setAnimal(item);
+    console.log(item.animal_id)
+  }, [])
+
+  // React.useEffect(() => {
+  //   getStateData();
+  // }, [])
+
+  // let {animalId} = useParams();
+  // console.log(animalId)
+  // console.log(animalPage)
+
+  // const getStateData = () => {
+  //   fetch("https://api.hikeadvisor.me/api/animal?page=" + animalPage / 10 + 1)
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     setAnimals(data.objects)
+  //   })
+  // }
+
+  // React.useEffect(() => {
+  //   setAnimal(animals.filter(animal => {
+  //     return animal.animal_id == animalId
+  //   })[0])
+  // }, animals);
+  const classes = useStyles();
   return (
+        <div className={classes}>
 
-<div>
-<Navigation/> 
-    <Container maxWidth="md">
-        <Box>
-        <Grid
-            container
-            spacing={0}
-            direction="column"
-            alignItems="center"
-            justify="center"
-        >
-            <Grid item>
-                
-                <Box p={2} >
-                    <Typography variant="h3" component="h2" maxWidth="xs">
-                        {animal.animal_commonName}
-                    </Typography>
-                </Box>
-
-                <Box textAlign="left" p={3} alignContent="center">
-                  <img className={classes.photo} src={animal.animal_picURL}/>
-                </Box>
-            </Grid>
-            <Divider/>
-            <Grid item>
-                <Typography variant="h3" component="h2" maxWidth="xs">
-                    
-                </Typography>
+            <Navigation />
+            {animal ?
                 <Grid
                     container
                     spacing={0}
@@ -85,67 +75,59 @@ export default function AnimalInstance() {
                     alignItems="center"
                     justify="center"
                 >
+
+
                     <Grid item>
-                        <Grid container 
-                        alignContent="center" 
-                        alignItems="center"  
-                        justspacing={2}
-                        justify="center"
-                        >
-                            <Box p={1}>
-     <Grid item xs={12} spacing={5}>
-    <Paper >
-      <Box p={3} 
-          maxWidth={350}
-          minWidth={350}
-          textAlign="left"
-          >
-          <Grid container spacing={2}>
-            <Grid item>
-              <Avatar  className={classes.large} src={animal.animal_picURL}/>
-            </Grid>
-            <Grid item>
-              <Typography variant="h4" component="h2" id="blurbtitle">
-              {animal.animal_commonName}
-              </Typography>
-              </Grid>
-          </Grid>
-          <Box minHeight={100}>
-        <Typography variant="body1" component="h2" id="blurbtitle">
-        {animal.animal_description}
-        </Typography>
-        <Divider/>
-        <Typography variant="h6" component="h2" id="blurbtitle">
-                States:<br/>
-                <Link to={("trails/" + animal.animal_states)} style={{ textDecoration: 'none' }}> {animal.animal_states} </Link>
-              </Typography>
-              <Divider/>
-              <Typography variant="h6" component="h2" id="blurbtitle">
-                Trails:<br/>
-                <Link to={("trails/" + animal.animal_trails)} style={{ textDecoration: 'none' }}> {animal.animal_trails} </Link>
-              </Typography>
-        <Typography variant="body1" component="h2" id="blurbtitle"></Typography>
-        </Box>
-      </Box>
-    </Paper>
-    </Grid>
-    </Box>
-
-                        </Grid>
+                        <img src={animal.animal_picURL}></img>
                     </Grid>
-                </Grid>
-            </Grid>
-            
-            <Divider/>
-            <Grid item>
-                <Box p={4}>
-                </Box>
-            </Grid>
-          </Grid>
-          </Box>
-    </Container>
+                    <Grid item>
+                        <Typography variant="h2">
+                            {animal.animal_commonName}
+                        </Typography>
+                    </Grid>
+                    <Grid item>
+                        <Typography variant="body2">
+                        </Typography>
+                    </Grid>
+                    <Grid item>
 
-</div>
-  )
+                        <Box textAlign="left">
+                            <Grid container
+                                spacing={2}
+                            >
+
+
+                                <Grid item>
+
+                                    <ul>
+                                        <li>State:                   <Link to={("/state/" + animal.animal_location)} style={{ textDecoration: 'none' }}> {animal.animal_location}</Link> </li>
+                                        <li>Rank: {animal.animal_rank}</li>
+                                        <li>Last Sighting: {animal.animal_lastSighting}</li>
+                                        <li>Common Name: {animal.animal_commonName}</li>
+                                        <li>Scientific Name: {animal.animal_scientificName}</li>
+                                        <li>Taxon Name: {animal.animal_taxonName}</li>
+                                    </ul>
+                                </Grid>
+
+                                <Grid item>
+                                    <ul>
+                                        <li>Trails: <Link to={("/trail/" + animal.animal_trails[0])} style={{ textDecoration: 'none' }}> {animal.animal_trails[1]}</Link>, <Link to={("/trail/" + animal.animal_trails[2])} style={{ textDecoration: 'none' }}> {animal.animal_trails[3]}</Link></li>
+                                        <li>Number of Observations: {animal.animal_numObser}</li>
+                                        <li>Is Extinct: {animal.animal_isExtinct} No</li>
+                                        <li>Description: {animal.animal_description}</li>
+                                        <li>Taxon Network:</li>
+                                        <img src={animal.animal_taxonNetwork}></img>
+                                    </ul>
+
+                                </Grid>
+
+                            </Grid>
+                        </Box>
+                    </Grid>
+
+                </Grid> : null}
+        </div>
+
+    )
 
 }
