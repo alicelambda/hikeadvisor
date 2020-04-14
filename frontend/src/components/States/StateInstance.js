@@ -15,40 +15,48 @@ import {
 } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-    '& > *': {
-      margin: theme.spacing(1),
-    },
-  },
-  paper: {
-    height: 140,
-    width: 100,
-  },
-  control: {
-    padding: theme.spacing(2),
-  },
-  large: {
-    width: theme.spacing(7),
-    height: theme.spacing(7),
-  },
-}));
+    photo: {
+        height: 250,
+      },
+    
+  }));
+  
 
 
 export default function StateInstance() {
-  let { stateId } = useParams();
+    const [states, setStates] = React.useState([]);
+    const [state, setState] = React.useState(null);
+
+    React.useEffect(() => {
+        getStateData();
+    }, []);
+
+    let { stateId, statePage } = useParams();
+    console.log(statePage)
     console.log(stateId)
-    const state = stateData.filter(state =>{
-       return state["state_name"] == stateId
-    })[0]
-    
-    const classes = useStyles();
-    console.log(state)
+
+    const getStateData = () => {
+
+        fetch("https://api.hikeadvisor.me/api/state?page=" + statePage / 10 + 1)
+            .then(response => response.json())
+            .then(data => {
+                setStates(data.objects)
+            })
+    }
+
+    React.useEffect(() => {
+        setState(states.filter(state => {
+            return state.state_name == stateId
+        })[0])
+
+    }, [states]);
  
+  const classes = useStyles();
   return (
 
     <div>
     <Navigation/> 
+    {state ?
         <Container maxWidth="md">
             <Box>
             <Grid
@@ -69,6 +77,7 @@ export default function StateInstance() {
                     <Box textAlign="left" p={3} alignContent="center">
     
                       <img className={classes.photo} src={state.state_flagPicURL}/>
+                      <img className={classes.photo} src={state.state_mapPicURL}/>
                     </Box>
                 </Grid>
                 <Divider/>
@@ -122,13 +131,15 @@ export default function StateInstance() {
             </Typography>
             <Divider/>
             <Typography variant="h6" component="h2" id="blurbtitle">
-            Animals: <br/>
-            <Link to={("animals/" + state.state_animals)} style={{ textDecoration: 'none' }}> {state.state_animals} </Link>
+            Popular Animals: <br/>
+            <Link to={("/state/" + state.state_animals[0])} style={{ textDecoration: 'none' }}> {state.state_animals[1]}</Link>,
+                                        <Link to={("/animal/" + state.state_animals[2])} style={{ textDecoration: 'none' }}> {state.state_animals[3]}</Link>
             </Typography>
             <Divider/>
             <Typography variant="h6" component="h2" id="blurbtitle">
-            Trails: <br/>
-            <Link to={("trails/" + state.state_trails)} style={{ textDecoration: 'none' }}> {state.state_trails} </Link>
+            Favorite Trails: <br/>
+            <Link to={("/state/" + state.state_trails[0])} style={{ textDecoration: 'none' }}> {state.state_trails[1]}</Link>,
+                                        <Link to={("/animal/" + state.state_trails[2])} style={{ textDecoration: 'none' }}> {state.state_trails[3]}</Link>
             </Typography>
             </Box>
           </Box>
@@ -140,7 +151,6 @@ export default function StateInstance() {
                         </Grid>
                     </Grid>
                 </Grid>
-                
                 <Divider/>
                 <Grid item>
                     <Box p={4}>
@@ -149,8 +159,9 @@ export default function StateInstance() {
               </Grid>
               </Box>
         </Container>
-    
+    : null}
     </div>
       )
+
 
 }

@@ -118,12 +118,11 @@ export default function Navigation() {
           </Box>
           <Typography className={classes.title} variant="h6" noWrap>
           </Typography>
-          <GlobalCss />
-          <Link to="/" className={classes.link}><Button>Home</Button> </Link>
-          <Link to="/states" className={classes.link}><Button >States</Button> </Link>
-          <Link to="/animals" className={classes.link}><Button>Animals</Button> </Link>
-          <Link to="/trails/0" className={classes.link}><Button>Trails</Button> </Link>
-          <Link to="/about" className={classes.link}><Button>About</Button> </Link>
+            <Link to="/" style={{ textDecoration: 'none' }}><Button>Home</Button> </Link>
+            <Link to="/states/0" style={{ textDecoration: 'none' }}><Button >States</Button> </Link>
+            <Link to="/animals/0" style={{ textDecoration: 'none' }}><Button>Animals</Button> </Link>
+            <Link to="/trails/0" style={{ textDecoration: 'none' }}><Button>Trails</Button> </Link>
+            <Link to="/about" style={{ textDecoration: 'none' }}><Button>About</Button> </Link>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />

@@ -60,6 +60,7 @@ export default function Animals() {
             <AnimalInfo
                 key={animal.id}
                 info={animal}
+                page={offset}
             />
             ))
 
@@ -68,7 +69,7 @@ export default function Animals() {
 
     React.useEffect(() => {
         getAnimalData();
-    }, []);
+    }, [offset]);
 
     const handleClick = (offset) => {
         setOffset(offset)

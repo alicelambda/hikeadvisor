@@ -45,11 +45,11 @@ function App() {
       <MuiThemeProvider theme={theme}>
         <Router>
           <Switch>
-            <Route path="/state/:stateId">
-              <StateInstance />
-            </Route>
-            <Route path="/states">
-              <States />
+          <Route path="/state/:stateId/:statePage">
+            <StateInstance/>
+          </Route>
+          <Route path="/states/:offset">
+              <States/>
             </Route>
             <Route path="/about">
               <About />
@@ -57,8 +57,11 @@ function App() {
             <Route path="/animal/:animalId">
               <AnimalInstance />
             </Route>
-            <Route path="/animals">
-              <Animals />
+          <Route path="/animal/:animalId/:animalPage">
+            <AnimalInstance/>
+          </Route>
+            <Route path="/animals/:offset">
+              <Animals/>
             </Route>
             <Route path="/trail/:trailId/:trailPage">
               <TrailStand />

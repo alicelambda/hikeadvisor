@@ -41,8 +41,9 @@ export default function States() {
     React.useEffect(() => {
         setStatesCard(stateData.map(state => 
             <StateInfo
-                key={state.id}
+                key={state.name}
                 info={state}
+                page={offset}
             />
             ))
 
@@ -51,7 +52,7 @@ export default function States() {
 
     React.useEffect(() => {
         getStateData();
-    }, []);
+    }, [offset]);
 
     const handleClick = (offset) => {
         setOffset(offset)
