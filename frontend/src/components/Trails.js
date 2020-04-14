@@ -4,8 +4,20 @@ import TrailCard from './Trails/TrailCard';
 import Grid from '@material-ui/core/Grid';
 import Pagination from "material-ui-flat-pagination";
 import { Redirect, useParams } from 'react-router-dom';
+import Box from '@material-ui/core/Box';
+import { makeStyles } from '@material-ui/core/styles';
+
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        backgroundColor:" #06d6a0",
+  
+    },
+
+}));
 
 export default function Trails() {
+    const classes = useStyles();
 
     let poffset = useParams();
 
@@ -22,7 +34,7 @@ export default function Trails() {
 
     const getTrailData = () => {
 
-        fetch("https://api.hikeadvisor.me/api/trail?page=" + offset/10+1)
+        fetch("https://api.hikeadvisor.me/api/trail?page=" + offset / 10 + 1)
             .then(response => response.json())
             .then(data => {
                 setTrails(data.objects)
@@ -51,24 +63,26 @@ export default function Trails() {
     }
 
     return (
-        <div>
+        <div className={classes.root}>
             <Navigation />
-            <Grid
-                container
-                alignItems="center"
-                justify="center"
-            >
+            <Box color="green">
+                <Grid
+                    container
+                    alignItems="center"
+                    justify="center"
+                >
 
-                {trails}
+                    {trails}
 
-            </Grid>
+                </Grid>
+            </Box>
             {redirect != -1 ? <Redirect to={"/trails/" + redirect} /> : null}
             <Pagination
-            limit={10}
-            offset={offset}
-            total={50}
-            onClick={(e, offset) => handleClick(offset)}
-        />
+                limit={10}
+                offset={offset}
+                total={50}
+                onClick={(e, offset) => handleClick(offset)}
+            />
         </div>
     )
 

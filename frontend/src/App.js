@@ -7,7 +7,9 @@ import TrailStand from './components/Trails/TrailStand';
 import States from './components/States'
 import AnimalInstance from './components/Animals/AnimalInstance';
 import './App.css';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { createMuiTheme } from '@material-ui/core/styles';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,35 +20,54 @@ import StateInstance from './components/States/StateInstance';
 
 function App() {
 
-  
+  const theme = createMuiTheme({
+    overrides: {
+      MuiButton: {
+        // Name of the styleSheet
+        root: {
+          // Name of the rule
+          background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+          borderRadius: 3,
+          border: 0,
+          color: "red",
+          height: 48,
+          padding: "0 30px",
+          boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .30)",
+          background: "red",
+          fontSize: '1rem',
+        },
+      },
+    },
+  });
+
   return (
     <div className="App">
-      <MuiThemeProvider>
+      <MuiThemeProvider theme={theme}>
         <Router>
           <Switch>
-          <Route path="/state/:stateId">
-            <StateInstance/>
-          </Route>
-          <Route path="/states">
-              <States/>
+            <Route path="/state/:stateId">
+              <StateInstance />
+            </Route>
+            <Route path="/states">
+              <States />
             </Route>
             <Route path="/about">
-              <About/>
+              <About />
             </Route>
-          <Route path="/animal/:animalId">
-            <AnimalInstance/>
-          </Route>
+            <Route path="/animal/:animalId">
+              <AnimalInstance />
+            </Route>
             <Route path="/animals">
-              <Animals/>
+              <Animals />
             </Route>
             <Route path="/trail/:trailId/:trailPage">
-              <TrailStand/>
+              <TrailStand />
             </Route>
             <Route path="/trails/:offset">
-              <Trails/>
+              <Trails />
             </Route>
             <Route path="/">
-              <Home/>
+              <Home />
             </Route>
           </Switch>
         </Router>

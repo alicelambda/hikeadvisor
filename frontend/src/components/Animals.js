@@ -10,12 +10,30 @@ import Divider from '@material-ui/core/Divider';
 import AnimalInfo from './Animals/AnimalInfo';
 import Pagination from "material-ui-flat-pagination";
 import { Redirect, useParams } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
 
 
+const useStyles = makeStyles(theme => ({
+    root: {
+        backgroundColor: " #06d6a0",
+    },
+    paper: {
+        height: 140,
+        width: 100,
+    },
+    control: {
+        padding: theme.spacing(2),
+    },
+    large: {
+        width: theme.spacing(7),
+        height: theme.spacing(7),
+    },
+}));
   
 export default function Animals() {
 
     let poffset = useParams();
+    const classes = useStyles();
 
     const [animalData,setAnimals] = React.useState([]);
     const [animals,setAnimalsCard] = React.useState([]);
@@ -58,7 +76,7 @@ export default function Animals() {
     }
 
     return (
-        <div>
+        <div className={classes.className}>
         <Navigation/> 
             <Container maxWidth="md">
                 <Box>
@@ -71,7 +89,7 @@ export default function Animals() {
                 >
                     <Grid item>
                         
-                        <Box p={2} >
+                        <Box p={2}  >
                             <Typography variant="h3" component="h2" maxWidth="xs">
                             Animal Dictionary
                             </Typography>

@@ -20,10 +20,7 @@ var sectionStyle = {
 
 const useStyles = makeStyles(theme => ({
     root: {
-        display: 'flex',
-        '& > *': {
-            margin: theme.spacing(1),
-        },
+        backgroundColor: " #32dde3",
     },
     paper: {
         height: 140,
@@ -44,17 +41,17 @@ export default function About() {
     const classes = useStyles();
 
     const trans = {
-        "Alice Reuter":"Alice Reuter",
-        "alice reuter":"Alice Reuter",
-        "Alice":"Alice Reuter",
-        "Long Do":"Long Do",
-        "nzubair76":"Nabil Zubair",
-        "Nabil Zubair":"Nabil Zubair",
-        "Nabil Zubair":"Nabil Zubair",
-        "jtrunick":"Josh Trunick",
-        "Josh Trunick":"Josh Trunick",
-        "austin0209":"Austin Aurelio",
-        "Austin Aurelio":"Austin Aurelio"  
+        "Alice Reuter": "Alice Reuter",
+        "alice reuter": "Alice Reuter",
+        "Alice": "Alice Reuter",
+        "Long Do": "Long Do",
+        "nzubair76": "Nabil Zubair",
+        "Nabil Zubair": "Nabil Zubair",
+        "Nabil Zubair": "Nabil Zubair",
+        "jtrunick": "Josh Trunick",
+        "Josh Trunick": "Josh Trunick",
+        "austin0209": "Austin Aurelio",
+        "Austin Aurelio": "Austin Aurelio"
     }
 
     const [commits, setCommits] = React.useState({
@@ -64,9 +61,9 @@ export default function About() {
         "Nabil Zubair": 0,
         "Austin Aurelio": 0
     });
-    
+
     const [blurbs, setBlurbs] = React.useState();
-   
+
     const getCommitPageData = (page) => {
         fetch("https://gitlab.com/api/v4/projects/17074163/repository/commits?page=" + page)
             .then(response => {
@@ -121,8 +118,9 @@ export default function About() {
                     return <Blurb
                         info={blurb}
                         commits={commits[tran]}
-                        issues={blurb.noissues} 
-                />}));
+                        issues={blurb.noissues}
+                    />
+                }));
             })
 
 
@@ -149,11 +147,12 @@ export default function About() {
             return <Blurb
                 info={blurb}
                 commits={commits[tran]}
-                issues={blurb.noissues} 
-        />}))
-    },[commits,blurbData,blurbs]);
+                issues={blurb.noissues}
+            />
+        }))
+    }, [commits, blurbData, blurbs]);
     return (
-        <div>
+        <div className={classes.root}>
             <Navigation />
             <Container maxWidth="md">
                 <Box>
@@ -166,13 +165,13 @@ export default function About() {
                     >
                         <Grid item>
 
-                            <Box p={4} >
+                            <Box p={4}  >
                                 <Typography variant="h2" component="h2" maxWidth="xs">
                                     Hike Advisor
                             </Typography>
                             </Box>
 
-                            <Box textAlign="left" p={3} alignContent="center">
+                            <Box textAlign="left" p={3} alignContent="center" color="#60492c">
 
                                 <Typography variant="body1" component="h2" maxWidth="xs">
                                     {blurb}
@@ -215,9 +214,11 @@ export default function About() {
                                     Data sources
                         </Typography>
 
-                                <Typography variant="body1" component="h2" maxWidth="xs">
-                                    Our team made use of <a href="https://www.inaturalist.org">iNaturalist data</a> for animal sightings, <a href="https://docs.ropensci.org/rebird/">Rebird</a> for bird sightings, <a href="https://www.hikingproject.com">Hiking Project</a> for hiking trails, and <a href="https://meta.wikimedia.org/w/api.php">Wikimedia</a> for state/city info.
+                                <Box color="#60492c">
+                                    <Typography variant="body1" component="h2" maxWidth="xs">
+                                        Our team made use of <a href="https://www.inaturalist.org">iNaturalist data</a> for animal sightings, <a href="https://docs.ropensci.org/rebird/">Rebird</a> for bird sightings, <a href="https://www.hikingproject.com">Hiking Project</a> for hiking trails, and <a href="https://meta.wikimedia.org/w/api.php">Wikimedia</a> for state/city info.
                         </Typography>
+                                </Box>
                             </Box>
                         </Grid>
                         <Grid item>
@@ -227,10 +228,11 @@ export default function About() {
                                 <Typography variant="h3" component="h2" maxWidth="xs">
                                     Tools
                         </Typography>
-
+        <Box color="#60492c">
                                 <Typography variant="body1" component="h2" maxWidth="xs">
                                     <a href="https://aws.amazon.com/">AWS</a>, <a href="https://www.postman.com/">Postman</a>, <a href="https://gitlab.com/">Gitlab</a>, <a href="https://reactjs.org/">React</a>, <a href="https://slack.com/">Slack</a>, <a href="https://www.namecheap.com/">Namecheap</a>
                                 </Typography>
+                                </Box>
                             </Box>
                         </Grid>
                         <Grid item>

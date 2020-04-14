@@ -3,13 +3,14 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
-import { fade, makeStyles } from '@material-ui/core/styles';
+import { fade, makeStyles, withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import SearchIcon from '@material-ui/icons/Search';
 import logo from "../images/HikeAdvisorIcon.svg";
 import {
   Link
 } from "react-router-dom";
+import Box from '@material-ui/core/Box'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -64,7 +65,37 @@ const useStyles = makeStyles(theme => ({
       },
     },
   },
+  link: {
+    color: 'white',
+
+
+  },
+  overrides: {
+    MuiButton: {
+      color: "white",
+      root: {
+        color: "red"
+      }
+    }
+  }
 }));
+
+const GlobalCss = withStyles({
+  // @global is handled by jss-plugin-global.
+  '@global': {
+    // You should target [class*="MuiButton-root"] instead if you nest themes.
+    '.MuiButton-root': {
+      fontSize: '1rem',
+      color: "#60492c"
+    },
+    '.MuiSvgIcon-root': {
+      color: "#60492c"
+    },
+    '.MuiInputBase-root': {
+      color:"#60492c"
+    }
+  },
+})(() => null);
 
 export default function Navigation() {
   const classes = useStyles();
@@ -74,22 +105,25 @@ export default function Navigation() {
       <AppBar color="#Eff1eD" position="static">
         <Toolbar>
           <img src={logo} width="2.5%" height="2.5%"></img>
-          <Typography
-            edge="start"
-            className={classes.menuButton}
-            color="#000000"
-            position= "center"
-            aria-label="open drawer"
-            variant="h6">
-            <text> HikeAdvisor</text>
+          <Box color="#60492c">
+            <Typography
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              position="center"
+              aria-label="open drawer"
+              variant="h6">
+              HikeAdvisor
           </Typography>
+          </Box>
           <Typography className={classes.title} variant="h6" noWrap>
           </Typography>
-            <Link to="/" style={{ textDecoration: 'none' }}><Button>Home</Button> </Link>
-            <Link to="/states" style={{ textDecoration: 'none' }}><Button >States</Button> </Link>
-            <Link to="/animals" style={{ textDecoration: 'none' }}><Button>Animals</Button> </Link>
-            <Link to="/trails/0" style={{ textDecoration: 'none' }}><Button>Trails</Button> </Link>
-            <Link to="/about" style={{ textDecoration: 'none' }}><Button>About</Button> </Link>
+          <GlobalCss />
+          <Link to="/" className={classes.link}><Button>Home</Button> </Link>
+          <Link to="/states" className={classes.link}><Button >States</Button> </Link>
+          <Link to="/animals" className={classes.link}><Button>Animals</Button> </Link>
+          <Link to="/trails/0" className={classes.link}><Button>Trails</Button> </Link>
+          <Link to="/about" className={classes.link}><Button>About</Button> </Link>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -105,6 +139,6 @@ export default function Navigation() {
           </div>
         </Toolbar>
       </AppBar>
-    </div>
+    </div >
   );
 }
