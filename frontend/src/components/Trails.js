@@ -73,10 +73,32 @@ export default function Trails() {
         setRedirect(offset)
     }
 
+    const upcall = (query) => {
+        setTrailsCard(
+        trailData.filter(trail => {
+            var index = 0;
+            for (index = 0; index < query.split(" ").length; index++) {
+                if(trail.trail_name.includes(query.split(" ")[index])) {
+                    return true
+                }
+            }
+            return false
+
+        })
+        .map(trail =>
+            <TrailCard
+                key={trail.id}
+                info={trail}
+                page={offset}
+            />
+        ))
+
+    }
+
     return (
         <div className={classes.root}>
             <GlobalCss/>
-            <Navigation />
+            <Navigation upcall={upcall}/>
             <Box color="green">
                 <Grid
                     container

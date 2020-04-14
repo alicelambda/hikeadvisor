@@ -97,8 +97,13 @@ const GlobalCss = withStyles({
   },
 })(() => null);
 
-export default function Navigation() {
+export default function Navigation(props) {
   const classes = useStyles();
+
+  const onSearch = (event) => {
+    props.upcall(event.target.value);
+  }
+
 
   return (
     <div className={classes.root}>
@@ -134,6 +139,7 @@ export default function Navigation() {
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
+              onChange={onSearch}
             />
           </div>
         </Toolbar>
