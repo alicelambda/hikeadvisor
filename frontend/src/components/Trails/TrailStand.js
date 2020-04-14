@@ -3,7 +3,7 @@ import { useRouteMatch } from 'react-router-dom';
 import Navigation from '../Navigation';
 import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import { useParams } from "react-router-dom";
 import {
@@ -11,6 +11,18 @@ import {
 } from "react-router-dom";
 
 const useStyles = makeStyles();
+
+
+const GlobalCss = withStyles({
+    // @global is handled by jss-plugin-global.
+    '@global': {
+        // You should target [class*="MuiButton-root"] instead if you nest themes.
+        '.MuiPaper-root': {
+            backgroundColor: "#06d6a0"
+        },
+
+    },
+})(() => null);
 
 export default function TrailStand() {
     const [trails, setTrails] = React.useState([]);
@@ -44,6 +56,7 @@ export default function TrailStand() {
     return (
         <div className={classes}>
 
+            <GlobalCss />
             <Navigation />
             {trail ?
                 <Grid
@@ -89,9 +102,9 @@ export default function TrailStand() {
                                 <Grid item>
                                     <ul>
                                         <li>
-                                        Animals:                   <Link to={("/animal/" + trail.trail_animals[0])} style={{ textDecoration: 'none' }}> {trail.trail_animals[1]}</Link>,
+                                            Animals:                   <Link to={("/animal/" + trail.trail_animals[0])} style={{ textDecoration: 'none' }}> {trail.trail_animals[1]}</Link>,
                                         <Link to={("/animal/" + trail.trail_animals[2])} style={{ textDecoration: 'none' }}> {trail.trail_animals[3]}</Link>
-                                         </li>
+                                        </li>
                                         <li> Highest Elevation {trail.trail_high} ft</li>
                                         <li> Lowest Elvation {trail.trail_low} ft</li>
                                         <li> Ascent: {trail.trail_ascent} ft</li>

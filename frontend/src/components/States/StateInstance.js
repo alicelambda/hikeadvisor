@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Navigation from '../Navigation'
 import Avatar from '@material-ui/core/Avatar';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles,withStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -21,6 +21,17 @@ const useStyles = makeStyles(theme => ({
     
   }));
   
+
+  const GlobalCss = withStyles({
+    // @global is handled by jss-plugin-global.
+    '@global': {
+        // You should target [class*="MuiButton-root"] instead if you nest themes.
+        '.MuiPaper-root': {
+            backgroundColor: "#06d6a0"
+        },
+
+    },
+})(() => null);
 
 
 export default function StateInstance() {
@@ -55,6 +66,8 @@ export default function StateInstance() {
   return (
 
     <div>
+          <GlobalCss/>
+
     <Navigation/> 
     {state ?
         <Container maxWidth="md">

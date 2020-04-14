@@ -5,16 +5,27 @@ import Grid from '@material-ui/core/Grid';
 import Pagination from "material-ui-flat-pagination";
 import { Redirect, useParams } from 'react-router-dom';
 import Box from '@material-ui/core/Box';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles,withStyles } from '@material-ui/core/styles';
 
 
 const useStyles = makeStyles(theme => ({
     root: {
-        backgroundColor:" #06d6a0",
+        backgroundColor:"#32dde3",
   
     },
 
 }));
+
+const GlobalCss = withStyles({
+    // @global is handled by jss-plugin-global.
+    '@global': {
+      // You should target [class*="MuiButton-root"] instead if you nest themes.
+      '.MuiPaper-root': {
+        backgroundColor: "#06d6a0"
+      },
+  
+    },
+  })(() => null);
 
 export default function Trails() {
     const classes = useStyles();
@@ -64,6 +75,7 @@ export default function Trails() {
 
     return (
         <div className={classes.root}>
+            <GlobalCss/>
             <Navigation />
             <Box color="green">
                 <Grid

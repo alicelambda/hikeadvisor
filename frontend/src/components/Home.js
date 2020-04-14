@@ -4,7 +4,7 @@ import '../styles/home.css';
 import Navigation from '../components/Navigation';
 import img from '../images/forest.jpg';
 import ReactSearchBox from 'react-search-box';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles,withStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   root: {
@@ -59,6 +59,20 @@ const useStyles = makeStyles({
   
 });
 
+
+
+
+const GlobalCss = withStyles({
+  // @global is handled by jss-plugin-global.
+  '@global': {
+      // You should target [class*="MuiButton-root"] instead if you nest themes.
+      '.MuiPaper-root': {
+          backgroundColor: "#06d6a0"
+      },
+
+  },
+})(() => null);
+
 class Home extends Component {
     data = [
         {
@@ -85,6 +99,7 @@ class Home extends Component {
     render() {
         return (
             <div>
+              <GlobalCss/>
                 <body id='mybody' background={img} className="home">
                 <Navigation/>
                 <header className="Home-header">
