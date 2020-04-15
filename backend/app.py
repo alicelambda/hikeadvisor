@@ -255,6 +255,38 @@ def convert_to_dict(row, model_attr) :
 def page_not_found(e):
     return render_template("404.html"), 404
 
+@application.route("/api/trail/getAll")
+def get_all_Trail() :
+	response_json = {"status" : 200}
+	response_json["result"] = {}
+	response_json["result"]["trails"] = get_all(Trail.query, trail_attr)
+	response_json["total_results"] = len(response_json["result"]["trails"])
+	response = jsonify(response_json)
+	response.status_code = 200
+	return response
+
+@application.route("/api/animal/getAll")
+def get_all_Animal() :
+	response_json = {"status" : 200}
+	response_json["result"] = {}
+	response_json["result"]["animals"] = get_all(Animal.query, animal_attr)
+	response_json["total_results"] = len(response_json["result"]["animals"])
+	response = jsonify(response_json)
+	response.status_code = 200
+	return response
+
+@application.route("/api/state/getAll")
+def get_all_State() :
+	response_json = {"status" : 200}
+	response_json["result"] = {}
+	response_json["result"]["states"] = get_all(State.query, state_attr)
+	response_json["total_results"] = len(response_json["result"]["states"])
+	response = jsonify(response_json)
+	response.status_code = 200
+	return response
+
+def get_all (model_query, model_attr) :
+	return [convert_to_dict(row, model_attr) for row in model_query.all()]
 
 if __name__ == "__main__":
     application.debug = False
