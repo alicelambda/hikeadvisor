@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 import {
     Link
 } from "react-router-dom";
-
+import GoogleMapReact from 'google-map-react';
 
 const useStyles = makeStyles();
 
@@ -111,12 +111,33 @@ export default function TrailStand() {
                                         <li> Ascent: {trail.trail_ascent} ft</li>
                                         <li> Descent: {trail.trail_descent} ft </li>
                                         <li> Location: {trail.trail_location} </li>
+                                        
                                     </ul>
 
                                 </Grid>
 
                             </Grid>
+
+
                         </Box>
+
+                        <GoogleMapReact
+          bootstrapURLKeys={{ key: "AIzaSyDCnE_rLDM9O5Ep1nmHCCejTCqN4SpqWWA" }}
+          defaultCenter= {{
+            lat: 59.95,
+            lng: 30.33
+          }}
+          defaultZoom ={{zoom:11}}
+          yesIWantToUseGoogleMapApiInternals
+      
+          >
+               <Box
+            lat={59.955413}
+            lng={30.337844}
+            text="My Marker"
+          />
+                      </GoogleMapReact>
+
                     </Grid>
 
                 </Grid> : null}

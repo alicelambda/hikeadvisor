@@ -27,7 +27,7 @@ const GlobalCss = withStyles({
     },
   })(() => null);
 
-export default function Trails() {
+export default function Trails(props) {
     const classes = useStyles();
 
     let poffset = useParams();
@@ -39,7 +39,6 @@ export default function Trails() {
     const [pagination, setPagination] = React.useState();
 
     React.useEffect(() => {
-
         setOffset(parseInt(poffset.offset));
     })
 
@@ -95,6 +94,9 @@ export default function Trails() {
 
     }
 
+
+    console.log()
+
     return (
         <div className={classes.root}>
             <GlobalCss/>
@@ -110,11 +112,11 @@ export default function Trails() {
 
                 </Grid>
             </Box>
-            {redirect != -1 ? <Redirect to={"/trails/" + redirect} /> : null}
+            {redirect != -1 ? <Redirect to={"/trails/" + redirect } /> : null}
             <Pagination
-                limit={10}
+                limit={1}
                 offset={offset}
-                total={50}
+                total={Math.floor(props.trailData.length/12)}
                 onClick={(e, offset) => handleClick(offset)}
             />
         </div>

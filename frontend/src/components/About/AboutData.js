@@ -9,7 +9,7 @@ const blurbData = [
     { 
         "name": "Alice Reuter",
         "role": "Frontend",
-        "description":"I am a second year Computer Science major interested in systems programming and cybersecurity. When not programming I enjoy bouldering and cat memes.",
+        "description":"I worked on the frontend design theme and the about and trails model. I am a second year Computer Science major interested in systems programming and cybersecurity. When not programming I enjoy bouldering and cat memes.",
         "noissues":0,
         "nocommits":9,
         "notestcases":22,

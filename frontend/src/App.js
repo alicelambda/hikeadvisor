@@ -17,8 +17,42 @@ import {
 } from "react-router-dom";
 import StateInstance from './components/States/StateInstance';
 
-
 function App() {
+
+  const [loading, setLoading] = React.useState('true');
+  const [trailData, setTrailData] = React.useState([]);
+
+  const loadTrailData = (page) => {
+    fetch("https://api.hikeadvisor.me/api/trail?page=" + page)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.total_pages)
+        Promise.all(
+          Array(data.total_pages)
+            .fill()
+            .map((_, i) => {
+              return fetch("https://api.hikeadvisor.me/api/trail?page=" + i).then(response => response.json());
+
+            }
+
+            )
+
+        ).then((all) => {
+          setTrailData(all.map(x => x.objects).flat());
+        })
+      })
+
+  }
+
+  const loadAllData = () => {
+    loadTrailData(1)
+    setLoading("false");
+  }
+
+  React.useEffect(() => {
+    loadAllData();
+  }, []);
+
 
   const theme = createMuiTheme({
     overrides: {
@@ -45,11 +79,11 @@ function App() {
       <MuiThemeProvider theme={theme}>
         <Router>
           <Switch>
-          <Route path="/state/:stateId/:statePage">
-            <StateInstance/>
-          </Route>
-          <Route path="/states/:offset">
-              <States/>
+            <Route path="/state/:stateId/:statePage">
+              <StateInstance />
+            </Route>
+            <Route path="/states/:offset">
+              <States />
             </Route>
             <Route path="/about">
               <About />
@@ -57,23 +91,25 @@ function App() {
             <Route path="/animal/:animalId">
               <AnimalInstance />
             </Route>
-          <Route path="/animal/:animalId/:animalPage">
-            <AnimalInstance/>
-          </Route>
+            <Route path="/animal/:animalId/:animalPage">
+              <AnimalInstance />
+            </Route>
             <Route path="/animals/:offset">
-              <Animals/>
+              <Animals />
             </Route>
             <Route path="/trail/:trailId/:trailPage">
               <TrailStand />
             </Route>
             <Route path="/trails/:offset">
-              <Trails />
+              <Trails trailData={trailData} />
             </Route>
             <Route path="/">
-              <Home />
+              <Home loading={loading} />
             </Route>
           </Switch>
         </Router>
+
+
       </MuiThemeProvider>
     </div>
   );
