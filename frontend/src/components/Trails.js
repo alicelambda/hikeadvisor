@@ -5,13 +5,13 @@ import Grid from '@material-ui/core/Grid';
 import Pagination from "material-ui-flat-pagination";
 import { Redirect, useParams } from 'react-router-dom';
 import Box from '@material-ui/core/Box';
-import { makeStyles,withStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 
 const useStyles = makeStyles(theme => ({
     root: {
-        backgroundColor:"#32dde3",
-  
+        backgroundColor: "#32dde3",
+
     },
 
 }));
@@ -19,13 +19,13 @@ const useStyles = makeStyles(theme => ({
 const GlobalCss = withStyles({
     // @global is handled by jss-plugin-global.
     '@global': {
-      // You should target [class*="MuiButton-root"] instead if you nest themes.
-      '.MuiPaper-root': {
-        backgroundColor: "#06d6a0"
-      },
-  
+        // You should target [class*="MuiButton-root"] instead if you nest themes.
+        '.MuiPaper-root': {
+            backgroundColor: "#06d6a0"
+        },
+
     },
-  })(() => null);
+})(() => null);
 
 export default function Trails(props) {
     const classes = useStyles();
@@ -42,13 +42,8 @@ export default function Trails(props) {
         setOffset(parseInt(poffset.offset));
     })
 
-    const getTrailData = () => {
-
-        fetch("https://api.hikeadvisor.me/api/trail?page=" + offset / 10 + 1)
-            .then(response => response.json())
-            .then(data => {
-                setTrails(data.objects)
-            })
+    const selectTrailData = (offset) => {
+        setTrails(props.trailData.slice(offset * 12, (offset + 1) * 12))
     }
 
     React.useEffect(() => {
@@ -64,7 +59,7 @@ export default function Trails(props) {
 
 
     React.useEffect(() => {
-        getTrailData();
+        selectTrailData(offset);
     }, [offset]);
 
     const handleClick = (offset) => {
@@ -72,26 +67,33 @@ export default function Trails(props) {
         setRedirect(offset)
     }
 
-    const upcall = (query) => {
-        setTrailsCard(
-        trailData.filter(trail => {
-            var index = 0;
-            for (index = 0; index < query.split(" ").length; index++) {
-                if(trail.trail_name.includes(query.split(" ")[index])) {
-                    return true
+    const search = (query) => {
+        console.log(query)
+        return new Promise((resolve, reject) => {
+            const result = props.trailData.filter(trail => {
+                var index = 0;
+                for (index = 0; index < query.length; index++) {
+                    if (trail.trail_name.includes(query[index])) {
+                        return true
+                    }
                 }
-            }
-            return false
+                return false
 
+            })
+
+            resolve(result)
+        });
+
+    }
+
+    const upcall = (query) => {
+        
+        search(
+            query.split(" ")
+            .filter(term => term !== "")
+        ).then((result) => {
+            setTrails(result)
         })
-        .map(trail =>
-            <TrailCard
-                key={trail.id}
-                info={trail}
-                page={offset}
-            />
-        ))
-
     }
 
 
@@ -99,8 +101,8 @@ export default function Trails(props) {
 
     return (
         <div className={classes.root}>
-            <GlobalCss/>
-            <Navigation upcall={upcall}/>
+            <GlobalCss />
+            <Navigation upcall={upcall} />
             <Box color="green">
                 <Grid
                     container
@@ -112,11 +114,11 @@ export default function Trails(props) {
 
                 </Grid>
             </Box>
-            {redirect != -1 ? <Redirect to={"/trails/" + redirect } /> : null}
+            {redirect != -1 ? <Redirect to={"/trails/" + redirect} /> : null}
             <Pagination
                 limit={1}
                 offset={offset}
-                total={Math.floor(props.trailData.length/12)}
+                total={Math.floor(props.trailData.length / 12)}
                 onClick={(e, offset) => handleClick(offset)}
             />
         </div>
