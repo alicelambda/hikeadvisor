@@ -93,10 +93,39 @@ export default function States(props) {
         setRedirect(offset)
     }
 
+    const search = (query) => {
+        console.log(query)
+        return new Promise((resolve, reject) => {
+            const result = props.stateData.filter(state => {
+                var index = 0;
+                for (index = 0; index < query.length; index++) {
+                    if (state.state_name.includes(query[index])) {
+                        return true
+                    }
+                }
+                return false
+
+            })
+
+            resolve(result)
+        });
+
+    }
+
+    const upcall = (query) => {
+
+        search(
+            query.split(" ")
+                .filter(term => term !== "")
+        ).then((result) => {
+            setStates(result)
+        })
+    }
+
     return (
         <div className={classes.root}>
             <GlobalCss />
-            <Navigation />
+            <Navigation upcall={upcall}/>
             <Container maxWidth="md">
                 <Box>
                     <Grid

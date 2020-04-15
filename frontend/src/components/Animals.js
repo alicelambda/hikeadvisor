@@ -93,11 +93,39 @@ export default function Animals(props) {
         setRedirect(offset)
     }
 
+    const search = (query) => {
+        console.log(query)
+        return new Promise((resolve, reject) => {
+            const result = props.animalData.filter(animal => {
+                var index = 0;
+                for (index = 0; index < query.length; index++) {
+                    if (animal.animal_commonName.includes(query[index])) {
+                        return true
+                    }
+                }
+                return false
+
+            })
+
+            resolve(result)
+        });
+
+    }
+
+    const upcall = (query) => {
+
+        search(
+            query.split(" ")
+                .filter(term => term !== "")
+        ).then((result) => {
+            setAnimals(result)
+        })
+    }
     
     return (
         <div className={classes.root}>
             <GlobalCss />
-            <Navigation />
+            <Navigation upcall={upcall}/>
             <Container maxWidth="md">
                 <Box>
                     <Grid
