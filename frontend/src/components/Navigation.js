@@ -11,6 +11,7 @@ import {
   Link
 } from "react-router-dom";
 import Box from '@material-ui/core/Box'
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -107,6 +108,7 @@ export default function Navigation(props) {
 
   return (
     <div className={classes.root}>
+     
       <AppBar color="#Eff1eD" position="static">
         <Toolbar>
           <img src={logo} width="2.5%" height="2.5%"></img>
@@ -120,6 +122,7 @@ export default function Navigation(props) {
               variant="h6">
               HikeAdvisor
           </Typography>
+
           </Box>
           <Typography className={classes.title} variant="h6" noWrap>
           </Typography>
@@ -144,6 +147,7 @@ export default function Navigation(props) {
           </div>
         </Toolbar>
       </AppBar>
+      {props.loading =="true" ? <LinearProgress /> : null}
     </div >
   );
 }

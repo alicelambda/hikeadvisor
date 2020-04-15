@@ -132,14 +132,13 @@ export default function AnimalInstance() {
             </Typography>
             <Divider/>
             <Typography variant="h6" component="h2" id="blurbtitle">
-                    States:<br/><Link to={("/animal/" + animal.animal_state[0])} style={{ textDecoration: 'none' }}> {animal.animal_state[1]}</Link>,
-                                        <Link to={("/animal/" + animal.animal_state[2])} style={{ textDecoration: 'none' }}> {animal.animal_state[3]}</Link>
+                    State:<br/><Link to={("/state/" + animal.animal_location)} style={{ textDecoration: 'none' }}> {animal.animal_location} </Link>
                   </Typography>
                   <Divider/>
                   <Typography variant="h6" component="h2" id="blurbtitle">
                     Trails:<br/>
-                    <Link to={("/animal/" + animal.animal_trails[0])} style={{ textDecoration: 'none' }}> {animal.animal_trails[1]}</Link>,
-                                        <Link to={("/animal/" + animal.animal_trails[2])} style={{ textDecoration: 'none' }}> {animal.animal_trails[3]}</Link>
+                    <Link to={("/trail/" + animal.animal_trails[0])} style={{ textDecoration: 'none' }}> {animal.animal_trails[1]}</Link>,
+                                        <Link to={("/trail/" + animal.animal_trails[2])} style={{ textDecoration: 'none' }}> {animal.animal_trails[3]}</Link>
                   </Typography>
             <Typography variant="body1" component="h2" id="blurbtitle"></Typography>
             </Box>

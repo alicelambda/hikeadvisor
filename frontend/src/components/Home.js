@@ -101,7 +101,7 @@ class Home extends Component {
             <div>
               <GlobalCss/>
                 <body id='mybody' background={img} className="home">
-                <Navigation/>
+                <Navigation loading={this.props.loading}/>
                 <header className="Home-header">
                     <div className="Title-summary">
                         HikeAdvisor

@@ -43,10 +43,16 @@ const GlobalCss = withStyles({
     },
 })(() => null);
 
-export default function Animals() {
+export default function Animals(props) {
+    const classes = useStyles();
+
+    const [age, setAge] = React.useState('');
+
+    const handleChange = (event) => {
+        setAge(event.target.value);
+    };
 
     let poffset = useParams();
-    const classes = useStyles();
 
     const [animalData, setAnimals] = React.useState([]);
     const [animals, setAnimalsCard] = React.useState([]);
@@ -55,17 +61,11 @@ export default function Animals() {
     const [pagination, setPagination] = React.useState();
 
     React.useEffect(() => {
-
         setOffset(parseInt(poffset.offset));
     })
 
-    const getAnimalData = () => {
-
-        fetch("https://api.hikeadvisor.me/api/animal?page=" + offset / 10 + 1)
-            .then(response => response.json())
-            .then(data => {
-                setAnimals(data.objects)
-            })
+    const selectAnimalData = (offset) => {
+        setAnimals(props.animalData.slice(offset * 10, (offset + 1) * 10))
     }
 
     React.useEffect(() => {
@@ -81,18 +81,51 @@ export default function Animals() {
 
 
     React.useEffect(() => {
-        getAnimalData();
+        selectAnimalData(offset);
     }, [offset]);
+
+    React.useEffect(() => {
+        selectAnimalData(offset);
+    },[props.animalData]);
 
     const handleClick = (offset) => {
         setOffset(offset)
         setRedirect(offset)
     }
 
+    const search = (query) => {
+        console.log(query)
+        return new Promise((resolve, reject) => {
+            const result = props.animalData.filter(animal => {
+                var index = 0;
+                for (index = 0; index < query.length; index++) {
+                    if (animal.animal_commonName.includes(query[index])) {
+                        return true
+                    }
+                }
+                return false
+
+            })
+
+            resolve(result)
+        });
+
+    }
+
+    const upcall = (query) => {
+
+        search(
+            query.split(" ")
+                .filter(term => term !== "")
+        ).then((result) => {
+            setAnimals(result)
+        })
+    }
+    
     return (
         <div className={classes.root}>
             <GlobalCss />
-            <Navigation />
+            <Navigation upcall={upcall}/>
             <Container maxWidth="md">
                 <Box>
                     <Grid
@@ -145,9 +178,9 @@ export default function Animals() {
                         </Grid>
                         {redirect != -1 ? <Redirect to={"/animals/" + redirect} /> : null}
                         <Pagination
-                            limit={10}
+                            limit={1}
                             offset={offset}
-                            total={50}
+                            total={Math.floor(props.animalData.length / 10)}
                             onClick={(e, offset) => handleClick(offset)}
                         />
                         <Divider />

@@ -97,7 +97,7 @@ export default function TrailCard(props) {
                 >
                     <Grid item>
                         <ul>
-                            <li>State:                   <Link to={("states/" + info.trail_states)} style={{ textDecoration: 'none' }}> {info.trail_states} </Link> </li>
+                            <li>State:                   <Link to={("/states/" + info.trail_states +"/0")} style={{ textDecoration: 'none' }}> {info.trail_states} </Link> </li>
                             <li>Length: {info.trail_length} miles </li>
                             <li>Peak elevation: {info.trail_high} ft. </li>
                            

@@ -17,8 +17,88 @@ import {
 } from "react-router-dom";
 import StateInstance from './components/States/StateInstance';
 
-
 function App() {
+
+  const [loading, setLoading] = React.useState('true');
+  const [stateData, setStateData] = React.useState([]);
+  const [trailData, setTrailData] = React.useState([]);
+  const [animalData, setAnimalData] = React.useState([]);
+
+  const loadTrailData = (page) => {
+    fetch("https://api.hikeadvisor.me/api/trail?page=" + page)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.total_pages)
+        Promise.all(
+          Array(data.total_pages)
+            .fill()
+            .map((_, i) => {
+              return fetch("https://api.hikeadvisor.me/api/trail?page=" + i).then(response => response.json());
+
+            }
+
+            )
+
+        ).then((all) => {
+          setTrailData(all.map(x => x.objects).flat());
+        })
+      })
+
+  }
+
+  const loadStateData = (page) => {
+    fetch("https://api.hikeadvisor.me/api/state?page=" + page)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.total_pages)
+        Promise.all(
+          Array(data.total_pages)
+            .fill()
+            .map((_, i) => {
+              return fetch("https://api.hikeadvisor.me/api/state?page=" + i).then(response => response.json());
+
+            }
+            )
+
+        ).then((all) => {
+          setStateData(all.map(x => x.objects).flat());
+        })
+      })
+
+  }
+
+  const loadAnimalData = (page) => {
+    fetch("https://api.hikeadvisor.me/api/animal?page=" + page)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.total_pages)
+        Promise.all(
+          Array(data.total_pages)
+            .fill()
+            .map((_, i) => {
+              return fetch("https://api.hikeadvisor.me/api/animal?page=" + i).then(response => response.json());
+
+            }
+            )
+
+        ).then((all) => {
+          setAnimalData(all.map(x => x.objects).flat());
+        })
+      })
+
+  }
+
+  const loadAllData = () => {
+    loadTrailData(1)
+    loadStateData(1)
+    loadAnimalData(1)
+    setLoading("false");
+  }
+
+  React.useEffect(() => {
+    loadAllData();
+  }, []);
+
 
   const theme = createMuiTheme({
     overrides: {
@@ -45,35 +125,34 @@ function App() {
       <MuiThemeProvider theme={theme}>
         <Router>
           <Switch>
-          <Route path="/state/:stateId/:statePage">
-            <StateInstance/>
-          </Route>
-          <Route path="/states/:offset">
-              <States/>
+            <Route path="/state/:stateId/:statePage">
+              <StateInstance />
+            </Route>
+            <Route path="/states/:offset">
+              <States stateData={stateData} />
             </Route>
             <Route path="/about">
               <About />
             </Route>
-            <Route path="/animal/:animalId">
+            <Route path="/animal/:animalId/:animalPage">
               <AnimalInstance />
             </Route>
-          <Route path="/animal/:animalId/:animalPage">
-            <AnimalInstance/>
-          </Route>
             <Route path="/animals/:offset">
-              <Animals/>
+              <Animals animalData={animalData}/>
             </Route>
             <Route path="/trail/:trailId/:trailPage">
               <TrailStand />
             </Route>
             <Route path="/trails/:offset">
-              <Trails />
+              <Trails trailData={trailData} />
             </Route>
             <Route path="/">
-              <Home />
+              <Home loading={loading} />
             </Route>
           </Switch>
         </Router>
+
+
       </MuiThemeProvider>
     </div>
   );
