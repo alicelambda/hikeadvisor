@@ -47,7 +47,6 @@ export default function StateInstance() {
     console.log(stateId)
 
     const getStateData = () => {
-
         fetch("https://api.hikeadvisor.me/api/state?page=" + statePage / 10 + 1)
             .then(response => response.json())
             .then(data => {
