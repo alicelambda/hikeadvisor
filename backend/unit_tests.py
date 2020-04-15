@@ -156,5 +156,23 @@ class Unit_Tests(unittest.TestCase):
             assert prop in data
 
 
+    #SEARCH TESTS
+    def test_search_status_code(self):
+    	response = requests.request("GET", api_link + "/search?q=Texas")
+    	self.assertEqual(response.status_code, 200)
+
+    def test_search_data(self):
+    	response = requests.request("GET", api_link + "/search?q=Texas")
+    	data = response.json()
+    	assert "num_animals" in data
+    	assert "num_states" in data
+    	assert "num_trails" in data
+    	assert "animals" in data["result"]
+    	assert "states" in data["result"]
+    	assert "trails" in data["result"]
+
+
+
+
 if __name__ == "__main__":
     unittest.main()
