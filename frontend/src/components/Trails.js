@@ -230,7 +230,7 @@ export default function Trails(props) {
                                 <MenuItem value="trail_stars">Rating</MenuItem>
                                 <MenuItem value="trail_numstars">No. Ratings</MenuItem>
                             </Select>
-                            <FormHelperText>Sort by Attribute9</FormHelperText>
+                            <FormHelperText>Sort by Attribute</FormHelperText>
                         </FormControl>
                         <Typography>
                         Total: {props.trailData.length} Trails
