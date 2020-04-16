@@ -159,7 +159,7 @@ function App() {
               <Animals animalData={animalData} />
             </Route>
             <Route path="/trail/:trailId">
-              <TrailInstance />
+              <TrailInstance trailData={trailData} />
             </Route>
             <Route path="/trails/:offset">
               <Trails

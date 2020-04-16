@@ -14,6 +14,7 @@ import Select from '@material-ui/core/Select';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -55,6 +56,8 @@ export default function Trails(props) {
         search(query, event.target.value)
             .then((result) => {
                 setQueryResults(result)
+                setOffset(0);
+                console.log("set offset")
             })
     };
 
@@ -68,7 +71,7 @@ export default function Trails(props) {
     })
 
     const selectTrailData = (offset) => {
-        setTrails(queryResults.slice(offset * 10, (offset + 1) * 10))
+        setTrails(queryResults.slice(offset * 12, (offset + 1) * 12))
     }
 
     React.useEffect(() => {
@@ -77,6 +80,7 @@ export default function Trails(props) {
                 key={trail.id}
                 info={trail}
                 page={offset}
+                query={query}
             />
         ))
 
@@ -88,6 +92,7 @@ export default function Trails(props) {
                 key={trail.id}
                 info={trail}
                 page={offset}
+                query={query}
             />
         ))
     },[]);
@@ -166,9 +171,10 @@ export default function Trails(props) {
             navQuery.split(" ")
                 .filter(term => term !== ""), state
         ).then((result) => {
-            setQueryResults(result)
+            setQueryResults(result);
+            setOffset(0);
         })
-        setQuery(navQuery)
+        setQuery(navQuery.split(" ").filter(x => x !== ""))
     }
 
     const stateItems = [...new Set(props.trailData.map(x => x.trail_states))].sort().map(x => {
@@ -201,7 +207,9 @@ export default function Trails(props) {
                         </FormControl>
 
                     </Grid>
-                    <Grid item xs={9} />
+                    <Grid item xs={9}>
+                        
+                    </Grid>
                     <Grid item>
                         <FormControl className={classes.formControl}>
                             <InputLabel id="demo-simple-select-helper-label">Sort By</InputLabel>
@@ -222,8 +230,11 @@ export default function Trails(props) {
                                 <MenuItem value="trail_stars">Rating</MenuItem>
                                 <MenuItem value="trail_numstars">No. Ratings</MenuItem>
                             </Select>
-                            <FormHelperText>Filter by State</FormHelperText>
+                            <FormHelperText>Sort by Attribute9</FormHelperText>
                         </FormControl>
+                        <Typography>
+                        Total: {props.trailData.length} Trails
+                        </Typography>
 
                     </Grid>
                 </Grid>
