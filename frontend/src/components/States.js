@@ -180,7 +180,7 @@ export default function States(props) {
             <Pagination
                 limit={1}
                 offset={offset}
-                total={Math.floor(props.stateData.length / 10)}
+                total={Math.floor(props.stateData.length / 10) + (props.stateData.length % 10 != 0 ? 1 : 0)}
                 onClick={(e, offset) => handleClick(offset)}
             />
                         <Divider />

@@ -244,7 +244,7 @@ export default function Trails(props) {
             <Pagination
                 limit={1}
                 offset={offset}
-                total={Math.floor(queryResults.length / 12)}
+                total={Math.floor(queryResults.length / 10) + (queryResults.length % 10 != 0 ? 1 : 0)}
                 onClick={(e, offset) => handleClick(offset)}
             />
         </div>
