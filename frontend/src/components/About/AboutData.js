@@ -39,7 +39,7 @@ const blurbData = [
     {
         "name": "Josh Trunick",
         "role": "Frontend",
-        "description":"I'm a senior majoring in Computer Science interested in web and mobile dev. You can catch me either cooking a new recipe, slinging a frisbee or pitching a startup idea to my friends.",
+        "description":"I worked on the frontend, desining the homepage as well as the animals and states models. I'm a senior majoring in Computer Science interested in web and mobile dev. You can catch me either cooking a new recipe, slinging a frisbee or pitching a startup idea to my friends.",
         "noissues":0,
         "nocommits":9,
         "notestcases":0,

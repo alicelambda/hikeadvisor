@@ -132,7 +132,7 @@ export default function AnimalInstance(props) {
                   </Typography>
                   <Divider/>
                   <Typography variant="subtitle1" component="h2" id="blurbtitle">
-            <a style={{ textDecoration: 'none' }} href={"https://en.wikipedia.org/wiki/" + animal.animal_commonName}>Read More</a>
+            <a style={{ textDecoration: 'none' }} href={"https://en.wikipedia.org/wiki/" + animal.animal_scientificName}>Read More</a>
             </Typography>
             <Typography variant="body1" component="h2" id="blurbtitle"></Typography>
             </Box>
