@@ -52,7 +52,7 @@ export default function AnimalInfo(props) {
                   <Avatar  className={classes.large} src={info.animal_picURL}/>
                 </Grid>
                 <Grid item>
-                  <Typography variant="h4" component="h2" id="blurbtitle">
+                  <Typography variant="h6" component="h2" id="blurbtitle">
                     {info.animal_commonName} <br/>
                   </Typography>
                   </Grid>

@@ -16,7 +16,7 @@ import {
 
 const useStyles = makeStyles(theme => ({
     photo: {
-        height: 250,
+        height: 240,
       },
     
   }));
@@ -161,6 +161,10 @@ export default function StateInstance() {
             Favorite Trails: <br/>
             <Link to={("/trail/" + state.state_trails[0])} style={{ textDecoration: 'none' }}> {state.state_trails[1]}</Link>,
                                         <Link to={("/trail/" + state.state_trails[2])} style={{ textDecoration: 'none' }}> {state.state_trails[3]}</Link>
+            </Typography>
+            <Divider/>
+            <Typography variant="h6" component="h2" id="blurbtitle">
+            <a style={{ textDecoration: 'none' }} href={"https://en.wikipedia.org/wiki/" + state.state_name}>Read More</a>
             </Typography>
             </Box>
           </Box>
