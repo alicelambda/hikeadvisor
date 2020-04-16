@@ -13,7 +13,7 @@ import Trails from '../components/Trails';
 
 import { MemoryRouter, Route } from "react-router-dom";
 import AnimalInstance from '../components/Animals/AnimalInstance';
-import TrailStand from '../components/Trails/TrailStand'
+import TrailStand from '../components/Trails/TrailInstance'
 configure({ adapter: new Adapter() });
 
 it('renders app without crashing', () => {

@@ -40,14 +40,14 @@ const GlobalCss = withStyles({
 export default function Trails(props) {
     const classes = useStyles();
 
-    const [state, setState] = React.useState();
+    const [state, setState] = React.useState('');
     const [query, setQuery] = React.useState([]);
     const [trailData, setTrails] = React.useState([]);
     const [trails, setTrailsCard] = React.useState([]);
     const [offset, setOffset] = React.useState(0);
     const [redirect, setRedirect] = React.useState(-1);
     const [pagination, setPagination] = React.useState();
-    const [sort,setSort] = React.useState();
+    const [sort, setSort] = React.useState('');
 
     const pickedState = (event) => {
         setState(event.target.value);
@@ -58,7 +58,7 @@ export default function Trails(props) {
             })
     };
 
- 
+
 
     let poffset = useParams();
 
@@ -84,12 +84,15 @@ export default function Trails(props) {
 
 
     React.useEffect(() => {
-        selectTrailData(offset);
-    }, [offset]);
+        if (state == '') {
+            selectTrailData(offset);
+        } else {
+            search(query, state).then((result) => {
+                setTrails(result)
+            })
+        }
+    }, [offset, props.trailData]);
 
-    React.useEffect(() => {
-        selectTrailData(offset);
-    }, [props.trailData]);
 
     const handleClick = (offset) => {
         setOffset(offset)
@@ -98,12 +101,9 @@ export default function Trails(props) {
 
     const sortBy = (event) => {
         setSort(event.target.value)
-        props.globalSortBy(event.target.value)
-        console.log(event.target.value1)
-        search(query,state).then((result) => {
-            setTrails(result)
+        props.globalSortBy(event.target.value).then(() => {
+
         });
-        console.log("uwu");
     }
 
     const search = (query, state) => {
@@ -202,7 +202,7 @@ export default function Trails(props) {
                                 </MenuItem>
                                 <MenuItem value="trail_ascent">Ascent</MenuItem>
                                 <MenuItem value="trail_descent">Descent</MenuItem>
-                                <MenuItem value="trail_high">Heighest Point</MenuItem>
+                                <MenuItem value="trail_high">Highest Point</MenuItem>
                                 <MenuItem value="trail_low">Lowest Point</MenuItem>
                                 <MenuItem value="trail_length">Length</MenuItem>
                                 <MenuItem value="trail_stars">Rating</MenuItem>
@@ -210,7 +210,7 @@ export default function Trails(props) {
                             </Select>
                             <FormHelperText>Filter by State</FormHelperText>
                         </FormControl>
-                   
+
                     </Grid>
                 </Grid>
             </Box>

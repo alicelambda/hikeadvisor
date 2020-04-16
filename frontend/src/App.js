@@ -97,12 +97,13 @@ function App() {
   }
 
   const globalSortBy = (selector) => {
-
-    console.log(selector)
-    const trailDataCopy = trailData.slice();
-    trailDataCopy.sort(highSort(selector));
-    setTrailData(trailDataCopy);
-
+    return new Promise((resolve, reject) => {
+      console.log(selector)
+      const trailDataCopy = trailData.slice();
+      trailDataCopy.sort(highSort(selector));
+      setTrailData(trailDataCopy);
+      resolve("done sorting")
+    });
   };
 
   const loadAllData = () => {
