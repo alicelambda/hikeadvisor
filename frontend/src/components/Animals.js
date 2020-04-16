@@ -180,7 +180,7 @@ export default function Animals(props) {
                         <Pagination
                             limit={1}
                             offset={offset}
-                            total={Math.floor(props.animalData.length / 10)}
+                            total={Math.floor(props.animalData.length / 10) + (props.animalData.length / 10 != 0 ? 1 : 0)}
                             onClick={(e, offset) => handleClick(offset)}
                         />
                         <Divider />
