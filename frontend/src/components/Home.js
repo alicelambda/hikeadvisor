@@ -4,7 +4,11 @@ import '../styles/home.css';
 import Navigation from '../components/Navigation';
 import img from '../images/forest.jpg';
 import ReactSearchBox from 'react-search-box';
-import { makeStyles,withStyles } from '@material-ui/core/styles';
+import { fade, makeStyles,withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import {
+  Link
+} from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -54,12 +58,20 @@ const useStyles = makeStyles({
   },
   search: {
     marginTop: '2%',
-    width: '20%'
+    width: '20%',
   }
   
 });
 
-
+const ColorButton = withStyles((theme) => ({
+  root: {
+    color: "#000000",
+    backgroundColor: "#03d6a0",
+    '&:hover': {
+      backgroundColor: "#0dd6a0",
+    },
+  },
+}))(Button);
 
 
 const GlobalCss = withStyles({
@@ -68,34 +80,12 @@ const GlobalCss = withStyles({
       // You should target [class*="MuiButton-root"] instead if you nest themes.
       '.MuiPaper-root': {
           backgroundColor: "#06d6a0"
-      },
-
+      }
   },
 })(() => null);
 
 class Home extends Component {
-    data = [
-        {
-          key: 'austin',
-          value: 'Austin, TX',
-        },
-        {
-          key: 'seattle',
-          value: 'Seattle, WA',
-        },
-        {
-          key: 'san francisco',
-          value: 'San Francisco, CA',
-        },
-        {
-          key: 'portland',
-          value: 'Portland, OR',
-        },
-        {
-          key: 'augusta',
-          value: 'Augusta, ME',
-        },
-      ]
+
     render() {
         return (
             <div>
@@ -110,10 +100,11 @@ class Home extends Component {
                             Here to plan your next hike
                     </div> 
                     <div className="search">
-                        <ReactSearchBox
-                            placeholder="Where to?"
-                            data={this.data}
-                            callback={record => console.log(record)}/>    
+                    <Link to="/trails/0" style={{ textDecoration: 'none' }}>
+                    <ColorButton variant="contained" color="primary">
+                      Find A Trail
+                    </ColorButton> 
+                    </Link>
                     </div>
                 </header>
                 </body>
