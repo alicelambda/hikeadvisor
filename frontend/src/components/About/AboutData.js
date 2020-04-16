@@ -19,7 +19,7 @@ const blurbData = [
     {
         "name": "Austin Aurelio",
         "role": "Backend",
-        "description":"I am a second year Computer Science major and I always use the light theme.",
+        "description":"I worked on the user experience of the website and handled user feedback to decide what features to add. I am a second year Computer Science major and I always use the light theme.",
         "noissues":0,
         "nocommits":9,
         "notestcases":0,
@@ -29,7 +29,7 @@ const blurbData = [
     {
         "name": "Nabil Zubair",
         "role": "Backend",
-        "description":"I am a junior majoring in computer science and minoring in Japanese. Some of my hobbies include playing the piano, video games, and cooking.",
+        "description":"I am a junior majoring in computer science and minoring in Japanese. Some of my hobbies include playing the piano, video games, and cooking. I worked on the backend and tested functionality for both the backend and frontend.",
         "noissues":0,
         "nocommits":9,
         "notestcases":110,
@@ -49,7 +49,7 @@ const blurbData = [
     {
         "name": "Long Do",
         "role": "Backend",
-        "description":"I'm a junior CS student. Hobbies include: animes, video games and cooking",
+        "description":"I worked on the backend. I worked with database, implemented API and helped fixing bug on the frontend. I'm a junior CS student. Hobbies include: animes, video games and cooking",
         "noissues":0,
         "nocommits":9,
         "notestcases":0,

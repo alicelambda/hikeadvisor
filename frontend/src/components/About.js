@@ -251,7 +251,7 @@ export default function About() {
                         </Typography>
 
                                 <Typography variant="body1" component="h2" maxWidth="xs">
-                                    <a href="https://gitlab.com/alicelambda/hikeadvisor">Gitlab Repo</a>, <a href="https://documenter.getpostman.com/view/10487499/SzKWuxeb?version=latest"> Postman Docs </a>
+                                    <a href="https://gitlab.com/alicelambda/hikeadvisor">Gitlab Repo</a>, <a href="https://documenter.getpostman.com/view/10487499/SzYW41ND?version=latest#d248d640-aeb8-4e54-83e1-55564d26752d"> Postman Docs </a>
                                 </Typography>
                             </Box>
                         </Grid>
