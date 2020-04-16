@@ -40,10 +40,16 @@ const GlobalCss = withStyles({
 export default function Trails(props) {
     const classes = useStyles();
 
-    const [age, setAge] = React.useState('');
+    const [state, setState] = React.useState('');
+    const [query, setQuery] = React.useState([]);
 
-    const handleChange = (event) => {
-        setAge(event.target.value);
+    const pickedState = (event) => {
+        setState(event.target.value);
+        search(query, event.target.value)
+            .then((result) => {
+                console.log(result)
+                setTrails(result)
+            })
     };
 
     let poffset = useParams();
@@ -80,40 +86,62 @@ export default function Trails(props) {
 
     React.useEffect(() => {
         selectTrailData(offset);
-    },[props.trailData]);
+    }, [props.trailData]);
 
     const handleClick = (offset) => {
         setOffset(offset)
         setRedirect(offset)
     }
 
-    const search = (query) => {
-        console.log(query)
+    const search = (query, state) => {
         return new Promise((resolve, reject) => {
-            const result = props.trailData.filter(trail => {
-                var index = 0;
-                for (index = 0; index < query.length; index++) {
-                    if (trail.trail_name.includes(query[index])) {
-                        return true
+            if (state !== '') {
+                resolve(props.trailData.filter(trail => {
+                    if (trail.trail_states !== state) {
+                        return false
                     }
-                }
-                return false
+                    if (query.length == 0) {
+                        return true
+                    } else {
+                        var index = 0;
+                        for (index = 0; index < query.length; index++) {
+                            if (trail.trail_name.includes(query[index])) {
+                                return true
+                            }
+                        }
+                        return false
+                    }
 
-            })
+                }))
+            } else {
+                resolve(props.trailData.filter(trail => {
+                    if (query.length == 0) {
+                        return true
+                    } else {
+                        var index = 0;
+                        for (index = 0; index < query.length; index++) {
+                            if (trail.trail_name.includes(query[index])) {
+                                return true
+                            }
+                        }
+                        return false
+                    }
+                }))
 
-            resolve(result)
+            }
         });
 
     }
 
-    const upcall = (query) => {
+    const upcall = (navQuery) => {
 
         search(
-            query.split(" ")
-                .filter(term => term !== "")
+            navQuery.split(" ")
+                .filter(term => term !== ""), state
         ).then((result) => {
             setTrails(result)
         })
+        setQuery(navQuery)
     }
 
     const stateItems = [...new Set(props.trailData.map(x => x.trail_states))].sort().map(x => {
@@ -132,8 +160,8 @@ export default function Trails(props) {
                             <Select
                                 labelId="demo-simple-select-helper-label"
                                 id="demo-simple-select-helper"
-                                value={age}
-                                onChange={handleChange}
+                                value={state}
+                                onChange={pickedState}
                             >
                                 <MenuItem value="">
                                     <em>None</em>
@@ -142,7 +170,7 @@ export default function Trails(props) {
                             </Select>
                             <FormHelperText>Filter by State</FormHelperText>
                         </FormControl>
-                      
+
                     </Grid>
                     <Grid item xs={9} />
                     <Grid item>
@@ -151,8 +179,7 @@ export default function Trails(props) {
                             <Select
                                 labelId="demo-simple-select-helper-label"
                                 id="demo-simple-select-helper"
-                                value={age}
-                                onChange={handleChange}
+                                value={state}
                             >
                                 <MenuItem value="">
                                     <em>None</em>
@@ -161,7 +188,7 @@ export default function Trails(props) {
                             <FormHelperText>Filter by State</FormHelperText>
                         </FormControl>
                         <FormControlLabel
-                            control={<Switch checked={true} onChange={handleChange} name="Descending" />}
+                            control={<Switch checked={true} name="Descending" />}
                             label="Descending"
                         />
                     </Grid>

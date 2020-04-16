@@ -147,7 +147,7 @@ export default function Navigation(props) {
           </div>
         </Toolbar>
       </AppBar>
-      {props.loading =="true" ? <LinearProgress /> : null}
+      {props.loading =="tru" ? <LinearProgress /> : null}
     </div >
   );
 }
