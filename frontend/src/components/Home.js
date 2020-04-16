@@ -16,10 +16,11 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
+import img from '../images/forest.jpg';
 
 import Paper from '@material-ui/core/Paper';
 import { animalData } from './Animals/animalData';
-
+import { red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles({
   root: {
@@ -30,7 +31,6 @@ const useStyles = makeStyles({
     color: 'white',
     height: 48,
     padding: '0 30px',
-    width: '100%',
 
   },
   mybody: {
@@ -70,13 +70,14 @@ const useStyles = makeStyles({
     paddingBottom: 0,
   },
   search: {
+    color: red,
     marginTop: '2%',
     width: '20%',
   },
   body: {
     backgroundColor: "#32dde3",
   }
-  
+
 
 });
 
@@ -125,73 +126,75 @@ export default function Home(props) {
 
   const [statePage, setStatePage] = React.useState(0);
   const [stateRowsPerPage, setStateRowsPerPage] = React.useState(10);
-  const [lquery,setQuery] = React.useState('');
+  const [lquery, setQuery] = React.useState('');
 
-  const searchGeneral = (query, trail,term) => {
+  const searchGeneral = (query, trail, term) => {
     const splitQuery = query.split(" ")
       .filter(term => term !== "")
     var i;
-    for (i = 0; i < query.length; i++) {
-      if (trail[term].includes(splitQuery[i])) {
+    for (i = 0; i < splitQuery.length; i++) {
+      if (trail[term].toLowerCase().includes(splitQuery[i].toLowerCase())) {
         return true
       }
     }
     return false
   }
 
- 
-  const search = (query) => {
+
+  const searchTerm = (query) => {
     setQuery(query)
     setTrails(
       props.trailData
-        .filter(trail => searchGeneral(query, trail,'trail_name'))
-        .map(trail => createTrailData(
-          trail.trail_name,
-          trail.trail_location,
-          trail.trail_length,
-          trail.trail_numstars,
-          "https://"
-        ))
+        .filter(trail => searchGeneral(query, trail, 'trail_name'))
+        .map(trail => {
+          return createTrailData(
+            trail.trail_name,
+            trail.trail_location,
+            trail.trail_length,
+            trail.trail_stars,
+            trail.trail_numstars,
+            trail.trail_id
+          )
+        })
     )
     setAnimals(
       props.animalData
-        .filter(animal => searchGeneral(query, animal,'animal_commonName'))
+        .filter(animal => searchGeneral(query, animal, 'animal_commonName'))
         .map(animal => createAnimalData(
           animal.animal_commonName,
           animal.animal_location,
           animal.animal_lastSighting,
           animal.animal_numObser,
           animal.animal_isExtinct,
-          "https:/"
+          animal.animal_id
 
         ))
     )
     setStates(
       props.stateData
-      .filter(state => searchGeneral(query,state,'state_name'))
-      .map(state => createStateData(
-        state.state_name,
-        state.state_capital,
-        state.state_population,
-        state.state_populationDensity,
-        state.state_totalArea,
-        "https://"
+        .filter(state => searchGeneral(query, state, 'state_name'))
+        .map(state => createStateData(
+          state.state_name,
+          state.state_capital,
+          state.state_population,
+          state.state_populationDensity,
+          state.state_totalArea,
 
-      ))
+        ))
     )
   };
 
-  function createTrailData(name, location, length, ranking, noranking, link) {
-    return { name, location, length, ranking, noranking, link };
+  function createTrailData(trailname, traillocation, length, ranking, noranking, trailid) {
+    return { trailname, traillocation, length, ranking, noranking, trailid };
   }
 
-  function createStateData(name, capital, population, popdensity, landarea, link) {
-    return { name, capital, population, popdensity, landarea, link }
+  function createStateData(statename, capital, population, popdensity, landarea) {
+    return { statename, capital, population, popdensity, landarea }
   }
 
-  function createAnimalData(name, location, lastsighting, numsightings, isextinct, link) {
+  function createAnimalData(animalname, location, lastsighting, numsightings, isextinct, animalid) {
     const extinct = isextinct.toString()
-    return { name, location, lastsighting, numsightings, extinct, link }
+    return { animalname, location, lastsighting, numsightings, isextinct, animalid }
   }
 
   const handleChangePage = (event, newPage) => {
@@ -207,8 +210,8 @@ export default function Home(props) {
 
 
   const trailColumns = [
-    { id: 'name', label: 'Name', minWidth: 200, maxWidth: 200 },
-    { id: 'location', label: 'Location', minWidth: 200, maxHeight: 200 },
+    { id: 'trailname', label: 'Name', minWidth: 200, maxWidth: 200 },
+    { id: 'traillocation', label: 'Location', minWidth: 200, maxHeight: 200 },
     {
       id: 'length',
       label: 'Length',
@@ -221,29 +224,56 @@ export default function Home(props) {
       id: 'noranking',
       label: 'No Ranking',
     },
-    {
-      id: 'link',
-      label: "Link",
-    }
+
   ];
 
   const animalColumns = [
-    { id: 'name', label: 'Name' },
+    { id: 'animalname', label: 'Name' },
     { id: 'location', label: 'Location' },
     { id: 'lastsighting', label: "Last Sighting" },
     { id: 'numsightings', label: "Number of Sightings" },
     { id: 'extinct', label: "Is Extinct" },
-    { id: 'link', label: "Link" },
   ]
 
   const stateColumns = [
-    {id: 'name', label: "Name"},
-    {id: 'captial',label: "Capital"},
-    {id: 'population',label: "Population"},
-    {id: 'popdensity',label: "Population Density"},
-    {id: 'landarea', label :"Land Area"},
-    {id: 'link', label: "Link"}
+    { id: 'statename', label: "Name" },
+    { id: 'captial', label: "Capital" },
+    { id: 'population', label: "Population" },
+    { id: 'popdensity', label: "Population Density" },
+    { id: 'landarea', label: "Land Area" },
   ]
+
+  const renderRow = (column, row, value) => {
+    let rendrow;
+    if (column.id == "location" || column.id == 'statename') {
+      rendrow = <TableCell key={column.id} align={column.align}>
+        <Link to={"/state/" + value}>{column.format && typeof value === 'number' ? column.format(value) : value} </Link>
+      </TableCell>
+    } else if (column.id == "traillocation") {
+      const state = value.split(", ")[1]
+      rendrow = <TableCell key={column.id} align={column.align}>
+        <Link to={"/state/" + state}>{column.format && typeof value === 'number' ? column.format(value) : value} </Link>
+      </TableCell>
+    } else if (column.id == "trailname") {
+      const id = row['trailid'];
+      rendrow = <TableCell key={column.id} align={column.align}>
+        <Link to={"/trail/" + id}>{column.format && typeof value === 'number' ? column.format(value) : value} </Link>
+      </TableCell>
+    } else if (column.id == "animalname") {
+      const id = row['animalid'];
+      rendrow = <TableCell key={column.id} align={column.align}>
+        <Link to={"/animal/" + id}>{column.format && typeof value === 'number' ? column.format(value) : value} </Link>
+      </TableCell>
+
+    } else {
+      rendrow = <TableCell key={column.id} align={column.align}>
+        {column.format && typeof value === 'number' ? column.format(value) : value}
+      </TableCell>
+
+    }
+
+    return rendrow;
+  }
 
   const renderTable = (columns, page, rowsPerPage, rows) => {
     return <Paper >
@@ -269,9 +299,10 @@ export default function Home(props) {
                   {columns.map((column) => {
                     const value = row[column.id];
                     return (
-                      <TableCell key={column.id} align={column.align}>
-                        {column.format && typeof value === 'number' ? column.format(value) : value}
-                      </TableCell>
+
+                      renderRow(column, row, value)
+
+
                     );
                   })}
                 </TableRow>
@@ -294,45 +325,48 @@ export default function Home(props) {
   const isQuery = lquery.length == 0
   return (
     <div>
-      <GlobalCss />
-      <body id='mybody' className={isQuery ?   "home": classes.body}>
-        <Navigation
-          loading={props.loading}
-          upcall={search}
-        />
-        <header className="Home-header">
-          {isQuery ?
-            <div>
+      <Navigation upcall={searchTerm}
+        loading={props.loading} />
+
+      {isQuery ?
+        <div>
+          <GlobalCss />
+          <body id='mybody' background={img} className="home">
+            <header className="Home-header">
               <div className="Title-summary">
                 HikeAdvisor
-                    </div>
+              </div>
               <div className="summary">
                 Here to plan your next hike
-                    </div>
+              </div>
               <div className="search">
                 <Link to="/trails/0" style={{ textDecoration: 'none' }}>
                   <ColorButton variant="contained" color="primary">
                     Find A Trail
-                    </ColorButton>
+              </ColorButton>
                 </Link>
               </div>
-            </div>
-            :
-            <div>
-              <Typography variant="h2">Animals</Typography>
-              
-              {renderTable(animalColumns,animalPage,animalRowsPerPage,animals)}
+            </header>
+          </body>
+        </div>
 
-              <Typography variant="h2">States</Typography>
-              {renderTable(stateColumns,statePage,stateRowsPerPage,states)}
-        
+        :
 
-              <Typography variant="h2">Trails</Typography>
-              {renderTable(trailColumns,trailPage,trailRowsPerPage,trails)}
-            </div>
-          }
-        </header>
-      </body>
+        <div className={classes.body}>
+          <GlobalCss />
+          <Typography variant="h2">Animals</Typography>
+
+          {renderTable(animalColumns, animalPage, animalRowsPerPage, animals)}
+
+          <Typography variant="h2">States</Typography>
+          {renderTable(stateColumns, statePage, stateRowsPerPage, states)}
+
+
+          <Typography variant="h2">Trails</Typography>
+          {renderTable(trailColumns, trailPage, trailRowsPerPage, trails)}
+        </div>
+
+      }
     </div>
   );
 
