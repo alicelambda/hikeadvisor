@@ -19,7 +19,7 @@ const blurbData = [
     {
         "name": "Austin Aurelio",
         "role": "Backend",
-        "description":"I am a second year Computer Science major and I always use the light theme.",
+        "description":"I worked on the user experience of the website and handled user feedback to decide what features to add. I am a second year Computer Science major and I always use the light theme.",
         "noissues":0,
         "nocommits":9,
         "notestcases":0,
