@@ -3,7 +3,7 @@ import Home from './components/Home'
 import About from './components/About'
 import Animals from './components/Animals';
 import Trails from './components/Trails';
-import TrailStand from './components/Trails/TrailStand';
+import TrailInstance from './components/Trails/TrailInstance';
 import States from './components/States'
 import AnimalInstance from './components/Animals/AnimalInstance';
 import './App.css';
@@ -88,6 +88,23 @@ function App() {
 
   }
 
+
+  const highSort = (selector) => {
+    const compare = (fst, snd) => {
+      return snd[selector] - fst[selector];
+    }
+    return compare;
+  }
+
+  const globalSortBy = (selector) => {
+
+    console.log(selector)
+    const trailDataCopy = trailData.slice();
+    trailDataCopy.sort(highSort(selector));
+    setTrailData(trailDataCopy);
+
+  };
+
   const loadAllData = () => {
     loadTrailData(1)
     loadStateData(1)
@@ -138,13 +155,16 @@ function App() {
               <AnimalInstance />
             </Route>
             <Route path="/animals/:offset">
-              <Animals animalData={animalData}/>
+              <Animals animalData={animalData} />
             </Route>
             <Route path="/trail/:trailId">
-              <TrailStand />
+              <TrailInstance />
             </Route>
             <Route path="/trails/:offset">
-              <Trails trailData={trailData} />
+              <Trails
+                trailData={trailData}
+                globalSortBy={globalSortBy}
+              />
             </Route>
             <Route path="/">
               <Home loading={loading} />

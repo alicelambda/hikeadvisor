@@ -25,7 +25,7 @@ const GlobalCss = withStyles({
     },
 })(() => null);
 
-export default function TrailStand() {
+export default function TrailInstance() {
     // const [trails, setTrails] = React.useState([]);
     const [trail, setTrail] = React.useState(null);
     let { trailId } = useParams();

@@ -40,8 +40,14 @@ const GlobalCss = withStyles({
 export default function Trails(props) {
     const classes = useStyles();
 
-    const [state, setState] = React.useState('');
+    const [state, setState] = React.useState();
     const [query, setQuery] = React.useState([]);
+    const [trailData, setTrails] = React.useState([]);
+    const [trails, setTrailsCard] = React.useState([]);
+    const [offset, setOffset] = React.useState(0);
+    const [redirect, setRedirect] = React.useState(-1);
+    const [pagination, setPagination] = React.useState();
+    const [sort,setSort] = React.useState();
 
     const pickedState = (event) => {
         setState(event.target.value);
@@ -52,13 +58,10 @@ export default function Trails(props) {
             })
     };
 
+ 
+
     let poffset = useParams();
 
-    const [trailData, setTrails] = React.useState([]);
-    const [trails, setTrailsCard] = React.useState([]);
-    const [offset, setOffset] = React.useState(0);
-    const [redirect, setRedirect] = React.useState(-1);
-    const [pagination, setPagination] = React.useState();
 
     React.useEffect(() => {
         setOffset(parseInt(poffset.offset));
@@ -91,6 +94,16 @@ export default function Trails(props) {
     const handleClick = (offset) => {
         setOffset(offset)
         setRedirect(offset)
+    }
+
+    const sortBy = (event) => {
+        setSort(event.target.value)
+        props.globalSortBy(event.target.value)
+        console.log(event.target.value1)
+        search(query,state).then((result) => {
+            setTrails(result)
+        });
+        console.log("uwu");
     }
 
     const search = (query, state) => {
@@ -148,6 +161,8 @@ export default function Trails(props) {
         return <MenuItem value={x}>{x}</MenuItem>
     })
 
+
+
     return (
         <div className={classes.root}>
             <GlobalCss />
@@ -179,18 +194,23 @@ export default function Trails(props) {
                             <Select
                                 labelId="demo-simple-select-helper-label"
                                 id="demo-simple-select-helper"
-                                value={state}
+                                value={sort}
+                                onChange={sortBy}
                             >
                                 <MenuItem value="">
                                     <em>None</em>
                                 </MenuItem>
+                                <MenuItem value="trail_ascent">Ascent</MenuItem>
+                                <MenuItem value="trail_descent">Descent</MenuItem>
+                                <MenuItem value="trail_high">Heighest Point</MenuItem>
+                                <MenuItem value="trail_low">Lowest Point</MenuItem>
+                                <MenuItem value="trail_length">Length</MenuItem>
+                                <MenuItem value="trail_stars">Rating</MenuItem>
+                                <MenuItem value="trail_numstars">No. Ratings</MenuItem>
                             </Select>
                             <FormHelperText>Filter by State</FormHelperText>
                         </FormControl>
-                        <FormControlLabel
-                            control={<Switch checked={true} name="Descending" />}
-                            label="Descending"
-                        />
+                   
                     </Grid>
                 </Grid>
             </Box>
