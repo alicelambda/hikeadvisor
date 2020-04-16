@@ -42,6 +42,7 @@ export default function Trails(props) {
 
     const [state, setState] = React.useState('');
     const [query, setQuery] = React.useState([]);
+    const [queryResults, setQueryResults] = React.useState([]);
     const [trailData, setTrails] = React.useState([]);
     const [trails, setTrailsCard] = React.useState([]);
     const [offset, setOffset] = React.useState(0);
@@ -53,8 +54,7 @@ export default function Trails(props) {
         setState(event.target.value);
         search(query, event.target.value)
             .then((result) => {
-                console.log(result)
-                setTrails(result)
+                setQueryResults(result)
             })
     };
 
@@ -68,7 +68,7 @@ export default function Trails(props) {
     })
 
     const selectTrailData = (offset) => {
-        setTrails(props.trailData.slice(offset * 10, (offset + 1) * 10))
+        setTrails(queryResults.slice(offset * 10, (offset + 1) * 10))
     }
 
     React.useEffect(() => {
@@ -82,17 +82,31 @@ export default function Trails(props) {
 
     }, [trailData])
 
+    React.useEffect(() => {
+        setTrailsCard(trailData.map(trail =>
+            <TrailCard
+                key={trail.id}
+                info={trail}
+                page={offset}
+            />
+        ))
+    },[]);
+
 
     React.useEffect(() => {
-        if (state == '') {
-            selectTrailData(offset);
-        } else {
-            search(query, state).then((result) => {
-                setTrails(result)
-            })
-        }
-    }, [offset, props.trailData]);
 
+        selectTrailData(offset);
+        console.log("updated")
+
+    }, [offset,queryResults]);
+
+    React.useEffect(() => {
+        search(query,state).then((result) => {
+            setQueryResults(result)
+        });
+
+
+    },[props.trailData]);
 
     const handleClick = (offset) => {
         setOffset(offset)
@@ -152,7 +166,7 @@ export default function Trails(props) {
             navQuery.split(" ")
                 .filter(term => term !== ""), state
         ).then((result) => {
-            setTrails(result)
+            setQueryResults(result)
         })
         setQuery(navQuery)
     }
@@ -230,7 +244,7 @@ export default function Trails(props) {
             <Pagination
                 limit={1}
                 offset={offset}
-                total={Math.floor(props.trailData.length / 12)}
+                total={Math.floor(queryResults.length / 12)}
                 onClick={(e, offset) => handleClick(offset)}
             />
         </div>
