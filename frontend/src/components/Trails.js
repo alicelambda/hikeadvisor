@@ -68,7 +68,7 @@ export default function Trails(props) {
     })
 
     const selectTrailData = (offset) => {
-        setTrails(queryResults.slice(offset * 10, (offset + 1) * 10))
+        setTrails(queryResults.slice(offset * 12, (offset + 1) * 12))
     }
 
     React.useEffect(() => {
@@ -244,7 +244,7 @@ export default function Trails(props) {
             <Pagination
                 limit={1}
                 offset={offset}
-                total={Math.floor(queryResults.length / 12)}
+                total={Math.floor(queryResults.length / 12) + (queryResults.length % 12 != 0 ? 1 : 0)}
                 onClick={(e, offset) => handleClick(offset)}
             />
         </div>

@@ -30,7 +30,7 @@ function App() {
       .then(data => {
         console.log(data.total_pages)
         Promise.all(
-          Array(data.total_pages)
+          Array(data.total_pages + 1)
             .fill()
             .map((_, i) => {
               return fetch("https://api.hikeadvisor.me/api/trail?page=" + i).then(response => response.json());
@@ -52,7 +52,7 @@ function App() {
       .then(data => {
         console.log(data.total_pages)
         Promise.all(
-          Array(data.total_pages)
+          Array(data.total_pages + 1)
             .fill()
             .map((_, i) => {
               return fetch("https://api.hikeadvisor.me/api/state?page=" + i).then(response => response.json());
@@ -73,9 +73,9 @@ function App() {
       .then(data => {
         console.log(data.total_pages)
         Promise.all(
-          Array(data.total_pages)
+          Array(data.total_pages + 1)
             .fill()
-            .map((_, i) => {
+            .map((_,i) => {
               return fetch("https://api.hikeadvisor.me/api/animal?page=" + i).then(response => response.json());
 
             }
@@ -102,6 +102,16 @@ function App() {
       const trailDataCopy = trailData.slice();
       trailDataCopy.sort(highSort(selector));
       setTrailData(trailDataCopy);
+      resolve("done sorting")
+    });
+  };
+
+  const animalSortBy = (selector) => {
+    return new Promise((resolve, reject) => {
+      console.log(selector)
+      const animalDataCopy = animalData.slice();
+      animalDataCopy.sort(highSort(selector));
+      setAnimalData(animalDataCopy);
       resolve("done sorting")
     });
   };
@@ -156,7 +166,8 @@ function App() {
               <AnimalInstance />
             </Route>
             <Route path="/animals/:offset">
-              <Animals animalData={animalData} />
+              <Animals animalData={animalData}
+              globalSortBy={animalSortBy} />
             </Route>
             <Route path="/trail/:trailId">
               <TrailInstance />
