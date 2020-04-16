@@ -129,7 +129,7 @@ export default function AnimalInstance() {
                   <Avatar  className={classes.large} src={animal.animal_picURL}/>
                 </Grid>
                 <Grid item>
-                  <Typography variant="h4" component="h2" id="blurbtitle">
+                  <Typography variant="h6" component="h2" id="blurbtitle">
                   {animal.animal_commonName}
                   </Typography>
                   </Grid>
@@ -139,12 +139,12 @@ export default function AnimalInstance() {
             {animal.animal_description}
             </Typography>
             <Divider/>
-            <Typography variant="h6" component="h2" id="blurbtitle">
-                    State:<br/><Link to={("/state/" + animal.animal_location)} style={{ textDecoration: 'none' }}> {animal.animal_location} </Link>
+            <Typography variant="subtitle1" component="h2" id="blurbtitle">
+                  Origin State:<br/><Link to={("/state/" + animal.animal_location)} style={{ textDecoration: 'none' }}> {animal.animal_location} </Link>
                   </Typography>
                   <Divider/>
-                  <Typography variant="h6" component="h2" id="blurbtitle">
-                    Trails:<br/>
+                  <Typography variant="subtitle1" component="h2" id="blurbtitle">
+                    Common Trails:<br/>
                     <Link to={("/trail/" + animal.animal_trails[0])} style={{ textDecoration: 'none' }}> {animal.animal_trails[1]}</Link>,
                                         <Link to={("/trail/" + animal.animal_trails[2])} style={{ textDecoration: 'none' }}> {animal.animal_trails[3]}</Link>
                   </Typography>
