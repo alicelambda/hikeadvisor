@@ -185,11 +185,18 @@ function App() {
             <Route path="/trails/:offset">
               <Trails
                 trailData={trailData}
+                animalData={animalData}
+                stateData={stateData}
                 globalSortBy={globalSortBy}
               />
             </Route>
             <Route path="/">
-              <Home loading={loading} />
+              <Home
+                loading={loading}
+                trailData={trailData}
+                animalData={animalData}
+                stateData={stateData}
+              />
             </Route>
           </Switch>
         </Router>

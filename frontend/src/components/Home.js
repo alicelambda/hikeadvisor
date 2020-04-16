@@ -1,14 +1,25 @@
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import '../styles/home.css';
 import Navigation from '../components/Navigation';
-import img from '../images/forest.jpg';
 import ReactSearchBox from 'react-search-box';
-import { fade, makeStyles,withStyles } from '@material-ui/core/styles';
+import { fade, makeStyles, withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import {
   Link
 } from "react-router-dom";
+import { Typography } from '@material-ui/core';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import TablePagination from '@material-ui/core/TablePagination';
+
+import Paper from '@material-ui/core/Paper';
+import { animalData } from './Animals/animalData';
+
 
 const useStyles = makeStyles({
   root: {
@@ -19,14 +30,16 @@ const useStyles = makeStyles({
     color: 'white',
     height: 48,
     padding: '0 30px',
+    width: '100%',
+
   },
   mybody: {
-      height: '100%',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-      backgroundSize: 'cover',
+    height: '100%',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
   },
-  
+
   HomeHeader: {
     /*background: '../static_resources/homephoto.jpg' no-repeat 'center';*/
     margin: 'auto',
@@ -39,8 +52,8 @@ const useStyles = makeStyles({
     fontFamily: "serif",
     width: '100%',
   },
-  
-  TitleSummary : {
+
+  TitleSummary: {
     fontSize: '80px',
     fontFamily: "Montserrat",
     fontWeight: 'bold',
@@ -59,8 +72,12 @@ const useStyles = makeStyles({
   search: {
     marginTop: '2%',
     width: '20%',
+  },
+  body: {
+    backgroundColor: "#32dde3",
   }
   
+
 });
 
 const ColorButton = withStyles((theme) => ({
@@ -73,44 +90,252 @@ const ColorButton = withStyles((theme) => ({
   },
 }))(Button);
 
+const ColorText = withStyles((theme) => ({
+  root: {
+    color: '#Eff1eD',
+  }
+
+}))(Typography);
 
 const GlobalCss = withStyles({
   // @global is handled by jss-plugin-global.
   '@global': {
-      // You should target [class*="MuiButton-root"] instead if you nest themes.
-      '.MuiPaper-root': {
-          backgroundColor: "#06d6a0"
-      }
+    // You should target [class*="MuiButton-root"] instead if you nest themes.
+    '.MuiPaper-root': {
+      backgroundColor: "#06d6a0"
+    }
   },
 })(() => null);
 
-class Home extends Component {
 
-    render() {
-        return (
-            <div>
-              <GlobalCss/>
-                <body id='mybody' background={img} className="home">
-                <Navigation loading={this.props.loading}/>
-                <header className="Home-header">
-                    <div className="Title-summary">
-                        HikeAdvisor
-                    </div>
-                    <div className="summary">
-                            Here to plan your next hike
-                    </div> 
-                    <div className="search">
-                    <Link to="/trails/0" style={{ textDecoration: 'none' }}>
-                    <ColorButton variant="contained" color="primary">
-                      Find A Trail
-                    </ColorButton> 
-                    </Link>
-                    </div>
-                </header>
-                </body>
-            </div>
-        );
+
+
+export default function Home(props) {
+
+  const classes = useStyles();
+  const [trails, setTrails] = React.useState([]);
+  const [animals, setAnimals] = React.useState([]);
+  const [states, setStates] = React.useState([]);
+
+  const [trailPage, setTrailPage] = React.useState(0);
+  const [trailRowsPerPage, setTrailRowsPerPage] = React.useState(10);
+
+  const [animalPage, setAnimalPage] = React.useState(0);
+  const [animalRowsPerPage, setAnimalRowsPerPage] = React.useState(10);
+
+  const [statePage, setStatePage] = React.useState(0);
+  const [stateRowsPerPage, setStateRowsPerPage] = React.useState(10);
+  const [lquery,setQuery] = React.useState('');
+
+  const searchGeneral = (query, trail,term) => {
+    const splitQuery = query.split(" ")
+      .filter(term => term !== "")
+    var i;
+    for (i = 0; i < query.length; i++) {
+      if (trail[term].includes(splitQuery[i])) {
+        return true
+      }
     }
+    return false
+  }
+
+ 
+  const search = (query) => {
+    setQuery(query)
+    setTrails(
+      props.trailData
+        .filter(trail => searchGeneral(query, trail,'trail_name'))
+        .map(trail => createTrailData(
+          trail.trail_name,
+          trail.trail_location,
+          trail.trail_length,
+          trail.trail_numstars,
+          "https://"
+        ))
+    )
+    setAnimals(
+      props.animalData
+        .filter(animal => searchGeneral(query, animal,'animal_commonName'))
+        .map(animal => createAnimalData(
+          animal.animal_commonName,
+          animal.animal_location,
+          animal.animal_lastSighting,
+          animal.animal_numObser,
+          animal.animal_isExtinct,
+          "https:/"
+
+        ))
+    )
+    setStates(
+      props.stateData
+      .filter(state => searchGeneral(query,state,'state_name'))
+      .map(state => createStateData(
+        state.state_name,
+        state.state_capital,
+        state.state_population,
+        state.state_populationDensity,
+        state.state_totalArea,
+        "https://"
+
+      ))
+    )
+  };
+
+  function createTrailData(name, location, length, ranking, noranking, link) {
+    return { name, location, length, ranking, noranking, link };
+  }
+
+  function createStateData(name, capital, population, popdensity, landarea, link) {
+    return { name, capital, population, popdensity, landarea, link }
+  }
+
+  function createAnimalData(name, location, lastsighting, numsightings, isextinct, link) {
+    const extinct = isextinct.toString()
+    return { name, location, lastsighting, numsightings, extinct, link }
+  }
+
+  const handleChangePage = (event, newPage) => {
+    setTrailPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setTrailRowsPerPage(+event.target.value);
+    setTrailPage(0);
+  };
+
+
+
+
+  const trailColumns = [
+    { id: 'name', label: 'Name', minWidth: 200, maxWidth: 200 },
+    { id: 'location', label: 'Location', minWidth: 200, maxHeight: 200 },
+    {
+      id: 'length',
+      label: 'Length',
+    },
+    {
+      id: 'ranking',
+      label: 'Ranking',
+    },
+    {
+      id: 'noranking',
+      label: 'No Ranking',
+    },
+    {
+      id: 'link',
+      label: "Link",
+    }
+  ];
+
+  const animalColumns = [
+    { id: 'name', label: 'Name' },
+    { id: 'location', label: 'Location' },
+    { id: 'lastsighting', label: "Last Sighting" },
+    { id: 'numsightings', label: "Number of Sightings" },
+    { id: 'extinct', label: "Is Extinct" },
+    { id: 'link', label: "Link" },
+  ]
+
+  const stateColumns = [
+    {id: 'name', label: "Name"},
+    {id: 'captial',label: "Capital"},
+    {id: 'population',label: "Population"},
+    {id: 'popdensity',label: "Population Density"},
+    {id: 'landarea', label :"Land Area"},
+    {id: 'link', label: "Link"}
+  ]
+
+  const renderTable = (columns, page, rowsPerPage, rows) => {
+    return <Paper >
+      <TableContainer className={classes.container}>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
+            <TableRow>
+              {columns.map((column) => (
+                <TableCell
+                  key={column.id}
+                  align={column.align}
+                  style={{ minWidth: column.minWidth }}
+                >
+                  {column.label}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+              return (
+                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                  {columns.map((column) => {
+                    const value = row[column.id];
+                    return (
+                      <TableCell key={column.id} align={column.align}>
+                        {column.format && typeof value === 'number' ? column.format(value) : value}
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+      />
+    </Paper>
+  }
+  const isQuery = lquery.length == 0
+  return (
+    <div>
+      <GlobalCss />
+      <body id='mybody' className={isQuery ?   "home": classes.body}>
+        <Navigation
+          loading={props.loading}
+          upcall={search}
+        />
+        <header className="Home-header">
+          {isQuery ?
+            <div>
+              <div className="Title-summary">
+                HikeAdvisor
+                    </div>
+              <div className="summary">
+                Here to plan your next hike
+                    </div>
+              <div className="search">
+                <Link to="/trails/0" style={{ textDecoration: 'none' }}>
+                  <ColorButton variant="contained" color="primary">
+                    Find A Trail
+                    </ColorButton>
+                </Link>
+              </div>
+            </div>
+            :
+            <div>
+              <Typography variant="h2">Animals</Typography>
+              
+              {renderTable(animalColumns,animalPage,animalRowsPerPage,animals)}
+
+              <Typography variant="h2">States</Typography>
+              {renderTable(stateColumns,statePage,stateRowsPerPage,states)}
+        
+
+              <Typography variant="h2">Trails</Typography>
+              {renderTable(trailColumns,trailPage,trailRowsPerPage,trails)}
+            </div>
+          }
+        </header>
+      </body>
+    </div>
+  );
+
 }
 
-export default Home;
+
