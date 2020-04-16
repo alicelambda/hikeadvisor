@@ -49,7 +49,7 @@ const blurbData = [
     {
         "name": "Long Do",
         "role": "Backend",
-        "description":"I'm a junior CS student. Hobbies include: animes, video games and cooking",
+        "description":"I worked on the backend. I worked with database, implemented API and helped fixing bug on the frontend. I'm a junior CS student. Hobbies include: animes, video games and cooking",
         "noissues":0,
         "nocommits":9,
         "notestcases":0,
