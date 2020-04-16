@@ -19,6 +19,7 @@ import {
   Link
 } from "react-router-dom";
 import Rating from '@material-ui/lab/Rating';
+import Highlight from 'react-highlighter';
 
 
 const useStyles = makeStyles(theme => ({
@@ -49,7 +50,7 @@ export default function TrailCard(props) {
   const classes = useStyles();
 
   const [expanded, setExpanded] = React.useState(false);
-
+  const [title, setTitle] = React.useState();
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -60,15 +61,16 @@ export default function TrailCard(props) {
     "blue": "intermediate",
   }
 
+
   return (
-    <Grid item xs={4} >
+    <Grid item xs={3} >
 
       <Card className={classes.root}>
         <Box textDecoration={'none'} color={'black'}>
           <Link to={("/trail/" + info.trail_id)} style={{ textDecoration: 'none' }}>
-
             <CardHeader
-              title={info.trail_name}
+              title={<Highlight search={props.query.length > 0 ? new RegExp(props.query.reduce((a, b) => a.concat('|', b)), 'i') : ""}>{info.trail_name}</Highlight>
+              }
             />
             <CardMedia
               className={classes.media}
@@ -106,14 +108,13 @@ export default function TrailCard(props) {
                           <li>Length: {info.trail_length} miles </li>
                           <li>Peak elevation: {info.trail_high} ft. </li>
                         </ul>
+
                       </Grid>
                       <Grid item>
                         <ul>
                           <li></li>
                         </ul>
                       </Grid>
-
-
                     </Grid>
                   </Grid>
                 </Grid>
@@ -121,7 +122,6 @@ export default function TrailCard(props) {
             </CardContent>
           </Link>
         </Box>
-
       </Card>
     </Grid>
   )

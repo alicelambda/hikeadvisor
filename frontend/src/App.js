@@ -33,7 +33,7 @@ function App() {
           Array(data.total_pages + 1)
             .fill()
             .map((_, i) => {
-              return fetch("https://api.hikeadvisor.me/api/trail?page=" + i).then(response => response.json());
+              return fetch("https://api.hikeadvisor.me/api/trail?page=" + (i + 1)).then(response => response.json());
 
             }
 
@@ -55,7 +55,7 @@ function App() {
           Array(data.total_pages + 1)
             .fill()
             .map((_, i) => {
-              return fetch("https://api.hikeadvisor.me/api/state?page=" + i).then(response => response.json());
+              return fetch("https://api.hikeadvisor.me/api/state?page=" + (i + 1)).then(response => response.json());
 
             }
             )
@@ -77,7 +77,6 @@ function App() {
             .fill()
             .map((_,i) => {
               return fetch("https://api.hikeadvisor.me/api/animal?page=" + i).then(response => response.json());
-
             }
             )
 
@@ -170,7 +169,7 @@ function App() {
               globalSortBy={animalSortBy} />
             </Route>
             <Route path="/trail/:trailId">
-              <TrailInstance />
+              <TrailInstance trailData={trailData} />
             </Route>
             <Route path="/trails/:offset">
               <Trails

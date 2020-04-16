@@ -25,41 +25,26 @@ const GlobalCss = withStyles({
     },
 })(() => null);
 
-export default function TrailInstance() {
-    // const [trails, setTrails] = React.useState([]);
+export default function TrailInstance(props) {
     const [trail, setTrail] = React.useState(null);
+    const [title, setTitle] = React.useState();
     let { trailId } = useParams();
-    React.useEffect(() => {
-        fetch("https://api.hikeadvisor.me/api/trail/" + trailId)
-            .then(response => response.json())
-            .then(data => {setTrail(data)})
-    }, [])
-
-    // React.useEffect(() => {
-    //     getTrailData();
-    // }, []);
-
-    // console.log(trailPage)
-    // console.log(trailId)
-
-    // const getTrailData = () => {
-    //     var temp = parseInt(trailPage) + 1;
-    //     console.log("https://api.hikeadvisor.me/api/trail?page=" + temp)
-    //     fetch("https://api.hikeadvisor.me/api/trail?page=" + temp)
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             setTrails(data.objects)
-    //         })
-    // }
-
-    // React.useEffect(() => {
-    //     setTrail(trails.filter(trail => {
-    //         return trail.trail_id == trailId
-    //     })[0])
-
-    // }, [trails]);
 
     const classes = useStyles();
+
+    React.useEffect(() => {
+        setTrail(props.trailData.filter((x) => {
+            return x.trail_id == trailId;
+        })[0]);
+    }, [props.trailData]);
+
+    React.useEffect(() => {
+        if (trail) {
+            setTitle(trail.trail_name)
+        }
+    }, [trail]);
+
+    
     return (
         <div className={classes}>
 
@@ -80,7 +65,8 @@ export default function TrailInstance() {
                     </Grid>
                     <Grid item>
                         <Typography variant="h2">
-                            {trail.trail_name}
+                        {title}
+
                         </Typography>
                     </Grid>
                     <Grid item>
@@ -103,6 +89,7 @@ export default function TrailInstance() {
                                         <li> Stars: {trail.trail_stars}</li>
                                         <li> Latitude: {trail.trail_latitude}</li>
                                         <li> Longitude: {trail.trail_longitude}</li>
+                                        <li> Hiking Project <a href={"https://www.hikingproject.com/trail/" + trail.trail_id}>link</a></li>
                                     </ul>
                                 </Grid>
 
@@ -117,7 +104,7 @@ export default function TrailInstance() {
                                         <li> Ascent: {trail.trail_ascent} ft</li>
                                         <li> Descent: {trail.trail_descent} ft </li>
                                         <li> Location: {trail.trail_location} </li>
-                                        
+
                                     </ul>
 
                                 </Grid>
@@ -126,23 +113,7 @@ export default function TrailInstance() {
 
 
                         </Box>
-
-                        <GoogleMapReact
-          bootstrapURLKeys={{ key: "AIzaSyDCnE_rLDM9O5Ep1nmHCCejTCqN4SpqWWA" }}
-          defaultCenter= {{
-            lat: 59.95,
-            lng: 30.33
-          }}
-          defaultZoom ={{zoom:11}}
-          yesIWantToUseGoogleMapApiInternals
-      
-          >
-               <Box
-            lat={59.955413}
-            lng={30.337844}
-            text="My Marker"
-          />
-                      </GoogleMapReact>
+                        <img src={trail.trail_mapPicURL}></img>
 
                     </Grid>
 

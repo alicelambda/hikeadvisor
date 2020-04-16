@@ -276,7 +276,11 @@ export default function Animals(props) {
                         <Pagination
                             limit={1}
                             offset={offset}
+<<<<<<< HEAD
                             total={Math.floor(queryResults.length / 10) + (queryResults.length % 10 != 0 ? 1 : 0)}
+=======
+                            total={Math.floor(props.animalData.length / 10) + (props.animalData.length / 10 != 0 ? 1 : 0)}
+>>>>>>> 554c5942be93b150f5205543295668e45371712a
                             onClick={(e, offset) => handleClick(offset)}
                         />
                         <Divider />
