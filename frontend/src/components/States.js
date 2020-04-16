@@ -34,6 +34,9 @@ const useStyles = makeStyles(theme => ({
         width: theme.spacing(7),
         height: theme.spacing(7),
     },
+    formControl: {
+        padding: 2
+    },
 }));
 
 
@@ -52,7 +55,7 @@ const GlobalCss = withStyles({
 export default function States(props) {
     const classes = useStyles();
 
-    const [state, setState] = React.useState('');
+    const [timezone, setTimezone] = React.useState('');
     const [query, setQuery] = React.useState([]);
     const [queryResults, setQueryResults] = React.useState([]);
     const [stateData, setStates] = React.useState([]);
@@ -63,8 +66,8 @@ export default function States(props) {
     const [sort, setSort] = React.useState('');
 
     const pickedState = (event) => {
-        setState(event.target.value.state_timezone);
-        search(query, event.target.value.state_timezone)
+        setTimezone(event.target.value);
+        search(query, event.target.value)
             .then((result) => {
                 setQueryResults(result)
                 setOffset(0);
@@ -117,7 +120,7 @@ export default function States(props) {
     }, [offset,queryResults]);
 
     React.useEffect(() => {
-        search(query,state).then((result) => {
+        search(query,timezone).then((result) => {
             setQueryResults(result)
         });
 
@@ -180,7 +183,7 @@ export default function States(props) {
 
         search(
             navQuery.split(" ")
-                .filter(term => term !== ""), state
+                .filter(term => term !== ""), timezone
         ).then((result) => {
             setQueryResults(result);
             setOffset(0);
@@ -225,7 +228,7 @@ export default function States(props) {
                             <Select
                                 labelId="demo-simple-select-helper-label"
                                 id="demo-simple-select-helper"
-                                value={state}
+                                value={timezone}
                                 onChange={pickedState}
                             >
                                 <MenuItem value="">
@@ -249,7 +252,7 @@ export default function States(props) {
                                 <MenuItem value="state_elevation">Elevation</MenuItem>
                                 <MenuItem value="state_totalArea">Area</MenuItem>
                             </Select>
-                            <FormHelperText>Filter by Other</FormHelperText>
+                            <FormHelperText>Sort States By</FormHelperText>
                         </FormControl>
                         </Grid>
                         <Typography>
