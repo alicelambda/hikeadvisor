@@ -233,7 +233,7 @@ export default function Trails(props) {
                             <FormHelperText>Sort by Attribute9</FormHelperText>
                         </FormControl>
                         <Typography>
-                        Total: {props.trailData.length} Trails
+                        Total: {queryResults.length} Trails
                         </Typography>
 
                     </Grid>

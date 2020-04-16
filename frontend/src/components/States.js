@@ -12,6 +12,11 @@ import StateInfo from './States/StateInfo';
 import Pagination from "material-ui-flat-pagination";
 import { Redirect, useParams } from 'react-router-dom';
 import zIndex from '@material-ui/core/styles/zIndex';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 
 const useStyles = makeStyles(theme => ({
@@ -47,26 +52,37 @@ const GlobalCss = withStyles({
 export default function States(props) {
     const classes = useStyles();
 
-    const [age, setAge] = React.useState('');
-
-    const handleChange = (event) => {
-        setAge(event.target.value);
-    };
-
-    let poffset = useParams();
-
+    const [state, setState] = React.useState('');
+    const [query, setQuery] = React.useState([]);
+    const [queryResults, setQueryResults] = React.useState([]);
     const [stateData, setStates] = React.useState([]);
     const [states, setStatesCard] = React.useState([]);
     const [offset, setOffset] = React.useState(0);
     const [redirect, setRedirect] = React.useState(-1);
     const [pagination, setPagination] = React.useState();
+    const [sort, setSort] = React.useState('');
+
+    const pickedState = (event) => {
+        setState(event.target.value.state_timezone);
+        search(query, event.target.value.state_timezone)
+            .then((result) => {
+                setQueryResults(result)
+                setOffset(0);
+                console.log("set offset")
+            })
+    };
+
+
+
+    let poffset = useParams();
+
 
     React.useEffect(() => {
         setOffset(parseInt(poffset.offset));
     })
 
     const selectStateData = (offset) => {
-        setStates(props.stateData.slice(offset * 10, (offset + 1) * 10))
+        setStates(queryResults.slice(offset * 12, (offset + 1) * 12))
     }
 
     React.useEffect(() => {
@@ -75,18 +91,37 @@ export default function States(props) {
                 key={state.name}
                 info={state}
                 page={offset}
+                query={query}
             />
         ))
 
     }, [stateData])
 
+    React.useEffect(() => {
+        setStatesCard(stateData.map(state =>
+            <StateInfo
+                key={state.name}
+                info={state}
+                page={offset}
+                query={query}
+            />
+        ))
+    },[]);
+
 
     React.useEffect(() => {
+
         selectStateData(offset);
-    }, [offset]);
+        console.log("updated")
+
+    }, [offset,queryResults]);
 
     React.useEffect(() => {
-        selectStateData(offset);
+        search(query,state).then((result) => {
+            setQueryResults(result)
+        });
+
+
     },[props.stateData]);
 
     const handleClick = (offset) => {
@@ -94,34 +129,68 @@ export default function States(props) {
         setRedirect(offset)
     }
 
-    const search = (query) => {
-        console.log(query)
+    const sortBy = (event) => {
+        setSort(event.target.value)
+        props.globalSortBy(event.target.value).then(() => {
+
+        });
+    }
+
+    const search = (query, state) => {
         return new Promise((resolve, reject) => {
-            const result = props.stateData.filter(state => {
-                var index = 0;
-                for (index = 0; index < query.length; index++) {
-                    if (state.state_name.includes(query[index])) {
-                        return true
+            if (state !== '') {
+                resolve(props.stateData.filter(state => {
+                    if (state.state_name !== state) {
+                        return false
                     }
-                }
-                return false
+                    if (query.length == 0) {
+                        return true
+                    } else {
+                        var index = 0;
+                        for (index = 0; index < query.length; index++) {
+                            if (state.state_name.includes(query[index])) {
+                                return true
+                            }
+                        }
+                        return false
+                    }
 
-            })
+                }))
+            } else {
+                resolve(props.stateData.filter(state => {
+                    if (query.length == 0) {
+                        return true
+                    } else {
+                        var index = 0;
+                        for (index = 0; index < query.length; index++) {
+                            if (state.state_name.includes(query[index])) {
+                                return true
+                            }
+                        }
+                        return false
+                    }
+                }))
 
-            resolve(result)
+            }
         });
 
     }
 
-    const upcall = (query) => {
+    const upcall = (navQuery) => {
 
         search(
-            query.split(" ")
-                .filter(term => term !== "")
+            navQuery.split(" ")
+                .filter(term => term !== ""), state
         ).then((result) => {
-            setStates(result)
+            setQueryResults(result);
+            setOffset(0);
         })
+        setQuery(navQuery.split(" ").filter(x => x !== ""))
     }
+
+    const timezoneItems = [...new Set(props.stateData.map(x => x.state_timezone))].sort().map(x => {
+        return <MenuItem value={x}>{x}</MenuItem>
+    })
 
     return (
         <div className={classes.root}>
@@ -151,7 +220,41 @@ export default function States(props) {
                                 </Typography>
 
                             </Box>
+                            <FormControl className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-helper-label">Timezone</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-helper-label"
+                                id="demo-simple-select-helper"
+                                value={state}
+                                onChange={pickedState}
+                            >
+                                <MenuItem value="">
+                                    <em>None</em>
+                                </MenuItem>
+                                {timezoneItems}
+                            </Select>
+                            <FormHelperText>Timezone Filter</FormHelperText>
+                        </FormControl>
+                        <FormControl className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-helper-label">Sort By</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-helper-label"
+                                id="demo-simple-select-helper"
+                                value={sort}
+                                onChange={sortBy}
+                            >
+                                <MenuItem value="">
+                                    <em>None</em>
+                                </MenuItem>
+                                <MenuItem value="state_elevation">Elevation</MenuItem>
+                                <MenuItem value="state_totalArea">Area</MenuItem>
+                            </Select>
+                            <FormHelperText>Filter by Other</FormHelperText>
+                        </FormControl>
                         </Grid>
+                        <Typography>
+                        Total: {queryResults.length} States
+                        </Typography>
                         <Divider />
                         <Grid item>
                             <Typography variant="h3" component="h2" maxWidth="xs">
@@ -181,7 +284,7 @@ export default function States(props) {
             <Pagination
                 limit={1}
                 offset={offset}
-                total={Math.floor(props.stateData.length / 10) + (props.stateData.length % 10 != 0 ? 1 : 0)}
+                total={Math.floor(queryResults.length / 10) + (queryResults.length % 10 != 0 ? 1 : 0)}
                 onClick={(e, offset) => handleClick(offset)}
             />
                         <Divider />

@@ -115,6 +115,16 @@ function App() {
     });
   };
 
+  const stateSortBy = (selector) => {
+    return new Promise((resolve, reject) => {
+      console.log(selector)
+      const stateDataCopy = stateData.slice();
+      stateDataCopy.sort(highSort(selector));
+      setStateData(stateDataCopy);
+      resolve("done sorting")
+    });
+  };
+
   const loadAllData = () => {
     loadTrailData(1)
     loadStateData(1)
@@ -153,16 +163,17 @@ function App() {
         <Router>
           <Switch>
             <Route path="/state/:stateId">
-              <StateInstance />
+              <StateInstance stateData={stateData}/>
             </Route>
             <Route path="/states/:offset">
-              <States stateData={stateData} />
+              <States stateData={stateData}
+              globalSortBy={stateSortBy} />
             </Route>
             <Route path="/about">
               <About />
             </Route>
             <Route path="/animal/:animalId">
-              <AnimalInstance />
+              <AnimalInstance animalData={animalData}/>
             </Route>
             <Route path="/animals/:offset">
               <Animals animalData={animalData}

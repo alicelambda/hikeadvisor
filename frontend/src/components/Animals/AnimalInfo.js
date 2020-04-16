@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
+import Highlight from 'react-highlighter';
 import {
   Link
 } from "react-router-dom";
@@ -53,7 +54,7 @@ export default function AnimalInfo(props) {
                 </Grid>
                 <Grid item>
                   <Typography variant="h6" component="h2" id="blurbtitle">
-                    {info.animal_commonName} <br/>
+                    <Highlight search={props.query.length > 0 ? props.query : ""}>{info.animal_commonName}</Highlight>
                   </Typography>
                   </Grid>
               </Grid>

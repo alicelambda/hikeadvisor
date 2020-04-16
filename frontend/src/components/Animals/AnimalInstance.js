@@ -10,6 +10,7 @@ import { animalData } from './animalData';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import {  useParams} from "react-router-dom";
+import Highlight from 'react-highlighter';
 import {
   Link
 } from "react-router-dom";
@@ -32,43 +33,24 @@ const useStyles = makeStyles(theme => ({
     },
 })(() => null);
 
-export default function AnimalInstance() {
-    //const [animals, setAnimals] = React.useState([]);
-    let { animalId} = useParams();
-    console.log(animalId)
-    console.log("Debugging")
-    const [animal, setAnimal] = React.useState(null);
-    React.useEffect(() => {
-      fetch("https://api.hikeadvisor.me/api/animal/" + animalId)
-        .then(response => response.json())
-        .then(data => {setAnimal(data)})
-    }, [])
+export default function AnimalInstance(props) {
+  const [animal, setAnimal] = React.useState(null);
+  const [title, setTitle] = React.useState();
+  let { animalId } = useParams();
 
-    // React.useEffect(() => {
-    //     getAnimalData();
-    // }, []);
-
-    
-    // console.log(animalPage)
-    // console.log(animalId)
-
-    // const getAnimalData = () => {
-    //     var temp = parseInt(animalPage) + 1;
-    //     fetch("https://api.hikeadvisor.me/api/animal?page=" + temp)
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             setAnimals(data.objects)
-    //         })
-    // }
-
-    // React.useEffect(() => {
-    //     setAnimal(animals.filter(animal => {
-    //         return animal.animal_id == animalId
-    //     })[0])
-
-    // }, [animals]);
- 
   const classes = useStyles();
+
+  React.useEffect(() => {
+      setAnimal(props.animalData.filter((x) => {
+          return x.animal_id == animalId;
+      })[0]);
+  }, [props.animalData]);
+
+  React.useEffect(() => {
+      if (animal) {
+          setTitle(animal.animal_commonName)
+      }
+  }, [animal]);
   return (
 
     <div>
@@ -88,7 +70,7 @@ export default function AnimalInstance() {
                     
                     <Box p={2} >
                         <Typography variant="h3" component="h2" maxWidth="xs">
-                            {animal.animal_commonName}
+                        {title}
                         </Typography>
                     </Box>
     
@@ -148,6 +130,10 @@ export default function AnimalInstance() {
                     <Link to={("/trail/" + animal.animal_trails[0])} style={{ textDecoration: 'none' }}> {animal.animal_trails[1]}</Link>,
                                         <Link to={("/trail/" + animal.animal_trails[2])} style={{ textDecoration: 'none' }}> {animal.animal_trails[3]}</Link>
                   </Typography>
+                  <Divider/>
+                  <Typography variant="subtitle1" component="h2" id="blurbtitle">
+            <a style={{ textDecoration: 'none' }} href={"https://en.wikipedia.org/wiki/" + animal.animal_commonName}>Read More</a>
+            </Typography>
             <Typography variant="body1" component="h2" id="blurbtitle"></Typography>
             </Box>
           </Box>

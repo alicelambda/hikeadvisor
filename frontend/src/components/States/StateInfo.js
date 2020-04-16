@@ -6,6 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
+import Highlight from 'react-highlighter';
+import CardHeader from '@material-ui/core/CardHeader';
 import {
   Link
 } from "react-router-dom";
@@ -53,8 +55,8 @@ export default function StateInfo(props) {
                   <Avatar  className={classes.large} src={info.state_flagPicURL}/>
                 </Grid>
                 <Grid item>
-                  <Typography variant="h4" component="h2" id="blurbtitle">
-                    {info.state_name} <br/>
+                <Typography variant="h4" component="h2" id="blurbtitle">
+                    <Highlight search={props.query.length > 0 ? props.query : ""}>{info.state_name}</Highlight>
                   </Typography>
                   </Grid>
               </Grid>
