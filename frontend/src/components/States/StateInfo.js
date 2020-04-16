@@ -12,6 +12,7 @@ import {
 
 const useStyles = makeStyles(theme => ({
     root: {
+      backgroundColor: "#32dde3",
       display: 'flex',
       '& > *': {
         margin: theme.spacing(1),
@@ -37,10 +38,10 @@ export default function StateInfo(props) {
    
     return (
       
-      <div className={classes.root}  >
+      <div className={classes.root}>
         <Box p={1}>
          <Grid item xs={12} spacing={5}>
-        <Link to={("/state/" + info.state_name)+'/'+ props.page} style={{ textDecoration: 'none' }}>
+        <Link to={("/state/" + info.state_name)} style={{ textDecoration: 'none' }}>
         <Paper >
           <Box p={3} 
               maxWidth={350}

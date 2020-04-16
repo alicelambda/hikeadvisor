@@ -43,8 +43,14 @@ const GlobalCss = withStyles({
     },
 })(() => null);
 
-export default function States() {
+export default function States(props) {
     const classes = useStyles();
+
+    const [age, setAge] = React.useState('');
+
+    const handleChange = (event) => {
+        setAge(event.target.value);
+    };
 
     let poffset = useParams();
 
@@ -55,17 +61,11 @@ export default function States() {
     const [pagination, setPagination] = React.useState();
 
     React.useEffect(() => {
-
         setOffset(parseInt(poffset.offset));
     })
 
-    const getStateData = () => {
-
-        fetch("https://api.hikeadvisor.me/api/state?page=" + offset / 10 + 1)
-            .then(response => response.json())
-            .then(data => {
-                setStates(data.objects)
-            })
+    const selectStateData = (offset) => {
+        setStates(props.stateData.slice(offset * 10, (offset + 1) * 10))
     }
 
     React.useEffect(() => {
@@ -81,18 +81,51 @@ export default function States() {
 
 
     React.useEffect(() => {
-        getStateData();
+        selectStateData(offset);
     }, [offset]);
+
+    React.useEffect(() => {
+        selectStateData(offset);
+    },[props.stateData]);
 
     const handleClick = (offset) => {
         setOffset(offset)
         setRedirect(offset)
     }
 
+    const search = (query) => {
+        console.log(query)
+        return new Promise((resolve, reject) => {
+            const result = props.stateData.filter(state => {
+                var index = 0;
+                for (index = 0; index < query.length; index++) {
+                    if (state.state_name.includes(query[index])) {
+                        return true
+                    }
+                }
+                return false
+
+            })
+
+            resolve(result)
+        });
+
+    }
+
+    const upcall = (query) => {
+
+        search(
+            query.split(" ")
+                .filter(term => term !== "")
+        ).then((result) => {
+            setStates(result)
+        })
+    }
+
     return (
         <div className={classes.root}>
             <GlobalCss />
-            <Navigation />
+            <Navigation upcall={upcall}/>
             <Container maxWidth="md">
                 <Box>
                     <Grid
@@ -144,13 +177,12 @@ export default function States() {
                             </Grid>
                         </Grid>
                         {redirect != -1 ? <Redirect to={"/states/" + redirect} /> : null}
-                        <Pagination
-                            limit={10}
-                            offset={offset}
-                            total={50}
-                            onClick={(e, offset) => handleClick(offset)}
-                        />
-
+            <Pagination
+                limit={1}
+                offset={offset}
+                total={Math.floor(props.stateData.length / 10)}
+                onClick={(e, offset) => handleClick(offset)}
+            />
                         <Divider />
                         <Grid item>
                             <Box p={4}>

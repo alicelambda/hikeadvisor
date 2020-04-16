@@ -65,7 +65,7 @@ export default function Trails(props) {
     })
 
     const selectTrailData = (offset) => {
-        setTrails(props.trailData.slice(offset * 12, (offset + 1) * 12))
+        setTrails(props.trailData.slice(offset * 10, (offset + 1) * 10))
     }
 
     React.useEffect(() => {

@@ -97,6 +97,18 @@
 							"    for(i = 0; i < jsonData.objects.length; i++) {",
 							"         pm.expect(jsonData.objects[i]).to.have.property('animal_taxonName');",
 							"    }",
+							"});",
+							"",
+							"pm.test('Has data - animal_taxonNetwork', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('animal_taxonNetwork');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - animal_trails', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('animal_taxonNetwork');",
+							"    }",
 							"});"
 						],
 						"type": "text/javascript"
@@ -254,6 +266,12 @@
 							"    }",
 							"});",
 							"",
+							"pm.test('Has data - state_mapPicURL', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('state_mapPicURL');",
+							"    }",
+							"});",
+							"",
 							"pm.test('Has data - state_motto', function () {",
 							"    for(i = 0; i < jsonData.objects.length; i++) {",
 							"         pm.expect(jsonData.objects[i]).to.have.property('state_motto');",
@@ -288,7 +306,21 @@
 							"    for(i = 0; i < jsonData.objects.length; i++) {",
 							"         pm.expect(jsonData.objects[i]).to.have.property('state_totalArea');",
 							"    }",
-							"});"
+							"});",
+							"",
+							"pm.test('Has data - state_animals', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('state_animals');",
+							"    }",
+							"});",
+							"",
+							"pm.test('Has data - state_trails', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('state_trails');",
+							"    }",
+							"});",
+							"",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -475,6 +507,12 @@
 							"    }",
 							"});",
 							"",
+							"pm.test('Has data - trail_mapPicURL', function () {",
+							"    for(i = 0; i < jsonData.objects.length; i++) {",
+							"         pm.expect(jsonData.objects[i]).to.have.property('trail_mapPicURL');",
+							"    }",
+							"});",
+							"",
 							"pm.test('Has data - trail_name', function () {",
 							"    for(i = 0; i < jsonData.objects.length; i++) {",
 							"         pm.expect(jsonData.objects[i]).to.have.property('trail_name');",
@@ -509,9 +547,19 @@
 					}
 				}
 			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "",
+						"variables": ""
+					}
+				},
 				"url": {
 					"raw": "https://api.hikeadvisor.me/api/trail",
 					"protocol": "https",
@@ -605,6 +653,70 @@
 						"api",
 						"trail",
 						"7000056"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Search",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8b143461-372a-4189-8295-f8f5c4d73846",
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test('Has data - num_animals', function () {",
+							"    pm.expect(jsonData).to.have.property('num_animals');",
+							"});",
+							"",
+							"pm.test('Has data - num_states', function () {",
+							"    pm.expect(jsonData).to.have.property('num_states');",
+							"});",
+							"",
+							"pm.test('Has data - num_trails', function () {",
+							"    pm.expect(jsonData).to.have.property('num_trails');",
+							"});",
+							"",
+							"pm.test('Has data - animals', function () {",
+							"    pm.expect(jsonData.result).to.have.property('animals');",
+							"});",
+							"",
+							"pm.test('Has data - trails', function () {",
+							"    pm.expect(jsonData.result).to.have.property('trails');",
+							"});",
+							"",
+							"pm.test('Has data - states', function () {",
+							"    pm.expect(jsonData.result).to.have.property('states');",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.hikeadvisor.me/api/search?q=Texas",
+					"protocol": "https",
+					"host": [
+						"api",
+						"hikeadvisor",
+						"me"
+					],
+					"path": [
+						"api",
+						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "Texas"
+						}
 					]
 				}
 			},
