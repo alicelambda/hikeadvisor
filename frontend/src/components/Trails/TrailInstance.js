@@ -89,6 +89,7 @@ export default function TrailInstance(props) {
                                         <li> Stars: {trail.trail_stars}</li>
                                         <li> Latitude: {trail.trail_latitude}</li>
                                         <li> Longitude: {trail.trail_longitude}</li>
+                                        <li> Hiking Project <a href={"https://www.hikingproject.com/trail/" + trail.trail_id}>link</a></li>
                                     </ul>
                                 </Grid>
 
