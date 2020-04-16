@@ -233,7 +233,7 @@ export default function Trails(props) {
                             <FormHelperText>Sort by Attribute</FormHelperText>
                         </FormControl>
                         <Typography>
-                        Total: {props.trailData.length} Trails
+                        Total: {queryResults.length} Trails
                         </Typography>
 
                     </Grid>
@@ -255,7 +255,7 @@ export default function Trails(props) {
             <Pagination
                 limit={1}
                 offset={offset}
-                total={Math.floor(queryResults.length / 10) + (queryResults.length % 10 != 0 ? 1 : 0)}
+                total={Math.floor(queryResults.length / 12) + (queryResults.length % 12 != 0 ? 1 : 0)}
                 onClick={(e, offset) => handleClick(offset)}
             />
         </div>

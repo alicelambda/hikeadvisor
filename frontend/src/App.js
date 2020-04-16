@@ -30,7 +30,7 @@ function App() {
       .then(data => {
         console.log(data.total_pages)
         Promise.all(
-          Array(data.total_pages)
+          Array(data.total_pages + 1)
             .fill()
             .map((_, i) => {
               return fetch("https://api.hikeadvisor.me/api/trail?page=" + (i + 1)).then(response => response.json());
@@ -52,7 +52,7 @@ function App() {
       .then(data => {
         console.log(data.total_pages)
         Promise.all(
-          Array(data.total_pages)
+          Array(data.total_pages + 1)
             .fill()
             .map((_, i) => {
               return fetch("https://api.hikeadvisor.me/api/state?page=" + (i + 1)).then(response => response.json());
@@ -73,11 +73,10 @@ function App() {
       .then(data => {
         console.log(data.total_pages)
         Promise.all(
-          Array(data.total_pages)
+          Array(data.total_pages + 1)
             .fill()
-            .map((_, i) => {
-              return fetch("https://api.hikeadvisor.me/api/animal?page=" + (i + 1)).then(response => response.json());
-
+            .map((_,i) => {
+              return fetch("https://api.hikeadvisor.me/api/animal?page=" + i).then(response => response.json());
             }
             )
 
@@ -102,6 +101,26 @@ function App() {
       const trailDataCopy = trailData.slice();
       trailDataCopy.sort(highSort(selector));
       setTrailData(trailDataCopy);
+      resolve("done sorting")
+    });
+  };
+
+  const animalSortBy = (selector) => {
+    return new Promise((resolve, reject) => {
+      console.log(selector)
+      const animalDataCopy = animalData.slice();
+      animalDataCopy.sort(highSort(selector));
+      setAnimalData(animalDataCopy);
+      resolve("done sorting")
+    });
+  };
+
+  const stateSortBy = (selector) => {
+    return new Promise((resolve, reject) => {
+      console.log(selector)
+      const stateDataCopy = stateData.slice();
+      stateDataCopy.sort(highSort(selector));
+      setStateData(stateDataCopy);
       resolve("done sorting")
     });
   };
@@ -144,19 +163,21 @@ function App() {
         <Router>
           <Switch>
             <Route path="/state/:stateId">
-              <StateInstance />
+              <StateInstance stateData={stateData}/>
             </Route>
             <Route path="/states/:offset">
-              <States stateData={stateData} />
+              <States stateData={stateData}
+              globalSortBy={stateSortBy} />
             </Route>
             <Route path="/about">
               <About />
             </Route>
             <Route path="/animal/:animalId">
-              <AnimalInstance />
+              <AnimalInstance animalData={animalData}/>
             </Route>
             <Route path="/animals/:offset">
-              <Animals animalData={animalData} />
+              <Animals animalData={animalData}
+              globalSortBy={animalSortBy} />
             </Route>
             <Route path="/trail/:trailId">
               <TrailInstance trailData={trailData} />

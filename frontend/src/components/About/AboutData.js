@@ -19,42 +19,42 @@ const blurbData = [
     {
         "name": "Austin Aurelio",
         "role": "Backend",
-        "description": "I am a second year Computer Science major and I always use the light theme.",
-        "noissues": 0,
-        "nocommits": 9,
-        "notestcases": 0,
-        "username": "austinrandy0209",
-        "photo": austin
+        "description":"I worked on the user experience of the website and handled user feedback to decide what features to add. I am a second year Computer Science major and I always use the light theme.",
+        "noissues":0,
+        "nocommits":9,
+        "notestcases":0,
+        "username":"austinrandy0209",
+        "photo":austin
     },
     {
         "name": "Nabil Zubair",
         "role": "Backend",
-        "description": "I am a junior majoring in computer science and minoring in Japanese. Some of my hobbies include playing the piano, video games, and cooking.",
-        "noissues": 0,
-        "nocommits": 9,
-        "notestcases": 110,
-        "photo": nabil,
-        "username": "nzubair76"
+        "description":"I am a junior majoring in computer science and minoring in Japanese. Some of my hobbies include playing the piano, video games, and cooking. I worked on the backend and tested functionality for both the backend and frontend.",
+        "noissues":0,
+        "nocommits":9,
+        "notestcases":110,
+        "photo":nabil,
+        "username":"nzubair76"
     },
     {
         "name": "Josh Trunick",
         "role": "Frontend",
-        "description": "I'm a senior majoring in Computer Science interested in web and mobile dev. You can catch me either cooking a new recipe, slinging a frisbee or pitching a startup idea to my friends.",
-        "noissues": 0,
-        "nocommits": 9,
-        "notestcases": 0,
-        "username": "jtrunick",
-        "photo": josh
+        "description":"I worked on the frontend, desining the homepage as well as the animals and states models. I'm a senior majoring in Computer Science interested in web and mobile dev. You can catch me either cooking a new recipe, slinging a frisbee or pitching a startup idea to my friends.",
+        "noissues":0,
+        "nocommits":9,
+        "notestcases":0,
+        "username":"jtrunick",
+        "photo":josh
     },
     {
         "name": "Long Do",
         "role": "Backend",
-        "description": "I'm a junior CS student. Hobbies include: animes, video games and cooking",
-        "noissues": 0,
-        "nocommits": 9,
-        "notestcases": 0,
-        "username": "LongDo16",
-        "photo": long
+        "description":"I worked on the backend. I worked with database, implemented API and helped fixing bug on the frontend. I'm a junior CS student. Hobbies include: animes, video games and cooking",
+        "noissues":0,
+        "nocommits":9,
+        "notestcases":0,
+        "username":"LongDo16",
+        "photo":long
     }
 ]
 

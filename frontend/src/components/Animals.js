@@ -11,6 +11,11 @@ import AnimalInfo from './Animals/AnimalInfo';
 import Pagination from "material-ui-flat-pagination";
 import { Redirect, useParams } from 'react-router-dom';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 
 const useStyles = makeStyles(theme => ({
@@ -27,6 +32,9 @@ const useStyles = makeStyles(theme => ({
     large: {
         width: theme.spacing(7),
         height: theme.spacing(7),
+    },
+    formControl: {
+        padding: 2
     },
 }));
 
@@ -46,26 +54,35 @@ const GlobalCss = withStyles({
 export default function Animals(props) {
     const classes = useStyles();
 
-    const [age, setAge] = React.useState('');
-
-    const handleChange = (event) => {
-        setAge(event.target.value);
-    };
-
-    let poffset = useParams();
-
+    const [state, setState] = React.useState('');
+    const [query, setQuery] = React.useState([]);
+    const [queryResults, setQueryResults] = React.useState([]);
     const [animalData, setAnimals] = React.useState([]);
     const [animals, setAnimalsCard] = React.useState([]);
     const [offset, setOffset] = React.useState(0);
     const [redirect, setRedirect] = React.useState(-1);
     const [pagination, setPagination] = React.useState();
+    const [sort, setSort] = React.useState('');
+
+    const pickedState = (event) => {
+        setState(event.target.value);
+        search(query, event.target.value)
+            .then((result) => {
+                setQueryResults(result)
+            })
+    };
+
+
+
+    let poffset = useParams();
+
 
     React.useEffect(() => {
         setOffset(parseInt(poffset.offset));
     })
 
     const selectAnimalData = (offset) => {
-        setAnimals(props.animalData.slice(offset * 10, (offset + 1) * 10))
+        setAnimals(queryResults.slice(offset * 12, (offset + 1) * 12))
     }
 
     React.useEffect(() => {
@@ -74,18 +91,37 @@ export default function Animals(props) {
                 key={animal.id}
                 info={animal}
                 page={offset}
+                query={query}
             />
         ))
 
     }, [animalData])
 
+    React.useEffect(() => {
+        setAnimalsCard(animalData.map(animal =>
+            <AnimalInfo
+                key={animal.id}
+                info={animal}
+                page={offset}
+                query={query}
+            />
+        ))
+    },[]);
+
 
     React.useEffect(() => {
+
         selectAnimalData(offset);
-    }, [offset]);
+        console.log("updated")
+
+    }, [offset,queryResults]);
 
     React.useEffect(() => {
-        selectAnimalData(offset);
+        search(query,state).then((result) => {
+            setQueryResults(result)
+        });
+
+
     },[props.animalData]);
 
     const handleClick = (offset) => {
@@ -93,34 +129,67 @@ export default function Animals(props) {
         setRedirect(offset)
     }
 
-    const search = (query) => {
-        console.log(query)
+    const sortBy = (event) => {
+        setSort(event.target.value)
+        props.globalSortBy(event.target.value).then(() => {
+
+        });
+    }
+
+    const search = (query, state) => {
         return new Promise((resolve, reject) => {
-            const result = props.animalData.filter(animal => {
-                var index = 0;
-                for (index = 0; index < query.length; index++) {
-                    if (animal.animal_commonName.includes(query[index])) {
-                        return true
+            if (state !== '') {
+                resolve(props.animalData.filter(animal => {
+                    if (animal.animal_location !== state) {
+                        return false
                     }
-                }
-                return false
+                    if (query.length == 0) {
+                        return true
+                    } else {
+                        var index = 0;
+                        for (index = 0; index < query.length; index++) {
+                            if (animal.animal_commonName.includes(query[index])) {
+                                return true
+                            }
+                        }
+                        return false
+                    }
 
-            })
+                }))
+            } else {
+                resolve(props.animalData.filter(animal => {
+                    if (query.length == 0) {
+                        return true
+                    } else {
+                        var index = 0;
+                        for (index = 0; index < query.length; index++) {
+                            if (animal.animal_commonName.includes(query[index])) {
+                                return true
+                            }
+                        }
+                        return false
+                    }
+                }))
 
-            resolve(result)
+            }
         });
 
     }
 
-    const upcall = (query) => {
+    const upcall = (navQuery) => {
 
         search(
-            query.split(" ")
-                .filter(term => term !== "")
+            navQuery.split(" ")
+                .filter(term => term !== ""), state
         ).then((result) => {
-            setAnimals(result)
+            setQueryResults(result)
         })
+        setQuery(navQuery)
     }
+
+    const stateItems = [...new Set(props.animalData.map(x => x.animal_location))].sort().map(x => {
+        return <MenuItem value={x}>{x}</MenuItem>
+    })
     
     return (
         <div className={classes.root}>
@@ -142,7 +211,6 @@ export default function Animals(props) {
                                     Animal Dictionary
                             </Typography>
                             </Box>
-
                             <Box p={3} alignContent="center">
 
                                 <Typography variant="body1" component="h2" maxWidth="xs">
@@ -150,7 +218,40 @@ export default function Animals(props) {
                                 </Typography>
 
                             </Box>
+                            <FormControl className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-helper-label">State</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-helper-label"
+                                id="demo-simple-select-helper"
+                                value={state}
+                                onChange={pickedState}
+                            >
+                                <MenuItem value="">
+                                    <em>None</em>
+                                </MenuItem>
+                                {stateItems}
+                            </Select>
+                            <FormHelperText>Filter by State</FormHelperText>
+                        </FormControl>
+                        <FormControl className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-helper-label">Sort By</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-helper-label"
+                                id="demo-simple-select-helper"
+                                value={sort}
+                                onChange={sortBy}
+                            >
+                                <MenuItem value="">
+                                    <em>None</em>
+                                </MenuItem>
+                                <MenuItem value="animal_numObser">Observations</MenuItem>
+                            </Select>
+                            <FormHelperText>Filter by Other</FormHelperText>
+                        </FormControl>
                         </Grid>
+                        <Typography>
+                        Total: {queryResults.length} Animals
+                        </Typography>
                         <Divider />
                         <Grid item>
                             <Typography variant="h3" component="h2" maxWidth="xs">
@@ -180,7 +281,7 @@ export default function Animals(props) {
                         <Pagination
                             limit={1}
                             offset={offset}
-                            total={Math.floor(props.animalData.length / 10) + (props.animalData.length / 10 != 0 ? 1 : 0)}
+                            total={Math.floor(queryResults.length / 12) + (queryResults.length % 12 != 0 ? 1 : 0)}
                             onClick={(e, offset) => handleClick(offset)}
                         />
                         <Divider />
