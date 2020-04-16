@@ -35,31 +35,40 @@ const useStyles = makeStyles(theme => ({
 
 
 export default function StateInstance() {
-    const [states, setStates] = React.useState([]);
+    let { stateId} = useParams();
     const [state, setState] = React.useState(null);
-
     React.useEffect(() => {
-        getStateData();
-    }, []);
+        fetch("https://api.hikeadvisor.me/api/state/" + stateId)
+        .then(response => response.json())
+        .then(data => {setState(data)})
+    }, [])
+    // const [state, setState] = React.useState(null);
 
-    let { stateId, statePage } = useParams();
-    console.log(statePage)
-    console.log(stateId)
+    // React.useEffect(() => {
+    //     getStateData();
+    // }, []);
 
-    const getStateData = () => {
-        fetch("https://api.hikeadvisor.me/api/state?page=" + statePage / 10 + 1)
-            .then(response => response.json())
-            .then(data => {
-                setStates(data.objects)
-            })
-    }
+    
+    // console.log(statePage)
+    // console.log(stateId)
+    // console.log(statePage / 10 + 1)
+    // console.log("https://api.hikeadvisor.me/api/state?page=" + statePage + 1)
 
-    React.useEffect(() => {
-        setState(states.filter(state => {
-            return state.state_name == stateId
-        })[0])
+    // const getStateData = () => {
+    //     var temp = parseInt(statePage) + 1;
+    //     fetch("https://api.hikeadvisor.me/api/state?page=" + temp)
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             setStates(data.objects)
+    //         })
+    // }
 
-    }, [states]);
+    // React.useEffect(() => {
+    //     setState(states.filter(state => {
+    //         return state.state_name == stateId
+    //     })[0])
+
+    // }, [states]);
  
   const classes = useStyles();
   return (
@@ -144,14 +153,14 @@ export default function StateInstance() {
             <Divider/>
             <Typography variant="h6" component="h2" id="blurbtitle">
             Popular Animals: <br/>
-            <Link to={("/state/" + state.state_animals[0])} style={{ textDecoration: 'none' }}> {state.state_animals[1]}</Link>,
+            <Link to={("/animal/" + state.state_animals[0])} style={{ textDecoration: 'none' }}> {state.state_animals[1]}</Link>,
                                         <Link to={("/animal/" + state.state_animals[2])} style={{ textDecoration: 'none' }}> {state.state_animals[3]}</Link>
             </Typography>
             <Divider/>
             <Typography variant="h6" component="h2" id="blurbtitle">
             Favorite Trails: <br/>
-            <Link to={("/state/" + state.state_trails[0])} style={{ textDecoration: 'none' }}> {state.state_trails[1]}</Link>,
-                                        <Link to={("/animal/" + state.state_trails[2])} style={{ textDecoration: 'none' }}> {state.state_trails[3]}</Link>
+            <Link to={("/trail/" + state.state_trails[0])} style={{ textDecoration: 'none' }}> {state.state_trails[1]}</Link>,
+                                        <Link to={("/trail/" + state.state_trails[2])} style={{ textDecoration: 'none' }}> {state.state_trails[3]}</Link>
             </Typography>
             </Box>
           </Box>

@@ -40,7 +40,7 @@ export default function AnimalInfo(props) {
       <div className={classes.root}  >
         <Box p={1}>
          <Grid item xs={12} spacing={5}>
-        <Link to={("/animal/" + info.animal_id) +'/'+ props.page} style={{ textDecoration: 'none' }}>
+        <Link to={("/animal/" + info.animal_id)} style={{ textDecoration: 'none' }}>
         <Paper >
           <Box p={3} 
               maxWidth={350}

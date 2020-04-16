@@ -33,32 +33,40 @@ const useStyles = makeStyles(theme => ({
 })(() => null);
 
 export default function AnimalInstance() {
-    const [animals, setAnimals] = React.useState([]);
-    const [animal, setAnimal] = React.useState(null);
-
-    React.useEffect(() => {
-        getAnimalData();
-    }, []);
-
-    let { animalId, animalPage } = useParams();
-    console.log(animalPage)
+    //const [animals, setAnimals] = React.useState([]);
+    let { animalId} = useParams();
     console.log(animalId)
-
-    const getAnimalData = () => {
-
-        fetch("https://api.hikeadvisor.me/api/animal?page=" + animalPage / 10 + 1)
-            .then(response => response.json())
-            .then(data => {
-                setAnimals(data.objects)
-            })
-    }
-
+    console.log("Debugging")
+    const [animal, setAnimal] = React.useState(null);
     React.useEffect(() => {
-        setAnimal(animals.filter(animal => {
-            return animal.animal_id == animalId
-        })[0])
+      fetch("https://api.hikeadvisor.me/api/animal/" + animalId)
+        .then(response => response.json())
+        .then(data => {setAnimal(data)})
+    }, [])
 
-    }, [animals]);
+    // React.useEffect(() => {
+    //     getAnimalData();
+    // }, []);
+
+    
+    // console.log(animalPage)
+    // console.log(animalId)
+
+    // const getAnimalData = () => {
+    //     var temp = parseInt(animalPage) + 1;
+    //     fetch("https://api.hikeadvisor.me/api/animal?page=" + temp)
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             setAnimals(data.objects)
+    //         })
+    // }
+
+    // React.useEffect(() => {
+    //     setAnimal(animals.filter(animal => {
+    //         return animal.animal_id == animalId
+    //     })[0])
+
+    // }, [animals]);
  
   const classes = useStyles();
   return (

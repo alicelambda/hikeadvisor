@@ -64,7 +64,7 @@ export default function TrailCard(props) {
 
                 <Card className={classes.root}>
                   <Box textDecoration={'none'} color={'black'}>
-                  <Link to={("/trail/" + info.trail_id) +'/'+ props.page} style={{ textDecoration: 'none' }}>
+                  <Link to={("/trail/" + info.trail_id)} style={{ textDecoration: 'none' }}>
 
       <CardHeader
         title={info.trail_name}
@@ -97,7 +97,7 @@ export default function TrailCard(props) {
                 >
                     <Grid item>
                         <ul>
-                            <li>State:                   <Link to={("/states/" + info.trail_states +"/0")} style={{ textDecoration: 'none' }}> {info.trail_states} </Link> </li>
+                            <li>State:                   <Link to={("/state/" + info.trail_states)} style={{ textDecoration: 'none' }}> {info.trail_states} </Link> </li>
                             <li>Length: {info.trail_length} miles </li>
                             <li>Peak elevation: {info.trail_high} ft. </li>
                            

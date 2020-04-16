@@ -26,32 +26,38 @@ const GlobalCss = withStyles({
 })(() => null);
 
 export default function TrailStand() {
-    const [trails, setTrails] = React.useState([]);
+    // const [trails, setTrails] = React.useState([]);
     const [trail, setTrail] = React.useState(null);
-
+    let { trailId } = useParams();
     React.useEffect(() => {
-        getTrailData();
-    }, []);
-
-    let { trailId, trailPage } = useParams();
-    console.log(trailPage)
-    console.log(trailId)
-
-    const getTrailData = () => {
-
-        fetch("https://api.hikeadvisor.me/api/trail?page=" + trailPage / 10 + 1)
+        fetch("https://api.hikeadvisor.me/api/trail/" + trailId)
             .then(response => response.json())
-            .then(data => {
-                setTrails(data.objects)
-            })
-    }
+            .then(data => {setTrail(data)})
+    }, [])
 
-    React.useEffect(() => {
-        setTrail(trails.filter(trail => {
-            return trail.trail_id == trailId
-        })[0])
+    // React.useEffect(() => {
+    //     getTrailData();
+    // }, []);
 
-    }, [trails]);
+    // console.log(trailPage)
+    // console.log(trailId)
+
+    // const getTrailData = () => {
+    //     var temp = parseInt(trailPage) + 1;
+    //     console.log("https://api.hikeadvisor.me/api/trail?page=" + temp)
+    //     fetch("https://api.hikeadvisor.me/api/trail?page=" + temp)
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             setTrails(data.objects)
+    //         })
+    // }
+
+    // React.useEffect(() => {
+    //     setTrail(trails.filter(trail => {
+    //         return trail.trail_id == trailId
+    //     })[0])
+
+    // }, [trails]);
 
     const classes = useStyles();
     return (
