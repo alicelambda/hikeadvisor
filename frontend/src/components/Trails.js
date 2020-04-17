@@ -55,6 +55,7 @@ export default function Trails(props) {
             .then((result) => {
                 setQueryResults(result)
                 setOffset(0);
+                setRedirect(0)
                 console.log("set offset")
             })
     };

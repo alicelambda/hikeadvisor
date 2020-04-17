@@ -70,10 +70,11 @@ export default function Animals(props) {
         search(query, event.target.value)
             .then((result) => {
                 setQueryResults(result)
+                setOffset(0);
+                setRedirect(0)
+                console.log("set offset")
             })
     };
-
-
 
     let poffset = useParams();
 

@@ -77,6 +77,7 @@ const useStyles = makeStyles({
   },
   body: {
     backgroundColor: "#32dde3",
+    minHeight: "100vh",
   }
 
 

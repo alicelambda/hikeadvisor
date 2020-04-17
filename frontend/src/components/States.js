@@ -71,7 +71,8 @@ export default function States(props) {
         search(query, event.target.value)
             .then((result) => {
                 setQueryResults(result)
-                setOffset(0);
+                setOffset(0)
+                setRedirect(0)
                 console.log("set offset")
             })
     };
