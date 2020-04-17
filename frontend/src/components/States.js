@@ -22,6 +22,7 @@ import Select from '@material-ui/core/Select';
 const useStyles = makeStyles(theme => ({
     root: {
         backgroundColor: "#32dde3",
+        minHeight: "100vh",
     },
     paper: {
         height: 140,

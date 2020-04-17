@@ -16,6 +16,7 @@ import { Typography } from '@material-ui/core';
 const useStyles = makeStyles(theme => ({
     root: {
         backgroundColor: "#32dde3",
+        minHeight: "100vh",
 
     },
     formControl: {
