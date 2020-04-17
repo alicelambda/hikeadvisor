@@ -197,7 +197,7 @@ export default function Home(props) {
   }
 
   function createAnimalData(animalname, location, lastsighting, numsightings, isextinct, animalid) {
-    const extinct = isextinct.toString()
+    const extinct = isextinct == false ? "No" : "Yes"
     return { animalname, location, lastsighting, numsightings, extinct, animalid }
   }
 
