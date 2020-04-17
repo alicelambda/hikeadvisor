@@ -231,7 +231,7 @@ export default function Animals(props) {
                                 </MenuItem>
                                 {stateItems}
                             </Select>
-                            <FormHelperText>Filter Animals</FormHelperText>
+                            <FormHelperText>Filter </FormHelperText>
                         </FormControl>
                         <FormControl className={classes.formControl}>
                             <InputLabel id="demo-simple-select-helper-label">Sort By</InputLabel>

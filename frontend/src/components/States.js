@@ -65,7 +65,7 @@ export default function States(props) {
     const [pagination, setPagination] = React.useState();
     const [sort, setSort] = React.useState('');
 
-    const pickedState = (event) => {
+    const pickedTimezone = (event) => {
         setTimezone(event.target.value);
         search(query, event.target.value)
             .then((result) => {
@@ -139,11 +139,11 @@ export default function States(props) {
         });
     }
 
-    const search = (query, state) => {
+    const search = (query, timezone) => {
         return new Promise((resolve, reject) => {
-            if (state !== '') {
+            if (timezone !== '') {
                 resolve(props.stateData.filter(state => {
-                    if (state.state_name !== state) {
+                    if (state.state_timezone !== timezone) {
                         return false
                     }
                     if (query.length == 0) {
@@ -229,7 +229,7 @@ export default function States(props) {
                                 labelId="demo-simple-select-helper-label"
                                 id="demo-simple-select-helper"
                                 value={timezone}
-                                onChange={pickedState}
+                                onChange={pickedTimezone}
                             >
                                 <MenuItem value="">
                                     <em>None</em>
