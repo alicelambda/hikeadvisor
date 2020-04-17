@@ -93,7 +93,7 @@ const GlobalCss = withStyles({
       color: "#60492c"
     },
     '.MuiInputBase-root': {
-      color:"#60492c"
+      color: "#60492c"
     }
   },
 })(() => null);
@@ -105,10 +105,9 @@ export default function Navigation(props) {
     props.upcall(event.target.value);
   }
 
-
   return (
     <div className={classes.root}>
-     
+
       <AppBar color="#Eff1eD" position="static">
         <Toolbar>
           <img src={logo} width="2.5%" height="2.5%"></img>
@@ -126,28 +125,30 @@ export default function Navigation(props) {
           </Box>
           <Typography className={classes.title} variant="h6" noWrap>
           </Typography>
-            <Link to="/" style={{ textDecoration: 'none' }}><Button>Home</Button> </Link>
-            <Link to="/states/0" style={{ textDecoration: 'none' }}><Button >States</Button> </Link>
-            <Link to="/animals/0" style={{ textDecoration: 'none' }}><Button>Animals</Button> </Link>
-            <Link to="/trails/0" style={{ textDecoration: 'none' }}><Button>Trails</Button> </Link>
-            <Link to="/about" style={{ textDecoration: 'none' }}><Button>About</Button> </Link>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
+          <Link to="/" style={{ textDecoration: 'none' }}><Button>Home</Button> </Link>
+          <Link to="/states/0" style={{ textDecoration: 'none' }}><Button >States</Button> </Link>
+          <Link to="/animals/0" style={{ textDecoration: 'none' }}><Button>Animals</Button> </Link>
+          <Link to="/trails/0" style={{ textDecoration: 'none' }}><Button>Trails</Button> </Link>
+          <Link to="/about" style={{ textDecoration: 'none' }}><Button>About</Button> </Link>
+          {props.notsearchable ? null :
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+                onChange={onSearch}
+              />
             </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-              onChange={onSearch}
-            />
-          </div>
+            }
         </Toolbar>
       </AppBar>
-      {props.loading =="tru" ? <LinearProgress /> : null}
+      {props.loading == "tru" ? <LinearProgress /> : null}
     </div >
   );
 }
