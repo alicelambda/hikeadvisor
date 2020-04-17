@@ -88,6 +88,7 @@ const useStyles = makeStyles({
   },
   body: {
     backgroundColor: "#32dde3",
+    minHeight: "100vh",
   }
 
 
@@ -208,7 +209,7 @@ export default function Home(props) {
   }
 
   function createAnimalData(animalname, location, lastsighting, numsightings, isextinct, animalid) {
-    const extinct = isextinct.toString()
+    const extinct = isextinct == false ? "No" : "Yes"
     return { animalname, location, lastsighting, numsightings, extinct, animalid }
   }
 
@@ -252,7 +253,7 @@ export default function Home(props) {
 
   const stateColumns = [
     { id: 'statename', label: "Name" },
-    { id: 'captial', label: "Capital" },
+    { id: 'capital', label: "Capital" },
     { id: 'population', label: "Population" },
     { id: 'popdensity', label: "Population Density" },
     { id: 'landarea', label: "Land Area" },
@@ -386,25 +387,23 @@ export default function Home(props) {
     const query = lquery.split(" ").filter(x => x !== " ")
     let text = <Highlight search={query.length > 0 ? new RegExp(query.reduce((a, b) => a.concat('|', b)), 'i') : ""}>{column.format && typeof value === 'number' ? column.format(value) : value}</Highlight>
     if (column.id == "location" || column.id == 'statename') {
-      rendrow = <TableCell
-        key={column.id}
-        align={column.align}>
-        <Link to={"/state/" + value}> {text} </Link>
+      rendrow = <TableCell key={column.id} align={column.align}>
+        <Link to={"/state/" + value} style={{ textDecoration: 'none' }}> {text} </Link>
       </TableCell>
     } else if (column.id == "traillocation") {
       const state = value.split(", ")[1]
       rendrow = <TableCell key={column.id} align={column.align}>
-        <Link to={"/state/" + state}> {text} </Link>
+        <Link to={"/state/" + state} style={{ textDecoration: 'none' }}> {text} </Link>
       </TableCell>
     } else if (column.id == "trailname") {
       const id = row['trailid'];
       rendrow = <TableCell key={column.id} align={column.align}>
-        <Link to={"/trail/" + id}> {text}  </Link>
+        <Link to={"/trail/" + id} style={{ textDecoration: 'none' }}> {text}  </Link>
       </TableCell>
     } else if (column.id == "animalname") {
       const id = row['animalid'];
       rendrow = <TableCell key={column.id} align={column.align}>
-        <Link to={"/animal/" + id}> {text}  </Link>
+        <Link to={"/animal/" + id} style={{ textDecoration: 'none' }}> {text}  </Link>
       </TableCell>
 
     } else {

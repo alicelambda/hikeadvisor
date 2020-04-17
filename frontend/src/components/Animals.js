@@ -21,6 +21,7 @@ import Select from '@material-ui/core/Select';
 const useStyles = makeStyles(theme => ({
     root: {
         backgroundColor: "#32dde3",
+        minHeight: "100vh",
     },
     paper: {
         height: 140,
@@ -69,10 +70,11 @@ export default function Animals(props) {
         search(query, event.target.value)
             .then((result) => {
                 setQueryResults(result)
+                setOffset(0);
+                setRedirect(0)
+                console.log("set offset")
             })
     };
-
-
 
     let poffset = useParams();
 
@@ -148,7 +150,7 @@ export default function Animals(props) {
                     } else {
                         var index = 0;
                         for (index = 0; index < query.length; index++) {
-                            if (animal.animal_commonName.includes(query[index])) {
+                            if (animal.animal_commonName.toLower().includes(query[index])) {
                                 return true
                             }
                         }
@@ -163,7 +165,7 @@ export default function Animals(props) {
                     } else {
                         var index = 0;
                         for (index = 0; index < query.length; index++) {
-                            if (animal.animal_commonName.includes(query[index])) {
+                            if (animal.animal_commonName.toLowerCase().includes(query[index])) {
                                 return true
                             }
                         }
@@ -231,7 +233,7 @@ export default function Animals(props) {
                                 </MenuItem>
                                 {stateItems}
                             </Select>
-                            <FormHelperText>Filter </FormHelperText>
+                            <FormHelperText>Filter Animals</FormHelperText>
                         </FormControl>
                         <FormControl className={classes.formControl}>
                             <InputLabel id="demo-simple-select-helper-label">Sort By</InputLabel>

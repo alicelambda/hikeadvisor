@@ -62,9 +62,11 @@ export default function AnimalInfo(props) {
               <Divider/>
             <Typography variant="body1" component="h2" id="blurbtitle">
                 Scientific name: {info.animal_scientificName} <br/>
+                Taxonomy name: {info.animal_taxonName} <br/>
                 Place of Origin: {info.animal_location} <br/>
                 Sightings: {info.animal_numObser} <br/>
-                Last seen: {info.animal_lastSighting}
+                Last seen: {info.animal_lastSighting} <br/>
+                Extinct? {info.animal_isExtinct == false ? "No" : "Yes"}
             </Typography>
             </Box>
           </Box>

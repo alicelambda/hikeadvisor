@@ -16,6 +16,7 @@ import { Typography } from '@material-ui/core';
 const useStyles = makeStyles(theme => ({
     root: {
         backgroundColor: "#32dde3",
+        minHeight: "100vh",
 
     },
     formControl: {
@@ -54,6 +55,7 @@ export default function Trails(props) {
             .then((result) => {
                 setQueryResults(result)
                 setOffset(0);
+                setRedirect(0)
                 console.log("set offset")
             })
     };

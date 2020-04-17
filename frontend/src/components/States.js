@@ -22,6 +22,7 @@ import Select from '@material-ui/core/Select';
 const useStyles = makeStyles(theme => ({
     root: {
         backgroundColor: "#32dde3",
+        minHeight: "100vh",
     },
     paper: {
         height: 140,
@@ -70,7 +71,8 @@ export default function States(props) {
         search(query, event.target.value)
             .then((result) => {
                 setQueryResults(result)
-                setOffset(0);
+                setOffset(0)
+                setRedirect(0)
                 console.log("set offset")
             })
     };
@@ -85,7 +87,7 @@ export default function States(props) {
     })
 
     const selectStateData = (offset) => {
-        setStates(queryResults.slice(offset * 12, (offset + 1) * 12))
+        setStates(queryResults.slice(offset * 10, (offset + 1) * 10))
     }
 
     React.useEffect(() => {
@@ -151,7 +153,7 @@ export default function States(props) {
                     } else {
                         var index = 0;
                         for (index = 0; index < query.length; index++) {
-                            if (state.state_name.includes(query[index])) {
+                            if (state.state_name.toLower().includes(query[index].toLower())) {
                                 return true
                             }
                         }
@@ -166,7 +168,7 @@ export default function States(props) {
                     } else {
                         var index = 0;
                         for (index = 0; index < query.length; index++) {
-                            if (state.state_name.includes(query[index])) {
+                            if (state.state_name.toLowerCase().includes(query[index].toLowerCase())) {
                                 return true
                             }
                         }
