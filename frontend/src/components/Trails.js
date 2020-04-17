@@ -137,7 +137,7 @@ export default function Trails(props) {
                     } else {
                         var index = 0;
                         for (index = 0; index < query.length; index++) {
-                            if (trail.trail_name.includes(query[index])) {
+                            if (trail.trail_name.toLower().includes(query[index].toLower())) {
                                 return true
                             }
                         }
@@ -152,7 +152,7 @@ export default function Trails(props) {
                     } else {
                         var index = 0;
                         for (index = 0; index < query.length; index++) {
-                            if (trail.trail_name.includes(query[index])) {
+                            if (trail.trail_name.toLowerCase().includes(query[index].toLowerCase())) {
                                 return true
                             }
                         }

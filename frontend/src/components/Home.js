@@ -17,6 +17,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import img from '../images/forest.jpg';
+import Highlight from 'react-highlighter';
 
 import Paper from '@material-ui/core/Paper';
 import { animalData } from './Animals/animalData';
@@ -128,13 +129,16 @@ export default function Home(props) {
   const [stateRowsPerPage, setStateRowsPerPage] = React.useState(10);
   const [lquery, setQuery] = React.useState('');
 
-  const searchGeneral = (query, trail, term) => {
+  const searchGeneral = (query, trail, terms) => {
     const splitQuery = query.split(" ")
       .filter(term => term !== "")
     var i;
-    for (i = 0; i < splitQuery.length; i++) {
-      if (trail[term].toLowerCase().includes(splitQuery[i].toLowerCase())) {
-        return true
+    var j;
+    for (j = 0; j < terms.length; j++) {
+      for (i = 0; i < splitQuery.length; i++) {
+        if (trail[terms[j]].toLowerCase().includes(splitQuery[i].toLowerCase())) {
+          return true
+        }
       }
     }
     return false
@@ -145,7 +149,7 @@ export default function Home(props) {
     setQuery(query)
     setTrails(
       props.trailData
-        .filter(trail => searchGeneral(query, trail, 'trail_name'))
+        .filter(trail => searchGeneral(query, trail, ['trail_name','trail_location']))
         .map(trail => {
           return createTrailData(
             trail.trail_name,
@@ -159,7 +163,7 @@ export default function Home(props) {
     )
     setAnimals(
       props.animalData
-        .filter(animal => searchGeneral(query, animal, 'animal_commonName'))
+        .filter(animal => searchGeneral(query, animal, ['animal_commonName','animal_location']))
         .map(animal => createAnimalData(
           animal.animal_commonName,
           animal.animal_location,
@@ -172,7 +176,7 @@ export default function Home(props) {
     )
     setStates(
       props.stateData
-        .filter(state => searchGeneral(query, state, 'state_name'))
+        .filter(state => searchGeneral(query, state, ['state_name']))
         .map(state => createStateData(
           state.state_name,
           state.state_capital,
@@ -194,7 +198,7 @@ export default function Home(props) {
 
   function createAnimalData(animalname, location, lastsighting, numsightings, isextinct, animalid) {
     const extinct = isextinct.toString()
-    return { animalname, location, lastsighting, numsightings, isextinct, animalid }
+    return { animalname, location, lastsighting, numsightings, extinct, animalid }
   }
 
   const handleChangePage = (event, newPage) => {
@@ -245,29 +249,31 @@ export default function Home(props) {
 
   const renderRow = (column, row, value) => {
     let rendrow;
+    const query = lquery.split(" ").filter(x => x !== " ")
+    let text = <Highlight search={query.length > 0 ? new RegExp(query.reduce((a, b) => a.concat('|', b)), 'i') : ""}>{column.format && typeof value === 'number' ? column.format(value) : value}</Highlight>
     if (column.id == "location" || column.id == 'statename') {
       rendrow = <TableCell key={column.id} align={column.align}>
-        <Link to={"/state/" + value}>{column.format && typeof value === 'number' ? column.format(value) : value} </Link>
+        <Link to={"/state/" + value}> {text} </Link>
       </TableCell>
     } else if (column.id == "traillocation") {
       const state = value.split(", ")[1]
       rendrow = <TableCell key={column.id} align={column.align}>
-        <Link to={"/state/" + state}>{column.format && typeof value === 'number' ? column.format(value) : value} </Link>
+        <Link to={"/state/" + state}> {text} </Link>
       </TableCell>
     } else if (column.id == "trailname") {
       const id = row['trailid'];
       rendrow = <TableCell key={column.id} align={column.align}>
-        <Link to={"/trail/" + id}>{column.format && typeof value === 'number' ? column.format(value) : value} </Link>
+        <Link to={"/trail/" + id}> {text}  </Link>
       </TableCell>
     } else if (column.id == "animalname") {
       const id = row['animalid'];
       rendrow = <TableCell key={column.id} align={column.align}>
-        <Link to={"/animal/" + id}>{column.format && typeof value === 'number' ? column.format(value) : value} </Link>
+        <Link to={"/animal/" + id}> {text}  </Link>
       </TableCell>
 
     } else {
       rendrow = <TableCell key={column.id} align={column.align}>
-        {column.format && typeof value === 'number' ? column.format(value) : value}
+        {text}
       </TableCell>
 
     }
