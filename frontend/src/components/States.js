@@ -34,6 +34,9 @@ const useStyles = makeStyles(theme => ({
         width: theme.spacing(7),
         height: theme.spacing(7),
     },
+    formControl: {
+        padding: 2
+    },
 }));
 
 
@@ -52,7 +55,7 @@ const GlobalCss = withStyles({
 export default function States(props) {
     const classes = useStyles();
 
-    const [state, setState] = React.useState('');
+    const [timezone, setTimezone] = React.useState('');
     const [query, setQuery] = React.useState([]);
     const [queryResults, setQueryResults] = React.useState([]);
     const [stateData, setStates] = React.useState([]);
@@ -62,9 +65,9 @@ export default function States(props) {
     const [pagination, setPagination] = React.useState();
     const [sort, setSort] = React.useState('');
 
-    const pickedState = (event) => {
-        setState(event.target.value.state_timezone);
-        search(query, event.target.value.state_timezone)
+    const pickedTimezone = (event) => {
+        setTimezone(event.target.value);
+        search(query, event.target.value)
             .then((result) => {
                 setQueryResults(result)
                 setOffset(0);
@@ -117,7 +120,7 @@ export default function States(props) {
     }, [offset,queryResults]);
 
     React.useEffect(() => {
-        search(query,state).then((result) => {
+        search(query,timezone).then((result) => {
             setQueryResults(result)
         });
 
@@ -136,11 +139,11 @@ export default function States(props) {
         });
     }
 
-    const search = (query, state) => {
+    const search = (query, timezone) => {
         return new Promise((resolve, reject) => {
-            if (state !== '') {
+            if (timezone !== '') {
                 resolve(props.stateData.filter(state => {
-                    if (state.state_name !== state) {
+                    if (state.state_timezone !== timezone) {
                         return false
                     }
                     if (query.length == 0) {
@@ -180,7 +183,7 @@ export default function States(props) {
 
         search(
             navQuery.split(" ")
-                .filter(term => term !== ""), state
+                .filter(term => term !== ""), timezone
         ).then((result) => {
             setQueryResults(result);
             setOffset(0);
@@ -225,8 +228,8 @@ export default function States(props) {
                             <Select
                                 labelId="demo-simple-select-helper-label"
                                 id="demo-simple-select-helper"
-                                value={state}
-                                onChange={pickedState}
+                                value={timezone}
+                                onChange={pickedTimezone}
                             >
                                 <MenuItem value="">
                                     <em>None</em>
@@ -249,7 +252,7 @@ export default function States(props) {
                                 <MenuItem value="state_elevation">Elevation</MenuItem>
                                 <MenuItem value="state_totalArea">Area</MenuItem>
                             </Select>
-                            <FormHelperText>Filter by Other</FormHelperText>
+                            <FormHelperText>Sort States By</FormHelperText>
                         </FormControl>
                         </Grid>
                         <Typography>
