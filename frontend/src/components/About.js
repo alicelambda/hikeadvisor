@@ -155,7 +155,7 @@ export default function About() {
     }, [commits, blurbData, blurbs]);
     return (
         <div className={classes.root}>
-            <Navigation />
+            <Navigation notsearchable={true}/>
             <Container maxWidth="md">
                 <Box>
                     <Grid
