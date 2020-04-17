@@ -148,7 +148,7 @@ export default function Animals(props) {
                     } else {
                         var index = 0;
                         for (index = 0; index < query.length; index++) {
-                            if (animal.animal_commonName.includes(query[index])) {
+                            if (animal.animal_commonName.toLower().includes(query[index])) {
                                 return true
                             }
                         }
@@ -163,7 +163,7 @@ export default function Animals(props) {
                     } else {
                         var index = 0;
                         for (index = 0; index < query.length; index++) {
-                            if (animal.animal_commonName.includes(query[index])) {
+                            if (animal.animal_commonName.toLowerCase().includes(query[index])) {
                                 return true
                             }
                         }
@@ -231,7 +231,7 @@ export default function Animals(props) {
                                 </MenuItem>
                                 {stateItems}
                             </Select>
-                            <FormHelperText>Filter </FormHelperText>
+                            <FormHelperText>Filter Animals</FormHelperText>
                         </FormControl>
                         <FormControl className={classes.formControl}>
                             <InputLabel id="demo-simple-select-helper-label">Sort By</InputLabel>
