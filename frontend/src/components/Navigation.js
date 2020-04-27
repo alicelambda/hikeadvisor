@@ -130,6 +130,7 @@ export default function Navigation(props) {
           <Link to="/animals/0" style={{ textDecoration: 'none' }}><Button>Animals</Button> </Link>
           <Link to="/trails/0" style={{ textDecoration: 'none' }}><Button>Trails</Button> </Link>
           <Link to="/about" style={{ textDecoration: 'none' }}><Button>About</Button> </Link>
+          <Link to="/visualization" style={{ textDecoration: 'none' }}><Button>Visualization</Button> </Link>
           {props.notsearchable ? null :
             <div className={classes.search}>
               <div className={classes.searchIcon}>

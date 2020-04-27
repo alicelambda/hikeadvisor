@@ -1,0 +1,110 @@
+[
+  {
+    "location": "CHURCH / SYNAGOGUE / TEMPLE / MOSQUE",
+    "count": 5
+  },
+  {
+    "location": "LIQUOR STORE",
+    "count": 3
+  },
+  {
+    "location": "SPECIALTY  STORE (TV  FUR ETC.)",
+    "count": 4
+  },
+  {
+    "location": "LAKE / WATERWAY",
+    "count": 1
+  },
+  {
+    "location": "SCHOOL - ELEMENTARY / SECONDARY",
+    "count": 3
+  },
+  {
+    "location": "RESTAURANTS",
+    "count": 13
+  },
+  {
+    "location": "CONSTRUCTION SITE",
+    "count": 2
+  },
+  {
+    "location": "GOVERNMENT / PUBLIC BUILDING",
+    "count": 6
+  },
+  {
+    "location": "GAS / SERVICE STATIONS",
+    "count": 4
+  },
+  {
+    "location": "PARK / PLAYGROUND",
+    "count": 3
+  },
+  {
+    "location": "DRUG STORE / DR. OFFICE / HOSPITAL",
+    "count": 5
+  },
+  {
+    "location": "PARKING LOTS / GARAGE",
+    "count": 103
+  },
+  {
+    "location": "COMMERCIAL / OFFICE BUILDING",
+    "count": 55
+  },
+  {
+    "location": "HOTEL / MOTEL / ETC.",
+    "count": 8
+  },
+  {
+    "location": "OTHER / UNKNOWN",
+    "count": 21
+  },
+  {
+    "location": "STREETS / HWY / ROAD / ALLEY",
+    "count": 284
+  },
+  {
+    "location": "BAR / NIGHT CLUB",
+    "count": 16
+  },
+  {
+    "location": "SCHOOLS / COLLEGES",
+    "count": 2
+  },
+  {
+    "location": "AUTO DEALERSHIP NEW / USED",
+    "count": 2
+  },
+  {
+    "location": "RENTAL STORAGE FACILITY",
+    "count": 1
+  },
+  {
+    "location": "BANKS / SAVINGS & LOAN",
+    "count": 1
+  },
+  {
+    "location": "DEPARTMENT / DISCOUNT STORE",
+    "count": 6
+  },
+  {
+    "location": "TRANSPORTATION (AIR / BUS / TRAIN - TERMINALS)",
+    "count": 3
+  },
+  {
+    "location": "CONVENIENCE STORE",
+    "count": 2
+  },
+  {
+    "location": "GROCERY / SUPERMARKET",
+    "count": 4
+  },
+  {
+    "location": "RESIDENCE / HOME",
+    "count": 398
+  },
+  {
+    "location": "FIELD / WOODS",
+    "count": 2
+  }
+]

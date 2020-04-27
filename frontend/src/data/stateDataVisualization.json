@@ -1,0 +1,30 @@
+[
+  {
+    "timezone": "PDT",
+    "numStates": 4
+  },
+  {
+    "timezone": "AKDT",
+    "numStates": 1
+  },
+  {
+    "timezone": "EDT",
+    "numStates": 21
+  },
+  {
+    "timezone": "MST",
+    "numStates": 1
+  },
+  {
+    "timezone": "CDT",
+    "numStates": 16
+  },
+  {
+    "timezone": "HST",
+    "numStates": 1
+  },
+  {
+    "timezone": "MDT",
+    "numStates": 6
+  }
+]

@@ -9,6 +9,7 @@ import AnimalInstance from './components/Animals/AnimalInstance';
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { createMuiTheme } from '@material-ui/core/styles';
+import Visualization from './components/Visualization';
 
 import {
   BrowserRouter as Router,
@@ -189,6 +190,9 @@ function App() {
                 stateData={stateData}
                 globalSortBy={globalSortBy}
               />
+            </Route>
+            <Route path="/visualization">
+              <Visualization />
             </Route>
             <Route path="/">
               <Home

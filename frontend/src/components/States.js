@@ -153,7 +153,7 @@ export default function States(props) {
                     } else {
                         var index = 0;
                         for (index = 0; index < query.length; index++) {
-                            if (state.state_name.toLower().includes(query[index].toLower())) {
+                            if (state.state_name.toLowerCase().includes(query[index].toLowerCase())) {
                                 return true
                             }
                         }

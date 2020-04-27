@@ -150,7 +150,7 @@ export default function Animals(props) {
                     } else {
                         var index = 0;
                         for (index = 0; index < query.length; index++) {
-                            if (animal.animal_commonName.toLower().includes(query[index])) {
+                            if (animal.animal_commonName.toLowerCase().includes(query[index])) {
                                 return true
                             }
                         }
