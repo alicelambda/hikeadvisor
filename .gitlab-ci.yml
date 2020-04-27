@@ -25,4 +25,5 @@ frontend_tests:
     script:
         - cd frontend
         - npm install
+        - npm install d3
         - npm test
