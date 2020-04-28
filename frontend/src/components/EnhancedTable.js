@@ -20,7 +20,10 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
-
+import Highlight from 'react-highlighter';
+import {
+    Link
+} from "react-router-dom";
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -82,6 +85,7 @@ function EnhancedTableHead(props) {
                         </TableSortLabel>
                     </TableCell>
                 })}
+
             </TableRow>
         </TableHead>
     );
@@ -243,12 +247,54 @@ export default function EnhancedTable(props) {
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.rows.length - page * rowsPerPage);
 
+
+    const renderRow = (row, id, value) => {
+        let rendrow;
+        const query = props.query.split(" ").filter(x => x !== " ")
+        let text = <Highlight search={query.length > 0 ? new RegExp(query.reduce((a, b) => a.concat('|', b)), 'i') : ""}>{value}</Highlight>
+        if (id == "location" || id == 'statename') {
+            rendrow = <TableCell key={id}>
+                <Link to={"/state/" + value} style={{ textDecoration: 'none' }}> {text} </Link>
+            </TableCell>
+        } else if (id == "traillocation") {
+            console.log("trailocation")
+            console.log(value);
+            const state = value.split(", ")[1]
+            rendrow = <TableCell key={id}>
+                <Link to={"/state/" + state} style={{ textDecoration: 'none' }}> {text} </Link>
+            </TableCell>
+        } else if (id == "trailname") {
+            const id = row['trailid'];
+            rendrow = <TableCell key={id} >
+                <Link to={"/trail/" + id} style={{ textDecoration: 'none' }}> {text}  </Link>
+            </TableCell>
+        } else if (id == "animalname") {
+            const id = row['animalid'];
+            rendrow = <TableCell key={id} >
+                <Link to={"/animal/" + id} style={{ textDecoration: 'none' }}> {text}  </Link>
+            </TableCell>
+        } else {
+            rendrow = <TableCell key={id} >
+                {text}
+            </TableCell>
+        }
+        return rendrow;
+    }
+
+    const rendRow = (row) => {
+        console.log(row);
+        console.log(props.headCells)
+        return props.headCells.map( (x) => {
+            return renderRow(row,x.id,row[x.id])
+        })
+    }
+
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
-                <EnhancedTableToolbar 
-                name={props.name}
-                numSelected={selected.length} />
+                <EnhancedTableToolbar
+                    name={props.name}
+                    numSelected={selected.length} />
                 <TableContainer>
                     <Table
                         className={classes.table}
@@ -283,20 +329,7 @@ export default function EnhancedTable(props) {
                                             key={row.name}
                                             selected={isItemSelected}
                                         >
-
-
-                                            {row.map((x, ind) => {
-                                                if(ind == 0) {
-                                                   return <TableCell align="center" component="th" id={labelId} scope="row">
-                                                    {x}
-                                                </TableCell>
-                                                } else {
-                                                    return <TableCell align="right"> {x}</TableCell>
-
-                                                }
-
-
-                                            })}
+                                            {rendRow(row)}
                                         </TableRow>
                                     );
                                 })}

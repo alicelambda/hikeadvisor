@@ -164,14 +164,14 @@ export default function Home(props) {
       props.trailData
         .filter(trail => searchGeneral(query, trail, ['trail_name', 'trail_location']))
         .map(trail => {
-          return [
+          return createTrailData(
             trail.trail_name,
             trail.trail_location,
             trail.trail_length,
             trail.trail_stars,
             trail.trail_numstars,
-            trail.trail_id]
-          
+            trail.trail_id)
+
         })
     )
     setAnimals(
@@ -201,13 +201,27 @@ export default function Home(props) {
     )
   };
 
-  function createTrailData(trailname, traillocation, length, ranking, noranking, trailid) {
-    return { trailname, traillocation, length, ranking, noranking, trailid };
-  }
+
+  const stateHeadCells = [
+    { id: 'statename', numeric: false, disablePadding: true, label: 'Name' },
+    { id: 'capital', numeric: false, disablePadding: false, label: 'Location' },
+    { id: 'population', numeric: true, disablePadding: false, label: 'Last Sighting' },
+    { id: 'popdensity', numeric: true, disablePadding: false, label: 'Is Extinct' },
+    { id: 'landarea', numeric: true, disablePadding: false, label: 'Animal Id' },
+  ];
+
 
   function createStateData(statename, capital, population, popdensity, landarea) {
     return { statename, capital, population, popdensity, landarea }
   }
+
+  const animalHeadCells = [
+    { id: 'animalname', numeric: false, disablePadding: true, label: 'Name' },
+    { id: 'location', numeric: false, disablePadding: false, label: 'Location' },
+    { id: 'lastsighting', numeric: true, disablePadding: false, label: 'Last Sighting' },
+    { id: 'isextinct', numeric: true, disablePadding: false, label: 'Is Extinct' },
+    { id: 'animalid', numeric: true, disablePadding: false, label: 'Animal Id' },
+  ];
 
   function createAnimalData(animalname, location, lastsighting, numsightings, isextinct, animalid) {
     const extinct = isextinct == false ? "No" : "Yes"
@@ -294,16 +308,20 @@ export default function Home(props) {
     return rendrow;
   }
 
- 
+
   const trailHeadCells = [
-    { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
-    { id: 'location', numeric: false, disablePadding: false, label: 'Location' },
+    { id: 'trailname', numeric: false, disablePadding: true, label: 'Name' },
+    { id: 'traillocation', numeric: false, disablePadding: false, label: 'Location' },
     { id: 'length', numeric: true, disablePadding: false, label: 'Length' },
     { id: 'ranking', numeric: true, disablePadding: false, label: 'Ranking' },
     { id: 'noranking', numeric: true, disablePadding: false, label: 'No. Rankings' },
   ];
 
-  
+  function createTrailData(trailname, traillocation, length, ranking, noranking, trailid) {
+    return { trailname, traillocation, length, ranking, noranking, trailid};
+  }
+
+
   const renderTable = (columns, page, rowsPerPage, rows) => {
     return <Paper >
       <TableContainer className={classes.container}>
@@ -385,19 +403,25 @@ export default function Home(props) {
           <GlobalCss />
           <Typography variant="h2">Animals</Typography>
 
-          {renderTable(animalColumns, animalPage, animalRowsPerPage, animals)}
-
+          {<EnhancedTable rows={animals}
+            headCells={animalHeadCells}
+            name={""}
+            query={lquery}
+          />}
           <Typography variant="h2">States</Typography>
-          {renderTable(stateColumns, statePage, stateRowsPerPage, states)}
 
+          {<EnhancedTable rows={states}
+            headCells={stateHeadCells}
+            name={""}
+            query={lquery}
+          />}
 
           <Typography variant="h2">Trails</Typography>
-          {renderTable(trailColumns, trailPage, trailRowsPerPage, [])}
-
           {<EnhancedTable rows={trails}
-                          headCells={trailHeadCells}
-                          name={""}
-                                />}
+            headCells={trailHeadCells}
+            name={""}
+            query={lquery}
+          />}
         </div>
 
       }
