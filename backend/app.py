@@ -21,14 +21,61 @@ migrate = Migrate(application, db)
 default_results_per_page = 10
 
 
-trail_attr = ["trail_id", "trail_name", "trail_location", "trail_length", "trail_stars", "trail_latitude", "trail_longitude",
-"trail_numstars", "trail_high", "trail_low", "trail_ascent", "trail_descent", "trail_picURL", "trail_states", "trail_mapPicURL", "trail_animals"]
+trail_attr = [
+    "trail_id",
+    "trail_name",
+    "trail_location",
+    "trail_length",
+    "trail_stars",
+    "trail_latitude",
+    "trail_longitude",
+    "trail_numstars",
+    "trail_high",
+    "trail_low",
+    "trail_ascent",
+    "trail_descent",
+    "trail_picURL",
+    "trail_states",
+    "trail_mapPicURL",
+    "trail_animals",
+]
 
-animal_attr = ["animal_id", "animal_location", "animal_scientificName", "animal_picURL", "animal_commonName", "animal_numObser",
-"animal_description", "animal_ancestry", "animal_isExtinct", "animal_rank", "animal_lastSighting", "animal_taxonName", "animal_taxonNetwork", "animal_trails"]
+animal_attr = [
+    "animal_id",
+    "animal_location",
+    "animal_scientificName",
+    "animal_picURL",
+    "animal_commonName",
+    "animal_numObser",
+    "animal_description",
+    "animal_ancestry",
+    "animal_isExtinct",
+    "animal_rank",
+    "animal_lastSighting",
+    "animal_taxonName",
+    "animal_taxonNetwork",
+    "animal_trails",
+]
 
-state_attr = ["state_name", "state_elevation", "state_capital", "state_totalArea", "state_population", "state_populationDensity",
-"state_timezone", "state_flagPicURL", "state_motto", "state_lat", "state_long", "state_landArea", "state_highest", "state_lowest", "state_mapPicURL", "state_animals", "state_trails"]
+state_attr = [
+    "state_name",
+    "state_elevation",
+    "state_capital",
+    "state_totalArea",
+    "state_population",
+    "state_populationDensity",
+    "state_timezone",
+    "state_flagPicURL",
+    "state_motto",
+    "state_lat",
+    "state_long",
+    "state_landArea",
+    "state_highest",
+    "state_lowest",
+    "state_mapPicURL",
+    "state_animals",
+    "state_trails",
+]
 
 
 class Trail(db.Model):
@@ -172,40 +219,47 @@ def get_trail_by_state():
         response.status_code = 200
         return response
 
-#example call: http://127.0.0.1:5000/api/search?q=texas (local machine only)
+
+# example call: http://127.0.0.1:5000/api/search?q=texas (local machine only)
 @application.route("/api/search")
-def search() :
+def search():
     input_query = request.args.get("q")
 
-    if input_query == None or len(input_query) < 1 :
+    if input_query == None or len(input_query) < 1:
         response_json = {"status": 400}
-        if input_query == None :
+        if input_query == None:
             response_json["message"] = "Invalid. Search query not found."
-        else :
+        else:
             response_json["message"] = "Invalid. Search query cannot be empty."
         response = jsonify(response_json)
         response.status_code = 400
         return response
-    else :
+    else:
         input_query = input_query.lower()
-        input_list = input_query.split(' ')
+        input_list = input_query.split(" ")
         container = set()
-        models = {"trails" : Trail.query, "animals" : Animal.query, "states" : State.query}
+        models = {"trails": Trail.query, "animals": Animal.query, "states": State.query}
         response_json = {"status": 200}
         response_json["result"] = {}
-        for model in ["trails", "animals", "states"] :
-            if model == "trails" :
-                response_json["result"][model] = search_model(input_list, models[model], trail_attr, container, model)
+        for model in ["trails", "animals", "states"]:
+            if model == "trails":
+                response_json["result"][model] = search_model(
+                    input_list, models[model], trail_attr, container, model
+                )
                 response_json["num_trails"] = len(response_json["result"][model])
-            elif model == "animals" :
-                response_json["result"][model] = search_model(input_list, models[model], animal_attr, container, model)
+            elif model == "animals":
+                response_json["result"][model] = search_model(
+                    input_list, models[model], animal_attr, container, model
+                )
                 response_json["num_animals"] = len(response_json["result"][model])
-            else :
-                response_json["result"][model] = search_model(input_list, models[model], state_attr, container, model)
+            else:
+                response_json["result"][model] = search_model(
+                    input_list, models[model], state_attr, container, model
+                )
                 response_json["num_states"] = len(response_json["result"][model])
 
         total = 0
-        for result in ["num_trails", "num_animals", "num_states"] :
+        for result in ["num_trails", "num_animals", "num_states"]:
             total = total + int(response_json[result])
 
         response_json["total_results"] = total
@@ -215,78 +269,96 @@ def search() :
         response.status_code = 200
         return response
 
-def search_model(input_query, model_query, model_attr, container, model) :
-    return [convert_to_dict(row, model_attr) for row in model_query.all() if helper(input_query, row, model_attr, container, model)]
 
-def helper(input_query, row, model_attr, container, model) :
-    for attr in model_attr :
-        if attr == "trail_mapPicURL" or attr == "animal_taxonNetwork" or attr == "state_mapPicURL" :
+def search_model(input_query, model_query, model_attr, container, model):
+    return [
+        convert_to_dict(row, model_attr)
+        for row in model_query.all()
+        if helper(input_query, row, model_attr, container, model)
+    ]
+
+
+def helper(input_query, row, model_attr, container, model):
+    for attr in model_attr:
+        if (
+            attr == "trail_mapPicURL"
+            or attr == "animal_taxonNetwork"
+            or attr == "state_mapPicURL"
+        ):
             continue
-        try : 
+        try:
             val = str(getattr(row, attr))
-        except UnicodeEncodeError :
-            val = getattr(row, attr).encode('ascii', 'ignore').decode('ascii')
-        if val != None and isContains(input_query, str(val.lower())) :
-            if str(val.lower()) in container :
+        except UnicodeEncodeError:
+            val = getattr(row, attr).encode("ascii", "ignore").decode("ascii")
+        if val != None and isContains(input_query, str(val.lower())):
+            if str(val.lower()) in container:
                 return False
-            else :
-                if model == "animals" :
+            else:
+                if model == "animals":
                     container |= {str(getattr(row, "animal_id"))}
-                elif model == "trails" :
+                elif model == "trails":
                     container |= {str(getattr(row, "trail_id"))}
-                else :
+                else:
                     container |= {str(getattr(row, "state_name"))}
                 return True
     return False
 
-def isContains (input_query, val) :
-    for query in input_query :
-        if query in val :
+
+def isContains(input_query, val):
+    for query in input_query:
+        if query in val:
             return True
     return False
 
-def convert_to_dict(row, model_attr) :
+
+def convert_to_dict(row, model_attr):
     response_json = {}
-    for attr in model_attr :
+    for attr in model_attr:
         response_json[attr] = getattr(row, attr)
     return response_json
+
 
 @application.errorhandler(404)
 def page_not_found(e):
     return render_template("404.html"), 404
 
+
 @application.route("/api/trail/getAll")
-def get_all_Trail() :
-	response_json = {"status" : 200}
-	response_json["result"] = {}
-	response_json["result"]["trails"] = get_all(Trail.query, trail_attr)
-	response_json["total_results"] = len(response_json["result"]["trails"])
-	response = jsonify(response_json)
-	response.status_code = 200
-	return response
+def get_all_Trail():
+    response_json = {"status": 200}
+    response_json["result"] = {}
+    response_json["result"]["trails"] = get_all(Trail.query, trail_attr)
+    response_json["total_results"] = len(response_json["result"]["trails"])
+    response = jsonify(response_json)
+    response.status_code = 200
+    return response
+
 
 @application.route("/api/animal/getAll")
-def get_all_Animal() :
-	response_json = {"status" : 200}
-	response_json["result"] = {}
-	response_json["result"]["animals"] = get_all(Animal.query, animal_attr)
-	response_json["total_results"] = len(response_json["result"]["animals"])
-	response = jsonify(response_json)
-	response.status_code = 200
-	return response
+def get_all_Animal():
+    response_json = {"status": 200}
+    response_json["result"] = {}
+    response_json["result"]["animals"] = get_all(Animal.query, animal_attr)
+    response_json["total_results"] = len(response_json["result"]["animals"])
+    response = jsonify(response_json)
+    response.status_code = 200
+    return response
+
 
 @application.route("/api/state/getAll")
-def get_all_State() :
-	response_json = {"status" : 200}
-	response_json["result"] = {}
-	response_json["result"]["states"] = get_all(State.query, state_attr)
-	response_json["total_results"] = len(response_json["result"]["states"])
-	response = jsonify(response_json)
-	response.status_code = 200
-	return response
+def get_all_State():
+    response_json = {"status": 200}
+    response_json["result"] = {}
+    response_json["result"]["states"] = get_all(State.query, state_attr)
+    response_json["total_results"] = len(response_json["result"]["states"])
+    response = jsonify(response_json)
+    response.status_code = 200
+    return response
 
-def get_all (model_query, model_attr) :
-	return [convert_to_dict(row, model_attr) for row in model_query.all()]
+
+def get_all(model_query, model_attr):
+    return [convert_to_dict(row, model_attr) for row in model_query.all()]
+
 
 if __name__ == "__main__":
     application.debug = False
