@@ -114,7 +114,6 @@ export default function About() {
                 }
                 setBlurbs(newBlurbData.map(blurb => {
                     const tran = trans[blurb.name];
-                    console.log(tran + " " + blurb.name);
 
 
                     return <Blurb
@@ -145,7 +144,6 @@ export default function About() {
     React.useEffect(() => {
         setBlurbs(blurbData.map(blurb => {
             const tran = trans[blurb.name];
-            console.log(tran + " mow" + blurb.name);
             return <Blurb
                 info={blurb}
                 commits={commits[tran]}

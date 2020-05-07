@@ -12,7 +12,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { Typography } from '@material-ui/core';
-
+import Switch from '@material-ui/core/Switch';
 const useStyles = makeStyles(theme => ({
     root: {
         backgroundColor: "#32dde3",
@@ -48,7 +48,8 @@ export default function Trails(props) {
     const [redirect, setRedirect] = React.useState(-1);
     const [pagination, setPagination] = React.useState();
     const [sort, setSort] = React.useState('');
-
+    const [checked, setChecked] = React.useState(false);
+    const [selector,setSelecctor] = React.useState();
     const pickedState = (event) => {
         setState(event.target.value);
         search(query, event.target.value)
@@ -56,7 +57,6 @@ export default function Trails(props) {
                 setQueryResults(result)
                 setOffset(0);
                 setRedirect(0)
-                console.log("set offset")
             })
     };
 
@@ -94,23 +94,22 @@ export default function Trails(props) {
                 query={query}
             />
         ))
-    },[]);
+    }, []);
 
 
     React.useEffect(() => {
 
         selectTrailData(offset);
-        console.log("updated")
 
-    }, [offset,queryResults]);
+    }, [offset, queryResults]);
 
     React.useEffect(() => {
-        search(query,state).then((result) => {
+        search(query, state).then((result) => {
             setQueryResults(result)
         });
 
 
-    },[props.trailData]);
+    }, [props.trailData]);
 
     const handleClick = (offset) => {
         setOffset(offset)
@@ -119,7 +118,7 @@ export default function Trails(props) {
 
     const sortBy = (event) => {
         setSort(event.target.value)
-        props.globalSortBy(event.target.value).then(() => {
+        props.globalSortBy(event.target.value,checked).then(() => {
 
         });
     }
@@ -180,6 +179,14 @@ export default function Trails(props) {
         return <MenuItem value={x}>{x}</MenuItem>
     })
 
+    const handleChecked = (event) => {
+        setChecked(event.target.checked);
+
+        props.globalSortBy(sort,event.target.checked).then(() => {
+
+        });
+    };
+
 
 
     return (
@@ -207,7 +214,7 @@ export default function Trails(props) {
 
                     </Grid>
                     <Grid item xs={9}>
-                        
+
                     </Grid>
                     <Grid item>
                         <FormControl className={classes.formControl}>
@@ -232,9 +239,14 @@ export default function Trails(props) {
                             <FormHelperText>Sort by Attribute</FormHelperText>
                         </FormControl>
                         <Typography>
-                        Total: {queryResults.length} Trails
+                            Total: {queryResults.length} Trails
                         </Typography>
-
+                        <Switch
+                            name="checkedA"
+                            checked={checked}
+                            onChange={handleChecked}
+                            inputProps={{ 'aria-label': 'secondary checkbox' }}
+                        /> Descending
                     </Grid>
                 </Grid>
             </Box>

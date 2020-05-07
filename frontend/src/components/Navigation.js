@@ -108,7 +108,7 @@ export default function Navigation(props) {
   return (
     <div className={classes.root}>
 
-      <AppBar color="#Eff1eD" position="static">
+      <AppBar  position="static">
         <Toolbar>
           <img src={logo} width="2.5%" height="2.5%"></img>
           <Box color="#60492c">

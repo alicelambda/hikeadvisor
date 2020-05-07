@@ -76,9 +76,9 @@ const stateData = [{
 
 const globalSortBy = (selector) => {
     return new Promise((resolve, reject) => {
-      resolve("done sorting")
+        resolve("done sorting")
     });
-  };
+};
 it('renders app without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<App />, div);
@@ -98,6 +98,22 @@ describe('renders states', () => {
             , div);
         ReactDOM.unmountComponentAtNode(div);
     });
+
+
+    it('renders Animals without Crashing', () => {
+        const div = document.createElement('div');
+        ReactDOM.render(
+            <MemoryRouter initialEntries={['/animals']} >
+                <Route path='/animals'>
+
+                    <Animals animalData={animalData} />
+                </Route>
+            </MemoryRouter>
+            , div);
+        div.querySelector("")
+        ReactDOM.unmountComponentAtNode(div);
+    });
+
 
     it('renders first Animal page without Crashing', () => {
         const div = document.createElement('div');

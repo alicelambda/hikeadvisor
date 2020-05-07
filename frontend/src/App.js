@@ -29,7 +29,6 @@ function App() {
     fetch("https://api.hikeadvisor.me/api/trail?page=" + page)
       .then(response => response.json())
       .then(data => {
-        console.log(data.total_pages)
         Promise.all(
           Array(data.total_pages + 1)
             .fill()
@@ -51,7 +50,6 @@ function App() {
     fetch("https://api.hikeadvisor.me/api/state?page=" + page)
       .then(response => response.json())
       .then(data => {
-        console.log(data.total_pages)
         Promise.all(
           Array(data.total_pages + 1)
             .fill()
@@ -72,7 +70,6 @@ function App() {
     fetch("https://api.hikeadvisor.me/api/animal?page=" + page)
       .then(response => response.json())
       .then(data => {
-        console.log(data.total_pages)
         Promise.all(
           Array(data.total_pages + 1)
             .fill()
@@ -89,38 +86,37 @@ function App() {
   }
 
 
-  const highSort = (selector) => {
+  const highSort = (selector,order) => {
+    console.log(selector,order);
+    const sign = order ? 1 : -1;
     const compare = (fst, snd) => {
-      return snd[selector] - fst[selector];
+      return sign * (snd[selector] - fst[selector]);
     }
     return compare;
   }
 
-  const globalSortBy = (selector) => {
+  const globalSortBy = (selector,order) => {
     return new Promise((resolve, reject) => {
-      console.log(selector)
       const trailDataCopy = trailData.slice();
-      trailDataCopy.sort(highSort(selector));
+      trailDataCopy.sort(highSort(selector,order));
       setTrailData(trailDataCopy);
       resolve("done sorting")
     });
   };
 
-  const animalSortBy = (selector) => {
+  const animalSortBy = (selector,order) => {
     return new Promise((resolve, reject) => {
-      console.log(selector)
       const animalDataCopy = animalData.slice();
-      animalDataCopy.sort(highSort(selector));
+      animalDataCopy.sort(highSort(selector,order));
       setAnimalData(animalDataCopy);
       resolve("done sorting")
     });
   };
 
-  const stateSortBy = (selector) => {
+  const stateSortBy = (selector,order) => {
     return new Promise((resolve, reject) => {
-      console.log(selector)
       const stateDataCopy = stateData.slice();
-      stateDataCopy.sort(highSort(selector));
+      stateDataCopy.sort(highSort(selector,order));
       setStateData(stateDataCopy);
       resolve("done sorting")
     });

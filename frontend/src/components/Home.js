@@ -378,7 +378,7 @@ export default function Home(props) {
       {isQuery ?
         <div>
           <GlobalCss />
-          <body id='mybody' background={img} className="home">
+          <div id='mybody' background={img} className="home">
             <header className="Home-header">
               <div className="Title-summary">
                 HikeAdvisor
@@ -394,7 +394,7 @@ export default function Home(props) {
                 </Link>
               </div>
             </header>
-          </body>
+          </div>
         </div>
 
         :

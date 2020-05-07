@@ -17,6 +17,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Switch from '@material-ui/core/Switch';
 
 
 const useStyles = makeStyles(theme => ({
@@ -55,6 +56,7 @@ const GlobalCss = withStyles({
 
 export default function States(props) {
     const classes = useStyles();
+    const [checked, setChecked] = React.useState(false);
 
     const [timezone, setTimezone] = React.useState('');
     const [query, setQuery] = React.useState([]);
@@ -73,7 +75,6 @@ export default function States(props) {
                 setQueryResults(result)
                 setOffset(0)
                 setRedirect(0)
-                console.log("set offset")
             })
     };
 
@@ -117,7 +118,6 @@ export default function States(props) {
     React.useEffect(() => {
 
         selectStateData(offset);
-        console.log("updated")
 
     }, [offset,queryResults]);
 
@@ -140,6 +140,14 @@ export default function States(props) {
 
         });
     }
+
+    const handleChecked = (event) => {
+        setChecked(event.target.checked);
+
+        props.globalSortBy(sort,event.target.checked).then(() => {
+
+        });
+    };
 
     const search = (query, timezone) => {
         return new Promise((resolve, reject) => {
@@ -256,6 +264,12 @@ export default function States(props) {
                             </Select>
                             <FormHelperText>Sort States By</FormHelperText>
                         </FormControl>
+                        <Switch
+                            name="checkedA"
+                            checked={checked}
+                            onChange={handleChecked}
+                            inputProps={{ 'aria-label': 'secondary checkbox' }}
+                        /> Descending
                         </Grid>
                         <Typography>
                         Total: {queryResults.length} States

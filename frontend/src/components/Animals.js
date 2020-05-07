@@ -16,6 +16,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Switch from '@material-ui/core/Switch';
 
 
 const useStyles = makeStyles(theme => ({
@@ -64,6 +65,7 @@ export default function Animals(props) {
     const [redirect, setRedirect] = React.useState(-1);
     const [pagination, setPagination] = React.useState();
     const [sort, setSort] = React.useState('');
+    const [checked, setChecked] = React.useState(false);
 
     const pickedState = (event) => {
         setState(event.target.value);
@@ -72,7 +74,6 @@ export default function Animals(props) {
                 setQueryResults(result)
                 setOffset(0);
                 setRedirect(0)
-                console.log("set offset")
             })
     };
 
@@ -114,7 +115,6 @@ export default function Animals(props) {
     React.useEffect(() => {
 
         selectAnimalData(offset);
-        console.log("updated")
 
     }, [offset,queryResults]);
 
@@ -137,6 +137,14 @@ export default function Animals(props) {
 
         });
     }
+    const handleChecked = (event) => {
+        setChecked(event.target.checked);
+
+        props.globalSortBy(sort,event.target.checked).then(() => {
+
+        });
+    };
+
 
     const search = (query, state) => {
         return new Promise((resolve, reject) => {
@@ -190,7 +198,7 @@ export default function Animals(props) {
     }
 
     const stateItems = [...new Set(props.animalData.map(x => x.animal_location))].sort().map(x => {
-        return <MenuItem value={x}>{x}</MenuItem>
+        return <MenuItem key={x.id} value={x}>{x}</MenuItem>
     })
     
     return (
@@ -228,7 +236,7 @@ export default function Animals(props) {
                                 value={state}
                                 onChange={pickedState}
                             >
-                                <MenuItem value="">
+                                <MenuItem key={0} value="">
                                     <em>None</em>
                                 </MenuItem>
                                 {stateItems}
@@ -250,6 +258,12 @@ export default function Animals(props) {
                             </Select>
                             <FormHelperText>Sort Animals</FormHelperText>
                         </FormControl>
+                        <Switch
+                            name="checkedA"
+                            checked={checked}
+                            onChange={handleChecked}
+                            inputProps={{ 'aria-label': 'secondary checkbox' }}
+                        /> Descending
                         </Grid>
                         <Typography>
                         Total: {queryResults.length} Animals

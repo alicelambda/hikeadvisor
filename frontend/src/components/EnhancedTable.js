@@ -257,8 +257,6 @@ export default function EnhancedTable(props) {
                 <Link to={"/state/" + value} style={{ textDecoration: 'none' }}> {text} </Link>
             </TableCell>
         } else if (id == "traillocation") {
-            console.log("trailocation")
-            console.log(value);
             const state = value.split(", ")[1]
             rendrow = <TableCell key={id}>
                 <Link to={"/state/" + state} style={{ textDecoration: 'none' }}> {text} </Link>
@@ -282,8 +280,6 @@ export default function EnhancedTable(props) {
     }
 
     const rendRow = (row) => {
-        console.log(row);
-        console.log(props.headCells)
         return props.headCells.map( (x) => {
             return renderRow(row,x.id,row[x.id])
         })
