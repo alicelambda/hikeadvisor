@@ -110,7 +110,7 @@ describe('renders states', () => {
                 </Route>
             </MemoryRouter>
             , div);
-        div.querySelector("")
+       
         ReactDOM.unmountComponentAtNode(div);
     });
 
