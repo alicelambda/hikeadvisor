@@ -10,7 +10,7 @@ import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { createMuiTheme } from '@material-ui/core/styles';
 import Visualization from './components/Visualization';
-
+import animalData from './components/Animals/animalData';
 import {
   BrowserRouter as Router,
   Switch,
@@ -23,7 +23,7 @@ function App() {
   const [loading, setLoading] = React.useState('true');
   const [stateData, setStateData] = React.useState([]);
   const [trailData, setTrailData] = React.useState([]);
-  const [animalData, setAnimalData] = React.useState([]);
+ 
 
   const loadTrailData = (page) => {
     fetch("https://api.hikeadvisor.me/api/trail?page=" + page)
@@ -66,24 +66,6 @@ function App() {
 
   }
 
-  const loadAnimalData = (page) => {
-    fetch("https://api.hikeadvisor.me/api/animal?page=" + page)
-      .then(response => response.json())
-      .then(data => {
-        Promise.all(
-          Array(data.total_pages + 1)
-            .fill()
-            .map((_,i) => {
-              return fetch("https://api.hikeadvisor.me/api/animal?page=" + i).then(response => response.json());
-            }
-            )
-
-        ).then((all) => {
-          setAnimalData(all.map(x => x.objects).flat());
-        })
-      })
-
-  }
 
 
   const highSort = (selector,order) => {
@@ -108,7 +90,6 @@ function App() {
     return new Promise((resolve, reject) => {
       const animalDataCopy = animalData.slice();
       animalDataCopy.sort(highSort(selector,order));
-      setAnimalData(animalDataCopy);
       resolve("done sorting")
     });
   };
@@ -125,7 +106,6 @@ function App() {
   const loadAllData = () => {
     loadTrailData(1)
     loadStateData(1)
-    loadAnimalData(1)
     setLoading("false");
   }
 

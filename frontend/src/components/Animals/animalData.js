@@ -97,4 +97,4 @@ const animalData = [
     }
 ]
 
-export {animalData};
+export default animalData;
